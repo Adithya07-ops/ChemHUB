@@ -125,6 +125,16 @@
                                 Copy
                             </button>
                         </div>
+                        <!-- NEW: Molecular Statistics -->
+                        <div class="info-divider"></div>
+                        <div class="info-row">
+                            <span class="info-label">Atoms</span>
+                            <span class="info-value mono" id="info-atoms">—</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Bonds</span>
+                            <span class="info-value mono" id="info-bonds">—</span>
+                        </div>
                     </div>
                 </div>
 
@@ -175,6 +185,24 @@
                             Spin
                         </button>
                     </div>
+                    <!-- NEW: Labels toggle + Download -->
+                    <div class="control-actions" style="margin-top:8px">
+                        <button class="btn btn-ghost" id="labels-btn" title="Toggle Atom Labels">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <text x="5" y="18" font-size="16" fill="currentColor" stroke="none"
+                                    font-family="Inter,sans-serif" font-weight="600">A</text>
+                            </svg>
+                            Labels
+                        </button>
+                        <button class="btn btn-ghost" id="download-btn" title="Download as PNG">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Image
+                        </button>
+                    </div>
                 </div>
             </aside>
 
@@ -193,6 +221,13 @@
                             <p class="empty-text">Enter a molecule name or SMILES to begin</p>
                             <p class="empty-hint">Try "caffeine" or "C1=CC=CC=C1" (benzene)</p>
                         </div>
+                        <!-- NEW: Viewer loading overlay -->
+                        <div class="viewer-loading hidden" id="viewer-loading">
+                            <div class="viewer-spinner"></div>
+                            <span>Loading molecule…</span>
+                        </div>
+                        <!-- NEW: Atom hover tooltip -->
+                        <div class="atom-tooltip hidden" id="atom-tooltip"></div>
                     </div>
                 </div>
             </section>

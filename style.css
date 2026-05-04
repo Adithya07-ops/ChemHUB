@@ -5,35 +5,35 @@
 /* ── CSS Custom Properties (Design Tokens) ── */
 :root {
     /* Colors */
-    --bg-deep:        #06060e;
-    --bg-mid:         #0c0c1e;
-    --bg-surface:     rgba(16, 16, 36, 0.65);
-    --glass-border:   rgba(120, 200, 255, 0.10);
-    --glass-bg:       rgba(18, 18, 44, 0.55);
-    --glass-hover:    rgba(24, 24, 56, 0.7);
+    --bg-deep: #06060e;
+    --bg-mid: #0c0c1e;
+    --bg-surface: rgba(16, 16, 36, 0.65);
+    --glass-border: rgba(120, 200, 255, 0.10);
+    --glass-bg: rgba(18, 18, 44, 0.55);
+    --glass-hover: rgba(24, 24, 56, 0.7);
 
-    --accent:         #00e5ff;
-    --accent-dim:     rgba(0, 229, 255, 0.15);
-    --accent-glow:    rgba(0, 229, 255, 0.35);
-    --accent-purple:  #a855f7;
+    --accent: #00e5ff;
+    --accent-dim: rgba(0, 229, 255, 0.15);
+    --accent-glow: rgba(0, 229, 255, 0.35);
+    --accent-purple: #a855f7;
     --accent-purple-dim: rgba(168, 85, 247, 0.15);
 
-    --text-primary:   #e8ecf4;
+    --text-primary: #e8ecf4;
     --text-secondary: #8892a8;
-    --text-muted:     #515b70;
+    --text-muted: #515b70;
 
-    --danger:         #ff4d6a;
-    --danger-bg:      rgba(255, 77, 106, 0.12);
+    --danger: #ff4d6a;
+    --danger-bg: rgba(255, 77, 106, 0.12);
 
     /* Typography */
-    --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
-    --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
     /* Spacing */
-    --radius-sm:  8px;
-    --radius-md:  14px;
-    --radius-lg:  20px;
-    --radius-xl:  28px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
 
     /* Transitions */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -41,7 +41,9 @@
 }
 
 /* ── Reset & Base ── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -126,8 +128,15 @@ body {
 }
 
 @keyframes logoPulse {
-    0%, 100% { filter: drop-shadow(0 0 8px var(--accent-glow)); }
-    50%      { filter: drop-shadow(0 0 18px var(--accent-glow)); }
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px var(--accent-glow));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 18px var(--accent-glow));
+    }
 }
 
 .app-title {
@@ -176,7 +185,7 @@ body {
         0 4px 30px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.04);
     transition: border-color var(--duration) var(--ease-out),
-                box-shadow var(--duration) var(--ease-out);
+        box-shadow var(--duration) var(--ease-out);
 }
 
 .glass-card:hover {
@@ -218,7 +227,7 @@ body {
     font-size: 0.92rem;
     outline: none;
     transition: border-color var(--duration) var(--ease-out),
-                box-shadow var(--duration) var(--ease-out);
+        box-shadow var(--duration) var(--ease-out);
 }
 
 .molecule-input::placeholder {
@@ -284,7 +293,9 @@ body {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .btn-ghost {
@@ -380,7 +391,7 @@ body {
 
 .skeleton-block {
     height: 18px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
     background-size: 200% 100%;
     border-radius: var(--radius-sm);
     animation: shimmer 1.5s ease-in-out infinite;
@@ -391,8 +402,13 @@ body {
 }
 
 @keyframes shimmer {
-    0%   { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 /* Info rows */
@@ -613,8 +629,15 @@ body {
 }
 
 @keyframes nucleusPulse {
-    0%, 100% { box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-dim); }
-    50%      { box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-dim); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-dim);
+    }
+
+    50% {
+        box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-dim);
+    }
 }
 
 .orbit-ring {
@@ -648,7 +671,9 @@ body {
 }
 
 @keyframes orbitSpin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .empty-text {
@@ -743,14 +768,98 @@ body {
 }
 
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.15); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
 }
 
 .footer-sub {
     margin-top: 4px;
     font-size: 0.72rem;
     opacity: 0.5;
+}
+
+/* ── Info Divider (NEW) ── */
+.info-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 4px 0;
+}
+
+/* ── Viewer Loading Overlay (NEW) ── */
+.viewer-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: rgba(6, 6, 14, 0.7);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 5;
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: opacity 0.4s var(--ease-out);
+}
+
+.viewer-loading.hidden {
+    display: none !important;
+}
+
+.viewer-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(0, 229, 255, 0.15);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ── Atom Hover Tooltip (NEW) ── */
+.atom-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    padding: 6px 12px;
+    background: rgba(12, 12, 30, 0.88);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.15s ease;
+}
+
+.atom-tooltip.hidden {
+    display: none !important;
+}
+
+/* ── Viewer Fade-in (NEW) ── */
+.mol-viewer-div {
+    animation: viewerFadeIn 0.5s ease forwards;
+}
+
+@keyframes viewerFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* ── Utility ── */

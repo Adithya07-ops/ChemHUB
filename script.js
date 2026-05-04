@@ -4,26 +4,29 @@
 
 // ── DOM References ──
 const elements = {
-    input:          document.getElementById('molecule-input'),
-    visualizeBtn:   document.getElementById('visualize-btn'),
-    btnLoader:      document.getElementById('btn-loader'),
-    viewerContainer:document.getElementById('viewer-container'),
-    viewerEmpty:    document.getElementById('viewer-empty'),
-    infoPlaceholder:document.getElementById('info-placeholder'),
-    infoLoading:    document.getElementById('info-loading'),
-    infoContent:    document.getElementById('info-content'),
-    infoName:       document.getElementById('info-name'),
-    infoFormula:    document.getElementById('info-formula'),
-    infoWeight:     document.getElementById('info-weight'),
-    infoSmiles:     document.getElementById('info-smiles'),
-    resetBtn:       document.getElementById('reset-view-btn'),
-    spinBtn:        document.getElementById('spin-btn'),
-    smilesBtn:      document.getElementById('smiles-copy-btn'),
-    styleSwitcher:  document.getElementById('style-switcher'),
-    errorToast:     document.getElementById('error-toast'),
-    errorMessage:   document.getElementById('error-message'),
-    toastClose:     document.getElementById('toast-close'),
-    bgCanvas:       document.getElementById('bg-canvas'),
+    input: document.getElementById('molecule-input'),
+    visualizeBtn: document.getElementById('visualize-btn'),
+    btnLoader: document.getElementById('btn-loader'),
+    viewerContainer: document.getElementById('viewer-container'),
+    viewerEmpty: document.getElementById('viewer-empty'),
+    infoPlaceholder: document.getElementById('info-placeholder'),
+    infoLoading: document.getElementById('info-loading'),
+    infoContent: document.getElementById('info-content'),
+    infoName: document.getElementById('info-name'),
+    infoFormula: document.getElementById('info-formula'),
+    infoWeight: document.getElementById('info-weight'),
+    infoSmiles: document.getElementById('info-smiles'),
+    infoAtoms: document.getElementById('info-atoms'),     // NEW
+    infoBonds: document.getElementById('info-bonds'),     // NEW
+    resetBtn: document.getElementById('reset-view-btn'),
+    spinBtn: document.getElementById('spin-btn'),
+    styleSwitcher: document.getElementById('style-switcher'),
+    errorToast: document.getElementById('error-toast'),
+    errorMessage: document.getElementById('error-message'),
+    toastClose: document.getElementById('toast-close'),
+    bgCanvas: document.getElementById('bg-canvas'),
+    viewerLoading: document.getElementById('viewer-loading'), // NEW
+    atomTooltip: document.getElementById('atom-tooltip'),   // NEW
 };
 
 // ── Application State ──
@@ -32,8 +35,19 @@ const state = {
     currentStyle: 'stick',  // stick | sphere | ball-and-stick
     isSpinning: false,
     isLoading: false,
+    showLabels: false,      // NEW: atom labels toggle
     currentMolData: null,
     toastTimer: null,
+};
+
+// ── Atomic Number Lookup (NEW) ──
+const ATOMIC_NUMBERS = {
+    H: 1, He: 2, Li: 3, Be: 4, B: 5, C: 6, N: 7, O: 8, F: 9, Ne: 10,
+    Na: 11, Mg: 12, Al: 13, Si: 14, P: 15, S: 16, Cl: 17, Ar: 18,
+    K: 19, Ca: 20, Sc: 21, Ti: 22, V: 23, Cr: 24, Mn: 25, Fe: 26,
+    Co: 27, Ni: 28, Cu: 29, Zn: 30, Ga: 31, Ge: 32, As: 33, Se: 34,
+    Br: 35, Kr: 36, Rb: 37, Sr: 38, Y: 39, Zr: 40, Nb: 41, Mo: 42,
+    I: 53, Xe: 54, Pt: 78, Au: 79, Hg: 80, Pb: 82
 };
 
 // ════════════════════════════════════════════════════════════
@@ -175,7 +189,7 @@ async function fetchMoleculeData(query) {
 
     // Step 2: Fetch properties and 3D SDF in parallel
     const propsUrl = `${PUBCHEM_BASE}/compound/cid/${cid}/property/IUPACName,MolecularFormula,MolecularWeight,CanonicalSMILES,IsomericSMILES/JSON`;
-    const sdfUrl   = `${PUBCHEM_BASE}/compound/cid/${cid}/SDF?record_type=3d`;
+    const sdfUrl = `${PUBCHEM_BASE}/compound/cid/${cid}/SDF?record_type=3d`;
 
     const [propsRes, sdfRes] = await Promise.all([
         fetch(propsUrl),
@@ -202,10 +216,10 @@ async function fetchMoleculeData(query) {
     if (!sdf) throw new Error('3D structure data unavailable for this molecule.');
 
     return {
-        name:    props.IUPACName || trimmed,
+        name: props.IUPACName || trimmed,
         formula: props.MolecularFormula || '—',
-        weight:  props.MolecularWeight ? `${props.MolecularWeight} g/mol` : '—',
-        smiles:  smiles || '—',
+        weight: props.MolecularWeight ? `${props.MolecularWeight} g/mol` : '—',
+        smiles: smiles || '—',
         sdf,
     };
 }
@@ -285,12 +299,115 @@ function loadMolecule(sdf) {
 
     viewer.addModel(sdf, 'sdf');
     applyStyle(state.currentStyle);
+
+    // NEW: Re-apply labels if they were on
+    if (state.showLabels) {
+        addAtomLabels();
+    }
+
+    // NEW: Set up atom hover handler
+    setupAtomHover(viewer);
+
     viewer.zoomTo();
     viewer.render();
 
     // Re-apply spin state
     if (state.isSpinning) {
         viewer.spin(true);
+    }
+}
+
+// ════════════════════════════════════════════════════════════
+// 3b. ATOM HOVER TOOLTIP (NEW)
+// ════════════════════════════════════════════════════════════
+
+/**
+ * Attaches hover callbacks to the viewer so hovering over an atom
+ * shows a lightweight tooltip with element symbol + atomic number.
+ */
+function setupAtomHover(viewer) {
+    viewer.setHoverable(
+        {},   // select all atoms
+        true, // hoverable
+        // on hover
+        function (atom, _viewer, _event, container) {
+            if (!atom) return;
+            const elem = atom.elem || '?';
+            const num = ATOMIC_NUMBERS[elem] || '?';
+            elements.atomTooltip.innerHTML = `<strong>${elem}</strong> &middot; #${num}`;
+            elements.atomTooltip.classList.remove('hidden');
+        },
+        // on unhover
+        function () {
+            elements.atomTooltip.classList.add('hidden');
+        }
+    );
+
+    // Track mouse to position tooltip inside viewer container
+    elements.viewerContainer.addEventListener('mousemove', (e) => {
+        if (elements.atomTooltip.classList.contains('hidden')) return;
+        const rect = elements.viewerContainer.getBoundingClientRect();
+        elements.atomTooltip.style.left = (e.clientX - rect.left + 14) + 'px';
+        elements.atomTooltip.style.top = (e.clientY - rect.top - 10) + 'px';
+    });
+}
+
+// ════════════════════════════════════════════════════════════
+// 3c. ATOM LABELS (NEW)
+// ════════════════════════════════════════════════════════════
+
+/**
+ * Adds element-symbol labels to every atom in the current model.
+ */
+function addAtomLabels() {
+    if (!state.viewer) return;
+    state.viewer.removeAllLabels();
+    const atoms = state.viewer.getModel()?.selectedAtoms({}) || [];
+    for (const atom of atoms) {
+        state.viewer.addLabel(atom.elem, {
+            position: { x: atom.x, y: atom.y, z: atom.z },
+            fontSize: 11,
+            fontColor: 'white',
+            backgroundOpacity: 0.35,
+            backgroundColor: '#1a1a3a',
+            borderColor: '#00e5ff',
+            borderThickness: 0.5,
+            padding: 2,
+        });
+    }
+    state.viewer.render();
+}
+
+/**
+ * Removes all atom labels.
+ */
+function removeAtomLabels() {
+    if (!state.viewer) return;
+    state.viewer.removeAllLabels();
+    state.viewer.render();
+}
+
+// ════════════════════════════════════════════════════════════
+// 3d. EXPORT AS IMAGE (NEW)
+// ════════════════════════════════════════════════════════════
+
+/**
+ * Captures the current viewer canvas and triggers a PNG download.
+ */
+function downloadViewerImage() {
+    if (!state.viewer) {
+        showError('Load a molecule first before downloading.');
+        return;
+    }
+    try {
+        const imgData = state.viewer.pngURI();
+        const link = document.createElement('a');
+        link.download = 'molecule-3d.png';
+        link.href = imgData;
+        link.click();
+    } catch (err) {
+        console.error('Download error:', err);
+        showError('Failed to capture image. Please try again.');
     }
 }
 
@@ -326,13 +443,6 @@ function showInfo(data) {
     elements.infoWeight.textContent = data.weight;
     elements.infoSmiles.textContent = data.smiles;
     elements.infoSmiles.title = data.smiles; // Show full SMILES on hover
-
-    // Show/hide the copy button depending on whether SMILES was resolved
-    if (data.smiles && data.smiles !== '—') {
-        elements.smilesBtn.classList.remove('hidden');
-    } else {
-        elements.smilesBtn.classList.add('hidden');
-    }
 }
 
 /**
@@ -396,6 +506,9 @@ async function visualizeMolecule() {
     setButtonLoading(true);
     setInfoLoading(true);
 
+    // NEW: Show viewer loading overlay
+    elements.viewerLoading.classList.remove('hidden');
+
     try {
         const data = await fetchMoleculeData(query);
         state.currentMolData = data;
@@ -415,6 +528,8 @@ async function visualizeMolecule() {
         elements.infoPlaceholder.classList.remove('hidden');
     } finally {
         setButtonLoading(false);
+        // NEW: Hide viewer loading overlay
+        elements.viewerLoading.classList.add('hidden');
     }
 }
 
@@ -468,37 +583,6 @@ function initEventListeners() {
 
     // Toast close
     elements.toastClose.addEventListener('click', hideError);
-
-    // Copy SMILES to clipboard
-    elements.smilesBtn.addEventListener('click', () => {
-        const smiles = elements.infoSmiles.textContent;
-        if (!smiles || smiles === '—') return;
-        navigator.clipboard.writeText(smiles).then(() => {
-            elements.smilesBtn.classList.add('copied');
-            elements.smilesBtn.querySelector('svg + *') // text node workaround
-            elements.smilesBtn.lastChild.textContent = ' Copied!';
-            setTimeout(() => {
-                elements.smilesBtn.classList.remove('copied');
-                elements.smilesBtn.lastChild.textContent = ' Copy';
-            }, 2000);
-        }).catch(() => {
-            // Fallback for file:// protocol
-            const ta = document.createElement('textarea');
-            ta.value = smiles;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            elements.smilesBtn.classList.add('copied');
-            elements.smilesBtn.lastChild.textContent = ' Copied!';
-            setTimeout(() => {
-                elements.smilesBtn.classList.remove('copied');
-                elements.smilesBtn.lastChild.textContent = ' Copy';
-            }, 2000);
-        });
-    });
 
     // Handle window resize for viewer
     let resizeTimer;
