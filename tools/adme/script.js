@@ -19,6 +19,9 @@ const el = {
     radarCanvas:    document.getElementById('radar-canvas'),
     pkPlaceholder:  document.getElementById('pk-placeholder'),
     pkGrid:         document.getElementById('pk-grid'),
+    eggPlaceholder: document.getElementById('egg-placeholder'),
+    eggContainer:   document.getElementById('egg-container'),
+    eggCanvas:      document.getElementById('egg-canvas'),
     errorToast:     document.getElementById('error-toast'),
     errorMessage:   document.getElementById('error-message'),
     toastClose:     document.getElementById('toast-close'),
@@ -28,6 +31,12 @@ const el = {
     drawClose:      document.getElementById('draw-close'),
     drawCancel:     document.getElementById('draw-cancel'),
     drawSubmit:     document.getElementById('draw-submit'),
+    drawClear:      document.getElementById('draw-clear'),
+    drawBackdrop:   document.getElementById('draw-backdrop'),
+    smilesPreview:  document.getElementById('smiles-preview-value'),
+    smilesCopyBtn:  document.getElementById('smiles-copy-btn'),
+    statusAtoms:    document.getElementById('status-atoms'),
+    statusBonds:    document.getElementById('status-bonds'),
 };
 
 const PUBCHEM_BASE = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug';
@@ -321,6 +330,123 @@ function drawRadar(d) {
 }
 
 // ════════════════════════════════════════════════════════════
+// 4b. BOILED-EGG PLOT (Canvas)
+// ════════════════════════════════════════════════════════════
+function drawBoiledEgg(d) {
+    const canvas = el.eggCanvas;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    // Data limits
+    const minTPSA = -10, maxTPSA = 200;
+    const minWLOGP = -3, maxWLOGP = 7;
+
+    const mapX = (tpsa) => ((tpsa - minTPSA) / (maxTPSA - minTPSA)) * W;
+    const mapY = (wlogp) => H - ((wlogp - minWLOGP) / (maxWLOGP - minWLOGP)) * H;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Draw Grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1;
+    ctx.font = '10px JetBrains Mono, monospace';
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+
+    // X-axis (TPSA)
+    for (let t = 0; t <= 150; t += 50) {
+        const x = mapX(t);
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        ctx.fillText(t, x, H - 15);
+    }
+    // Y-axis (WLOGP)
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (let l = -2; l <= 6; l += 2) {
+        const y = mapY(l);
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        ctx.fillText(l, 20, y);
+    }
+
+    // Axes Labels
+    ctx.fillStyle = '#8892a8';
+    ctx.font = '500 12px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('TPSA', W / 2, H - 4);
+    ctx.save();
+    ctx.translate(10, H / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('WLOGP', 0, 0);
+    ctx.restore();
+
+    // Helper function to draw an ellipse
+    function drawEllipse(xCtr, yCtr, a, b, angle, fillColor) {
+        const cx = mapX(xCtr);
+        const cy = mapY(yCtr);
+        // We need to scale a and b to pixel coordinates
+        const pxA = (a / (maxTPSA - minTPSA)) * W;
+        const pxB = (b / (maxWLOGP - minWLOGP)) * H;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        // Notice angle is negated because Canvas Y is inverted compared to math Y
+        ctx.rotate(-angle);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, pxA, pxB, 0, 0, 2 * Math.PI);
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.restore();
+    }
+
+    // BOILED-Egg parameters from Daina & Zoete (2016)
+    // HIA (White region): Center(71.051, 2.292), a=61.353, b=4.887, angle=-0.17189
+    // BBB (Yolk region): Center(38.169, 3.177), a=32.553, b=2.761, angle=-0.16999
+    
+    // Draw the egg white (HIA)
+    drawEllipse(71.051, 2.292, 61.353, 4.887, -0.17189, '#ffffff');
+
+    // Draw the yolk (BBB)
+    drawEllipse(38.169, 3.177, 32.553, 2.761, -0.16999, '#fde047');
+
+    // Plot the molecule
+    // Fallbacks if data missing
+    const tpsaVal = d.tpsa !== null ? d.tpsa : -100;
+    const logPVal = d.logP !== null ? d.logP : -100;
+
+    if (tpsaVal >= minTPSA && tpsaVal <= maxTPSA && logPVal >= minWLOGP && logPVal <= maxWLOGP) {
+        const x = mapX(tpsaVal);
+        const y = mapY(logPVal);
+
+        // Glow
+        ctx.beginPath();
+        ctx.arc(x, y, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = 'rgba(0,229,255,0.4)';
+        ctx.fill();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = '#00e5ff';
+        ctx.fill();
+        ctx.strokeStyle = '#111';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+    }
+}
+
+function showBoiledEgg(d) {
+    if (!el.eggPlaceholder) return;
+    el.eggPlaceholder.classList.add('hidden');
+    el.eggContainer.classList.remove('hidden');
+    drawBoiledEgg(d);
+}
+
+// ════════════════════════════════════════════════════════════
 // 5. UI RENDERING
 // ════════════════════════════════════════════════════════════
 function showProps(d) {
@@ -445,6 +571,7 @@ async function analyze() {
         showFilters(data);
         showPK(data);
         showRadar(data);
+        showBoiledEgg(data);
     } catch (err) {
         console.error(err);
         showError(err.message || 'Unable to load molecule.');
@@ -455,33 +582,106 @@ async function analyze() {
 }
 
 // ════════════════════════════════════════════════════════════
-// 7. JSME DRAW MODAL
+// 7. JSME DRAW MODAL  ── Premium UX
 // ════════════════════════════════════════════════════════════
 let jsmeApplet = null;
-window.jsmeOnLoad = function() {
-    jsmeApplet = new JSApplet.JSME("jsme_container", "100%", "400px", {
-        options: "oldlook,star"
+let smilesPollingTimer = null;
+let lastSmiles = '';
+
+window.jsmeOnLoad = function () {
+    jsmeApplet = new JSApplet.JSME('jsme_container', '100%', '430px', {
+        options: 'newlook,star'
     });
 };
 
+// ── Live SMILES preview (poll every 400 ms) ──
+function startSmilesPolling() {
+    stopSmilesPolling();
+    smilesPollingTimer = setInterval(() => {
+        if (!jsmeApplet) return;
+        try {
+            const smiles = jsmeApplet.smiles() || '';
+            if (smiles !== lastSmiles) { lastSmiles = smiles; updateSmilesPreview(smiles); }
+        } catch (_) { /* JSME may throw before any atoms are drawn */ }
+    }, 400);
+}
+function stopSmilesPolling() {
+    if (smilesPollingTimer) { clearInterval(smilesPollingTimer); smilesPollingTimer = null; }
+}
+function updateSmilesPreview(smiles) {
+    if (!el.smilesPreview) return;
+    if (smiles) {
+        el.smilesPreview.textContent = smiles;
+        el.smilesPreview.classList.add('has-value');
+        const atoms = (smiles.match(/[BCNOPSFI]|Cl|Br/g) || []).length;
+        const bonds = (smiles.match(/[-=#:]/g) || []).length +
+                      (smiles.match(/[a-z]/g) || []).length;
+        if (el.statusAtoms) el.statusAtoms.textContent = `Atoms: ${atoms}`;
+        if (el.statusBonds) el.statusBonds.textContent = `Bonds: ${bonds}`;
+    } else {
+        el.smilesPreview.textContent = '—';
+        el.smilesPreview.classList.remove('has-value');
+        if (el.statusAtoms) el.statusAtoms.textContent = 'Atoms: —';
+        if (el.statusBonds) el.statusBonds.textContent = 'Bonds: —';
+    }
+}
+
+// ── Open / Close ──
 function openDrawModal() {
+    lastSmiles = '';
+    updateSmilesPreview('');
     el.drawModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    startSmilesPolling();
+    if (jsmeApplet && looksLikeSMILES(el.input.value.trim())) {
+        try { jsmeApplet.readMolecule(el.input.value.trim()); } catch (_) { }
+    }
 }
-
 function closeDrawModal() {
+    stopSmilesPolling();
     el.drawModal.classList.add('hidden');
+    document.body.style.overflow = '';
 }
 
+// ── Use Structure ──
 function useStructure() {
     if (!jsmeApplet) return;
     const smiles = jsmeApplet.smiles();
-    if (!smiles) {
-        showError('Please draw a structure first.');
-        return;
-    }
+    if (!smiles) { showError('Please draw a structure first.'); return; }
     el.input.value = smiles;
     closeDrawModal();
     analyze();
+}
+
+// ── Clear canvas ──
+function clearDrawing() {
+    if (!jsmeApplet) return;
+    try { jsmeApplet.reset(); } catch (_) { }
+    updateSmilesPreview('');
+    lastSmiles = '';
+}
+
+// ── Copy SMILES ──
+async function copySmiles() {
+    const smiles = lastSmiles;
+    if (!smiles) { showError('Nothing to copy — draw a molecule first.'); return; }
+    try {
+        await navigator.clipboard.writeText(smiles);
+    } catch (_) {
+        const ta = document.createElement('textarea');
+        ta.value = smiles; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+    }
+    if (el.smilesCopyBtn) {
+        el.smilesCopyBtn.classList.add('copied');
+        const label = el.smilesCopyBtn.querySelector('.copy-label');
+        if (label) label.textContent = 'Copied!';
+        setTimeout(() => {
+            el.smilesCopyBtn.classList.remove('copied');
+            if (label) label.textContent = 'Copy';
+        }, 2000);
+    }
 }
 
 // ── Event Listeners ──
@@ -492,6 +692,9 @@ document.addEventListener('DOMContentLoaded', () => {
     el.drawClose.addEventListener('click', closeDrawModal);
     el.drawCancel.addEventListener('click', closeDrawModal);
     el.drawSubmit.addEventListener('click', useStructure);
+    if (el.drawClear)     el.drawClear.addEventListener('click', clearDrawing);
+    if (el.drawBackdrop)  el.drawBackdrop.addEventListener('click', closeDrawModal);
+    if (el.smilesCopyBtn) el.smilesCopyBtn.addEventListener('click', copySmiles);
 
     el.analyzeBtn.addEventListener('click', analyze);
     el.input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); analyze(); } });
@@ -499,4 +702,16 @@ document.addEventListener('DOMContentLoaded', () => {
         chip.addEventListener('click', () => { el.input.value = chip.dataset.molecule; analyze(); })
     );
     el.toastClose.addEventListener('click', hideError);
+
+    // Global keyboard shortcuts
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !el.drawModal.classList.contains('hidden')) {
+            closeDrawModal(); return;
+        }
+        if ((e.key === 'd' || e.key === 'D') &&
+            document.activeElement !== el.input &&
+            !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+            openDrawModal();
+        }
+    });
 });

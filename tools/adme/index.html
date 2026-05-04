@@ -50,8 +50,11 @@
                     <div class="input-group">
                         <input type="text" id="molecule-input" class="text-input molecule-input"
                             placeholder="e.g. aspirin, ibuprofen, CCO…" autocomplete="off" spellcheck="false">
-                        <button id="draw-btn" class="btn btn-secondary" title="Draw Molecule">
-                            <span class="btn-text">✏️ Draw</span>
+                        <button id="draw-btn" class="btn btn-draw" title="Open molecule sketcher (D)">
+                            <svg class="draw-btn-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" fill="currentColor"/>
+                            </svg>
+                            <span class="btn-text">Draw</span>
                         </button>
                         <button id="analyze-btn" class="btn btn-primary">
                             <span class="btn-text">Analyze</span>
@@ -146,6 +149,22 @@
                     </div>
                 </div>
 
+                <!-- BOILED-Egg Card -->
+                <div class="glass-card egg-card" id="egg-card">
+                    <h2 class="card-title"><span class="card-icon">🍳</span> BOILED-Egg Model</h2>
+                    <div class="egg-placeholder" id="egg-placeholder">
+                        <p class="placeholder-text">Run analysis to plot molecule on BOILED-Egg</p>
+                    </div>
+                    <div class="egg-container hidden" id="egg-container">
+                        <canvas id="egg-canvas" width="420" height="300"></canvas>
+                        <div class="egg-legend">
+                            <div class="legend-item"><span class="legend-dot" style="background:#fff;border:1px solid #ccc;"></span>HIA (White)</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:#fde047;"></span>BBB (Yolk)</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:var(--accent);"></span>Molecule</div>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </main>
 
@@ -163,19 +182,73 @@
     </div>
 
     <!-- Draw Modal -->
-    <div class="modal hidden" id="draw-modal">
+    <div class="modal hidden" id="draw-modal" role="dialog" aria-modal="true" aria-labelledby="draw-modal-title">
         <div class="modal-backdrop" id="draw-backdrop"></div>
-        <div class="modal-content glass-card">
+        <div class="modal-content draw-modal-content glass-card">
+
+            <!-- Accent line at top -->
+            <div class="modal-accent-line"></div>
+
+            <!-- Header -->
             <div class="modal-header">
-                <h3 class="modal-title">Draw Molecule</h3>
-                <button class="modal-close" id="draw-close">&times;</button>
+                <div class="modal-header-left">
+                    <div class="modal-header-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" fill="currentColor" opacity="0.7"/>
+                            <path d="M16.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM14.379 6.793L6 15.172V18h2.828l8.38-8.379-2.83-2.828z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="modal-title" id="draw-modal-title">Molecule Sketcher</h3>
+                        <p class="modal-subtitle">Draw your structure — SMILES will be extracted automatically</p>
+                    </div>
+                </div>
+                <div class="modal-header-right">
+                    <kbd class="kbd-hint">Esc</kbd>
+                    <button class="modal-close" id="draw-close" aria-label="Close sketcher">&times;</button>
+                </div>
             </div>
+
+            <!-- Editor body -->
             <div class="modal-body">
-                <div id="jsme_container"></div>
+                <div class="jsme-wrapper">
+                    <div id="jsme_container"></div>
+                    <!-- Status bar -->
+                    <div class="jsme-status-bar" id="jsme-status">
+                        <span class="status-item" id="status-atoms">Atoms: —</span>
+                        <span class="status-sep">·</span>
+                        <span class="status-item" id="status-bonds">Bonds: —</span>
+                        <span class="status-flex"></span>
+                        <span class="status-hint">Click atoms to build · drag to move</span>
+                    </div>
+                </div>
             </div>
+
+            <!-- SMILES preview strip -->
+            <div class="smiles-preview-strip" id="smiles-preview-strip">
+                <span class="smiles-preview-label">SMILES</span>
+                <span class="smiles-preview-value" id="smiles-preview-value">—</span>
+                <button class="smiles-copy-btn" id="smiles-copy-btn" title="Copy SMILES to clipboard" aria-label="Copy SMILES">
+                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M4 14H3a1 1 0 01-1-1V3a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="copy-label">Copy</span>
+                </button>
+            </div>
+
+            <!-- Footer -->
             <div class="modal-footer">
-                <button class="btn btn-secondary" id="draw-cancel">Cancel</button>
-                <button class="btn btn-primary" id="draw-submit">Use Structure</button>
+                <button class="btn btn-ghost" id="draw-clear">Clear</button>
+                <div class="modal-footer-right">
+                    <button class="btn btn-secondary" id="draw-cancel">Cancel</button>
+                    <button class="btn btn-primary btn-use-structure" id="draw-submit">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="use-icon">
+                            <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="currentColor"/>
+                        </svg>
+                        Use Structure
+                    </button>
+                </div>
             </div>
         </div>
     </div>
