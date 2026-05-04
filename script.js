@@ -18,6 +18,7 @@ const elements = {
     infoSmiles:     document.getElementById('info-smiles'),
     resetBtn:       document.getElementById('reset-view-btn'),
     spinBtn:        document.getElementById('spin-btn'),
+    smilesBtn:      document.getElementById('smiles-copy-btn'),
     styleSwitcher:  document.getElementById('style-switcher'),
     errorToast:     document.getElementById('error-toast'),
     errorMessage:   document.getElementById('error-message'),
@@ -172,36 +173,39 @@ async function fetchMoleculeData(query) {
         cid = data.IdentifierList.CID[0];
     }
 
-    // Step 2: Fetch properties
-    const propsUrl = `${PUBCHEM_BASE}/compound/cid/${cid}/property/IUPACName,MolecularFormula,MolecularWeight,CanonicalSMILES/JSON`;
-    const propsRes = await fetch(propsUrl);
+    // Step 2: Fetch properties and 3D SDF in parallel
+    const propsUrl = `${PUBCHEM_BASE}/compound/cid/${cid}/property/IUPACName,MolecularFormula,MolecularWeight,CanonicalSMILES,IsomericSMILES/JSON`;
+    const sdfUrl   = `${PUBCHEM_BASE}/compound/cid/${cid}/SDF?record_type=3d`;
+
+    const [propsRes, sdfRes] = await Promise.all([
+        fetch(propsUrl),
+        fetch(sdfUrl),
+    ]);
+
     if (!propsRes.ok) throw new Error('Failed to fetch molecule properties.');
     const propsData = await propsRes.json();
     const props = propsData.PropertyTable?.Properties?.[0];
     if (!props) throw new Error('No property data returned.');
 
-    // Step 3: Fetch 3D SDF structure
-    const sdfUrl = `${PUBCHEM_BASE}/compound/cid/${cid}/SDF?record_type=3d`;
-    const sdfRes = await fetch(sdfUrl);
+    // Prefer CanonicalSMILES, fall back to IsomericSMILES, SMILES, or ConnectivitySMILES
+    const smiles = props.CanonicalSMILES || props.IsomericSMILES || props.SMILES || props.ConnectivitySMILES || null;
+
+    // Step 3: Resolve SDF (3D preferred, 2D fallback)
     let sdf = null;
     if (sdfRes.ok) {
         sdf = await sdfRes.text();
     } else {
-        // Fallback: try 2D SDF
-        const sdf2dUrl = `${PUBCHEM_BASE}/compound/cid/${cid}/SDF?record_type=2d`;
-        const sdf2dRes = await fetch(sdf2dUrl);
-        if (sdf2dRes.ok) {
-            sdf = await sdf2dRes.text();
-        }
+        const sdf2dRes = await fetch(`${PUBCHEM_BASE}/compound/cid/${cid}/SDF?record_type=2d`);
+        if (sdf2dRes.ok) sdf = await sdf2dRes.text();
     }
 
     if (!sdf) throw new Error('3D structure data unavailable for this molecule.');
 
     return {
-        name: props.IUPACName || trimmed,
+        name:    props.IUPACName || trimmed,
         formula: props.MolecularFormula || '—',
-        weight: props.MolecularWeight ? `${props.MolecularWeight} g/mol` : '—',
-        smiles: props.CanonicalSMILES || '—',
+        weight:  props.MolecularWeight ? `${props.MolecularWeight} g/mol` : '—',
+        smiles:  smiles || '—',
         sdf,
     };
 }
@@ -322,6 +326,13 @@ function showInfo(data) {
     elements.infoWeight.textContent = data.weight;
     elements.infoSmiles.textContent = data.smiles;
     elements.infoSmiles.title = data.smiles; // Show full SMILES on hover
+
+    // Show/hide the copy button depending on whether SMILES was resolved
+    if (data.smiles && data.smiles !== '—') {
+        elements.smilesBtn.classList.remove('hidden');
+    } else {
+        elements.smilesBtn.classList.add('hidden');
+    }
 }
 
 /**
@@ -457,6 +468,37 @@ function initEventListeners() {
 
     // Toast close
     elements.toastClose.addEventListener('click', hideError);
+
+    // Copy SMILES to clipboard
+    elements.smilesBtn.addEventListener('click', () => {
+        const smiles = elements.infoSmiles.textContent;
+        if (!smiles || smiles === '—') return;
+        navigator.clipboard.writeText(smiles).then(() => {
+            elements.smilesBtn.classList.add('copied');
+            elements.smilesBtn.querySelector('svg + *') // text node workaround
+            elements.smilesBtn.lastChild.textContent = ' Copied!';
+            setTimeout(() => {
+                elements.smilesBtn.classList.remove('copied');
+                elements.smilesBtn.lastChild.textContent = ' Copy';
+            }, 2000);
+        }).catch(() => {
+            // Fallback for file:// protocol
+            const ta = document.createElement('textarea');
+            ta.value = smiles;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            elements.smilesBtn.classList.add('copied');
+            elements.smilesBtn.lastChild.textContent = ' Copied!';
+            setTimeout(() => {
+                elements.smilesBtn.classList.remove('copied');
+                elements.smilesBtn.lastChild.textContent = ' Copy';
+            }, 2000);
+        });
+    });
 
     // Handle window resize for viewer
     let resizeTimer;

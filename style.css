@@ -409,6 +409,12 @@ body {
     gap: 12px;
 }
 
+/* SMILES row stacks vertically so the string has full width */
+.info-row.smiles-row {
+    flex-direction: column;
+    gap: 6px;
+}
+
 .info-label {
     font-size: 0.78rem;
     font-weight: 500;
@@ -432,10 +438,56 @@ body {
 }
 
 .info-value.smiles {
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    overflow-x: auto;
+    text-align: left;
+    max-width: 100%;
+    padding-bottom: 2px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-dim) transparent;
+}
+
+.info-value.smiles::-webkit-scrollbar {
+    height: 3px;
+}
+
+.info-value.smiles::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.info-value.smiles::-webkit-scrollbar-thumb {
+    background: var(--accent-dim);
+    border-radius: 4px;
+}
+
+/* Copy SMILES button */
+.smiles-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+}
+
+.smiles-copy-btn:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.smiles-copy-btn.copied {
+    background: rgba(0, 229, 255, 0.15);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 /* ── Controls Card ── */
