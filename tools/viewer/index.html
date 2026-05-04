@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Computational Chemistry 3D Viewer — Visualize molecular structures in 3D using PubChem data and 3Dmol.js. Explore atoms, bonds, and properties interactively.">
+    <title>3D Molecular Visualizer | ChemHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../shared.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- 3Dmol.js -->
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Main Container -->
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header" id="app-header">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <div class="logo-group">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="14" r="5" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="12" cy="26" r="5" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="28" cy="26" r="5" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <line x1="17" y1="18" x2="14" y2="22" stroke="currentColor" stroke-width="1.5" />
+                            <line x1="23" y1="18" x2="26" y2="22" stroke="currentColor" stroke-width="1.5" />
+                            <line x1="17" y1="26" x2="23" y2="26" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="20" cy="14" r="2" fill="currentColor" opacity="0.6" />
+                            <circle cx="12" cy="26" r="2" fill="currentColor" opacity="0.6" />
+                            <circle cx="28" cy="26" r="2" fill="currentColor" opacity="0.6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="app-title">3D Molecular Visualizer</h1>
+                        <p class="app-subtitle">ChemHub · Interactive Visualization</p>
+                    </div>
+                </div>
+                <a href="../../index.html" class="back-link">← ChemHub</a>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <main class="main-layout">
+
+            <!-- Left Panel: Controls & Info -->
+            <aside class="side-panel" id="side-panel">
+
+                <!-- Search Card -->
+                <div class="glass-card search-card" id="search-card">
+                    <h2 class="card-title">
+                        <span class="card-icon">🔬</span>
+                        Molecule Search
+                    </h2>
+                    <div class="input-group">
+                        <input type="text" id="molecule-input" class="molecule-input"
+                            placeholder="e.g. caffeine, aspirin, CCO…" autocomplete="off" spellcheck="false">
+                        <button id="visualize-btn" class="btn btn-primary">
+                            <span class="btn-text">Visualize</span>
+                            <span class="btn-loader" id="btn-loader"></span>
+                        </button>
+                    </div>
+                    <div class="quick-picks">
+                        <span class="quick-label">Quick picks:</span>
+                        <div class="quick-chips">
+                            <button class="chip" data-molecule="caffeine">Caffeine</button>
+                            <button class="chip" data-molecule="aspirin">Aspirin</button>
+                            <button class="chip" data-molecule="ethanol">Ethanol</button>
+                            <button class="chip" data-molecule="glucose">Glucose</button>
+                            <button class="chip" data-molecule="dopamine">Dopamine</button>
+                            <button class="chip" data-molecule="penicillin">Penicillin</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Card -->
+                <div class="glass-card info-card" id="info-card">
+                    <h2 class="card-title">
+                        <span class="card-icon">📊</span>
+                        Molecule Info
+                    </h2>
+                    <div class="info-placeholder" id="info-placeholder">
+                        <div class="placeholder-icon">
+                            <svg viewBox="0 0 48 48" fill="none">
+                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5"
+                                    stroke-dasharray="4 3" opacity="0.4" /><text x="24" y="28" text-anchor="middle"
+                                    fill="currentColor" font-size="16" opacity="0.4">?</text>
+                            </svg>
+                        </div>
+                        <p>Search for a molecule to see its properties</p>
+                    </div>
+                    <div class="info-loading hidden" id="info-loading">
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block short"></div>
+                        <div class="skeleton-block"></div>
+                    </div>
+                    <div class="info-content hidden" id="info-content">
+                        <div class="info-row">
+                            <span class="info-label">Name</span>
+                            <span class="info-value" id="info-name">—</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Formula</span>
+                            <span class="info-value mono" id="info-formula">—</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Weight</span>
+                            <span class="info-value" id="info-weight">—</span>
+                        </div>
+                        <div class="info-row smiles-row">
+                            <span class="info-label">SMILES</span>
+                            <span class="info-value mono smiles" id="info-smiles">—</span>
+                            <button class="smiles-copy-btn hidden" id="smiles-copy-btn" title="Copy SMILES to clipboard">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                Copy
+                            </button>
+                        </div>
+                        <!-- NEW: Molecular Statistics -->
+                        <div class="info-divider"></div>
+                        <div class="info-row">
+                            <span class="info-label">Atoms</span>
+                            <span class="info-value mono" id="info-atoms">—</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Bonds</span>
+                            <span class="info-value mono" id="info-bonds">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Style Controls -->
+                <div class="glass-card controls-card" id="controls-card">
+                    <h2 class="card-title">
+                        <span class="card-icon">🎨</span>
+                        Display Options
+                    </h2>
+                    <div class="control-group">
+                        <label class="control-label">Render Style</label>
+                        <div class="style-switcher" id="style-switcher">
+                            <button class="style-btn active" data-style="stick" id="style-stick">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="4" y1="20" x2="20" y2="4" />
+                                </svg>
+                                Stick
+                            </button>
+                            <button class="style-btn" data-style="sphere" id="style-sphere">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="8" />
+                                </svg>
+                                Sphere
+                            </button>
+                            <button class="style-btn" data-style="ball-and-stick" id="style-ball-stick">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="6" cy="18" r="4" />
+                                    <circle cx="18" cy="6" r="4" />
+                                    <line x1="9" y1="15" x2="15" y2="9" />
+                                </svg>
+                                Ball &amp; Stick
+                            </button>
+                        </div>
+                    </div>
+                    <div class="control-actions">
+                        <button class="btn btn-ghost" id="reset-view-btn" title="Reset View">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 4v6h6" />
+                                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                            </svg>
+                            Reset View
+                        </button>
+                        <button class="btn btn-ghost" id="spin-btn" title="Toggle Spin">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m0 0a9 9 0 0 1 9-9m-9 9a9 9 0 0 0 9 9" />
+                            </svg>
+                            Spin
+                        </button>
+                    </div>
+                    <!-- NEW: Labels toggle + Download -->
+                    <div class="control-actions" style="margin-top:8px">
+                        <button class="btn btn-ghost" id="labels-btn" title="Toggle Atom Labels">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <text x="5" y="18" font-size="16" fill="currentColor" stroke="none"
+                                    font-family="Inter,sans-serif" font-weight="600">A</text>
+                            </svg>
+                            Labels
+                        </button>
+                        <button class="btn btn-ghost" id="download-btn" title="Download as PNG">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Image
+                        </button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Viewer Area -->
+            <section class="viewer-section" id="viewer-section">
+                <div class="glass-card viewer-card">
+                    <div class="viewer-container" id="viewer-container">
+                        <!-- 3Dmol viewer gets injected here -->
+                        <div class="viewer-empty" id="viewer-empty">
+                            <div class="empty-molecule-anim">
+                                <div class="orbit-ring ring-1"></div>
+                                <div class="orbit-ring ring-2"></div>
+                                <div class="orbit-ring ring-3"></div>
+                                <div class="nucleus"></div>
+                            </div>
+                            <p class="empty-text">Enter a molecule name or SMILES to begin</p>
+                            <p class="empty-hint">Try "caffeine" or "C1=CC=CC=C1" (benzene)</p>
+                        </div>
+                        <!-- NEW: Viewer loading overlay -->
+                        <div class="viewer-loading hidden" id="viewer-loading">
+                            <div class="viewer-spinner"></div>
+                            <span>Loading molecule…</span>
+                        </div>
+                        <!-- NEW: Atom hover tooltip -->
+                        <div class="atom-tooltip hidden" id="atom-tooltip"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Error Toast -->
+        <div class="toast hidden" id="error-toast">
+            <div class="toast-icon">⚠️</div>
+            <div class="toast-message" id="error-message">Something went wrong</div>
+            <button class="toast-close" id="toast-close">&times;</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer" id="app-footer">
+            <p>Built with <span class="heart">♥</span> using <a href="https://3dmol.csb.pitt.edu/" target="_blank"
+                    rel="noopener">3Dmol.js</a> &amp; <a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank"
+                    rel="noopener">PubChem API</a></p>
+            <p class="footer-sub">ChemHub &copy; 2026 &mdash; <a href="../../index.html">Back to Hub</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

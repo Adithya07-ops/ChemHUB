@@ -1,0 +1,271 @@
+/* ========================================================
+   ChemHub — Hub Page Styles
+   ======================================================== */
+
+/* ── Header overrides ── */
+.app-header {
+    padding: 32px 0 0;
+    text-align: left;
+}
+.header-badge { margin-left: auto; }
+
+/* ── Hero Section ── */
+.hero {
+    text-align: center;
+    padding: 56px 24px 52px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+}
+
+.hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 auto 36px;
+}
+
+.hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.stat-num {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--font-mono);
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-sep {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.08);
+}
+
+/* ── Tool Grid ── */
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    padding-bottom: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ── Tool Cards ── */
+.tool-card {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    transition:
+        transform 0.35s var(--ease-out),
+        box-shadow 0.35s var(--ease-out),
+        border-color 0.35s var(--ease-out);
+}
+
+.tool-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Glow orb behind each card */
+.tool-card-glow {
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    top: -60px; right: -60px;
+    opacity: 0;
+    filter: blur(60px);
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.tool-card:hover .tool-card-glow { opacity: 1; }
+
+.glow-cyan   { background: var(--accent-glow); }
+.glow-purple { background: var(--accent-purple-glow); }
+.glow-gradient { background: radial-gradient(circle, var(--accent-glow), var(--accent-purple-glow)); }
+
+/* Card hover border */
+#card-adme:hover   { border-color: rgba(0, 229, 255, 0.35); }
+#card-docking:hover { border-color: rgba(168, 85, 247, 0.35); }
+#card-viewer:hover  { border-color: rgba(0, 229, 255, 0.25); }
+
+/* ── Card Header ── */
+.tool-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.tool-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    flex-shrink: 0;
+}
+.tool-icon-wrap svg { width: 100%; height: 100%; }
+
+.icon-cyan     { background: var(--accent-dim);        color: var(--accent);        border: 1px solid rgba(0,229,255,0.25); }
+.icon-purple   { background: var(--accent-purple-dim); color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.25); }
+.icon-gradient {
+    background: linear-gradient(135deg, var(--accent-dim), var(--accent-purple-dim));
+    color: var(--accent);
+    border: 1px solid rgba(0,229,255,0.2);
+}
+
+/* ── Card Body ── */
+.tool-card-name {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+}
+
+.tool-card-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+/* ── Card Tags ── */
+.tool-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.tool-tag {
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* ── Card Footer ── */
+.tool-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.tool-card-source {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+.tool-launch-btn {
+    padding: 8px 18px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration) var(--ease-out);
+    pointer-events: none; /* card itself is clickable */
+}
+
+.btn-cyan {
+    background: linear-gradient(135deg, var(--accent), #00b8d4);
+    color: #0a0a1a;
+    box-shadow: 0 2px 12px var(--accent-dim);
+}
+.tool-card:hover .btn-cyan { box-shadow: 0 4px 20px var(--accent-glow); }
+
+.btn-purple {
+    background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+    color: #fff;
+    box-shadow: 0 2px 12px var(--accent-purple-dim);
+}
+.tool-card:hover .btn-purple { box-shadow: 0 4px 20px var(--accent-purple-glow); }
+
+.btn-gradient {
+    background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(0,229,255,0.2);
+}
+.tool-card:hover .btn-gradient { box-shadow: 0 4px 20px rgba(168,85,247,0.3); }
+
+/* ── Coming Soon overlay (for future cards) ── */
+.tool-card.coming-soon {
+    cursor: default;
+    opacity: 0.65;
+}
+.tool-card.coming-soon:hover {
+    transform: none;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+    .hero-title { font-size: 2rem; }
+    .hero { padding: 40px 0 36px; }
+    .tool-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .hero-stats { gap: 14px; }
+    .tool-card-footer { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .tool-launch-btn { align-self: stretch; text-align: center; }
+}

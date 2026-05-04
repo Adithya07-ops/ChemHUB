@@ -1,0 +1,289 @@
+/* ========================================================
+   ChemHub — ADME Analyzer Styles
+   ======================================================== */
+
+/* ── Layout ── */
+.main-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 24px;
+    padding-bottom: 24px;
+}
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.results-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ── Search Card ── */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.molecule-input { flex: 1; }
+
+/* ── Molecule Name ── */
+.mol-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 14px;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+/* ── Properties Grid ── */
+.prop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.prop-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color var(--duration) var(--ease-out);
+}
+.prop-item:hover { border-color: rgba(0,229,255,0.2); }
+
+.prop-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+.prop-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+}
+
+.prop-value.highlight { color: var(--accent); }
+
+/* ── Info Placeholder ── */
+.info-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
+.placeholder-icon { width: 48px; height: 48px; color: var(--text-muted); }
+.placeholder-text { font-size: 0.83rem; color: var(--text-muted); text-align: center; }
+
+/* Loading */
+.props-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+/* ── Drug Filters ── */
+.filters-placeholder { padding: 14px 0; }
+
+.filter-section {
+    margin-bottom: 18px;
+}
+
+.filter-section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+.filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    gap: 10px;
+}
+.filter-row:last-child { border-bottom: none; }
+
+.filter-name {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    flex: 1;
+}
+
+.filter-value {
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-align: right;
+    flex-shrink: 0;
+    max-width: 100px;
+}
+
+.filter-overall {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: var(--radius-md);
+    margin-top: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.filter-overall-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ── Radar Card ── */
+.radar-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.radar-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.radar-orbit-anim {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.radar-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    border: 1px solid rgba(0,229,255,0.12);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.r1 { width: 40px; height: 40px; animation: orbitSpin 6s linear infinite; }
+.r2 { width: 65px; height: 65px; border-color: rgba(168,85,247,0.1); animation: orbitSpin 10s linear infinite reverse; }
+.r3 { width: 90px; height: 90px; border-style: dashed; border-color: rgba(0,229,255,0.06); animation: orbitSpin 14s linear infinite; }
+.radar-center { position: absolute; top:50%; left:50%; width:10px; height:10px; background: var(--accent); border-radius:50%; transform:translate(-50%,-50%); box-shadow: 0 0 12px var(--accent-glow); }
+@keyframes orbitSpin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.radar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+#radar-canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.radar-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.dot-molecule { background: var(--accent); }
+.dot-ideal    { background: var(--accent-purple); }
+
+/* ── Pharmacokinetics Card ── */
+.pk-card {}
+
+.pk-placeholder { padding: 14px 0; }
+
+.pk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.pk-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pk-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+}
+
+.pk-value {
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+.pk-value.high  { color: var(--success); }
+.pk-value.low   { color: var(--danger); }
+.pk-value.yes   { color: var(--success); }
+.pk-value.no    { color: var(--text-secondary); }
+.pk-value.maybe { color: var(--warning); }
+
+.pk-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+    .prop-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .pk-grid   { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .input-group { flex-direction: column; }
+    .prop-grid   { grid-template-columns: 1fr 1fr; }
+    .pk-grid     { grid-template-columns: 1fr; }
+}
