@@ -50,6 +50,9 @@
                     <div class="input-group">
                         <input type="text" id="molecule-input" class="text-input molecule-input"
                             placeholder="e.g. aspirin, ibuprofen, CCO…" autocomplete="off" spellcheck="false">
+                        <button id="draw-btn" class="btn btn-secondary" title="Draw Molecule">
+                            <span class="btn-text">✏️ Draw</span>
+                        </button>
                         <button id="analyze-btn" class="btn btn-primary">
                             <span class="btn-text">Analyze</span>
                             <span class="btn-loader" id="btn-loader"></span>
@@ -159,6 +162,26 @@
         <button class="toast-close" id="toast-close">&times;</button>
     </div>
 
+    <!-- Draw Modal -->
+    <div class="modal hidden" id="draw-modal">
+        <div class="modal-backdrop" id="draw-backdrop"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Draw Molecule</h3>
+                <button class="modal-close" id="draw-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="jsme_container"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="draw-cancel">Cancel</button>
+                <button class="btn btn-primary" id="draw-submit">Use Structure</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSME Editor -->
+    <script src="https://jsme-editor.github.io/dist/jsme/jsme.nocache.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

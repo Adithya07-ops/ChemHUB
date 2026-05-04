@@ -23,6 +23,11 @@ const el = {
     errorMessage:   document.getElementById('error-message'),
     toastClose:     document.getElementById('toast-close'),
     bgCanvas:       document.getElementById('bg-canvas'),
+    drawBtn:        document.getElementById('draw-btn'),
+    drawModal:      document.getElementById('draw-modal'),
+    drawClose:      document.getElementById('draw-close'),
+    drawCancel:     document.getElementById('draw-cancel'),
+    drawSubmit:     document.getElementById('draw-submit'),
 };
 
 const PUBCHEM_BASE = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug';
@@ -449,9 +454,44 @@ async function analyze() {
     }
 }
 
+// ════════════════════════════════════════════════════════════
+// 7. JSME DRAW MODAL
+// ════════════════════════════════════════════════════════════
+let jsmeApplet = null;
+window.jsmeOnLoad = function() {
+    jsmeApplet = new JSApplet.JSME("jsme_container", "100%", "400px", {
+        options: "oldlook,star"
+    });
+};
+
+function openDrawModal() {
+    el.drawModal.classList.remove('hidden');
+}
+
+function closeDrawModal() {
+    el.drawModal.classList.add('hidden');
+}
+
+function useStructure() {
+    if (!jsmeApplet) return;
+    const smiles = jsmeApplet.smiles();
+    if (!smiles) {
+        showError('Please draw a structure first.');
+        return;
+    }
+    el.input.value = smiles;
+    closeDrawModal();
+    analyze();
+}
+
 // ── Event Listeners ──
 document.addEventListener('DOMContentLoaded', () => {
     initBackground();
+
+    el.drawBtn.addEventListener('click', openDrawModal);
+    el.drawClose.addEventListener('click', closeDrawModal);
+    el.drawCancel.addEventListener('click', closeDrawModal);
+    el.drawSubmit.addEventListener('click', useStructure);
 
     el.analyzeBtn.addEventListener('click', analyze);
     el.input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); analyze(); } });
