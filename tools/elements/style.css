@@ -1,0 +1,175 @@
+/* ========================================================
+   ChemHub — Interactive Periodic Table Styles
+   ======================================================== */
+
+.main-layout {
+    flex: 1;
+    display: flex;
+    gap: 24px;
+    padding-bottom: 24px;
+    align-items: flex-start;
+}
+
+/* ── Left Panel (320px fixed) ── */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 320px;
+    flex-shrink: 0;
+}
+
+.search-card { padding: 20px; }
+.input-group { display: flex; gap: 8px; }
+#element-input { flex: 1; }
+
+/* Element Box (Detail View) */
+.element-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 20px;
+}
+.element-box {
+    position: relative;
+    width: 140px;
+    height: 160px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+.atomic-num { position: absolute; top: 10px; left: 14px; font-size: 1.1rem; font-family: var(--font-mono); font-weight: 600; color: var(--text-secondary); }
+.atomic-symbol { font-size: 3.5rem; font-weight: 800; color: var(--text-primary); line-height: 1; margin-bottom: 5px; }
+.atomic-mass { font-size: 1rem; font-family: var(--font-mono); color: var(--text-muted); }
+
+.element-titles { text-align: center; }
+.element-name { font-size: 1.8rem; font-weight: 700; margin: 0 0 6px 0; color: var(--text-primary); }
+.element-group { font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+
+/* Properties & Config */
+.prop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.prop-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.prop-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+.prop-value { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); }
+
+.config-display { padding: 16px; background: rgba(0,0,0,0.2); border-radius: 8px; display: flex; align-items: baseline; gap: 10px; justify-content: center; }
+.config-core { font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); font-family: var(--font-mono); }
+.config-valence { font-size: 1.2rem; font-weight: 600; color: var(--primary); font-family: var(--font-mono); }
+
+/* ── Right Panel (Table Grid) ── */
+.table-section {
+    flex: 1;
+    overflow-x: auto; /* Handle smaller desktop screens gracefully */
+}
+.table-card {
+    padding: 30px;
+    min-width: 900px;
+}
+
+/* CSS Grid for The Table */
+.periodic-grid {
+    display: grid;
+    grid-template-columns: repeat(18, minmax(40px, 1fr));
+    gap: 6px;
+    margin-bottom: 30px;
+}
+
+/* Individual Grid Cells */
+.p-cell {
+    position: relative;
+    aspect-ratio: 1 / 1.15;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.p-cell .c-num { position: absolute; top: 4px; left: 4px; font-size: 0.6rem; font-family: var(--font-mono); color: rgba(255,255,255,0.6); }
+.p-cell .c-sym { font-size: 1.2rem; font-weight: 700; color: rgba(255,255,255,0.9); }
+.p-cell .c-mass { display: none; } /* Could show on hover if designed larger */
+
+/* Hover / Active Effects */
+.p-cell:hover {
+    transform: scale(1.15);
+    z-index: 10;
+    box-shadow: 0 0 15px currentColor;
+    background: rgba(255,255,255,0.1);
+}
+.p-cell.active {
+    transform: scale(1.1);
+    z-index: 5;
+    box-shadow: 0 0 20px currentColor, inset 0 0 10px currentColor;
+    border-width: 2px;
+}
+
+/* ── Group Color Themes (Lively Glow) ── */
+.g-alkali { color: #f87171; border-color: rgba(248,113,113,0.3); }     /* Red */
+.g-alkaline { color: #fbbf24; border-color: rgba(251,191,36,0.3); }   /* Amber */
+.g-transition { color: #f472b6; border-color: rgba(244,114,182,0.3); } /* Pink */
+.g-post { color: #a78bfa; border-color: rgba(167,139,250,0.3); }       /* Purple */
+.g-metalloid { color: #34d399; border-color: rgba(52,211,153,0.3); }   /* Emerald */
+.g-nonmetal { color: #60a5fa; border-color: rgba(96,165,250,0.3); }    /* Blue */
+.g-halogen { color: #38bdf8; border-color: rgba(56,189,248,0.3); }     /* Light Blue */
+.g-noble { color: #c084fc; border-color: rgba(192,132,252,0.3); }      /* Fuji */
+.g-lanthanide { color: #fb923c; border-color: rgba(251,146,60,0.3); }  /* Orange */
+.g-actinide { color: #a3e635; border-color: rgba(163,230,53,0.3); }    /* Lime */
+
+.p-cell.g-alkali { background: rgba(248,113,113,0.05); }
+.p-cell.g-alkaline { background: rgba(251,191,36,0.05); }
+.p-cell.g-transition { background: rgba(244,114,182,0.05); }
+.p-cell.g-post { background: rgba(167,139,250,0.05); }
+.p-cell.g-metalloid { background: rgba(52,211,153,0.05); }
+.p-cell.g-nonmetal { background: rgba(96,165,250,0.05); }
+.p-cell.g-halogen { background: rgba(56,189,248,0.05); }
+.p-cell.g-noble { background: rgba(192,132,252,0.05); }
+.p-cell.g-lanthanide { background: rgba(251,146,60,0.05); }
+.p-cell.g-actinide { background: rgba(163,230,53,0.05); }
+
+/* Apply matching tint to the detail box */
+#main-el-box { border-color: currentColor; box-shadow: 0 0 20px currentColor; }
+#main-el-box .atomic-symbol { color: inherit; }
+
+.element-group { border-color: currentColor; color: inherit; }
+
+/* ── Legend ── */
+.table-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 20px;
+}
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-secondary); }
+.dot { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
+.dot.alkali { color: #f87171; background: #f87171; }
+.dot.alkaline { color: #fbbf24; background: #fbbf24; }
+.dot.transition { color: #f472b6; background: #f472b6; }
+.dot.post { color: #a78bfa; background: #a78bfa; }
+.dot.metalloid { color: #34d399; background: #34d399; }
+.dot.nonmetal { color: #60a5fa; background: #60a5fa; }
+.dot.halogen { color: #38bdf8; background: #38bdf8; }
+.dot.noble { color: #c084fc; background: #c084fc; }
+.dot.lanthanide { color: #fb923c; background: #fb923c; }
+.dot.actinide { color: #a3e635; background: #a3e635; }
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+    .main-layout { flex-direction: column; }
+    .side-panel { width: 100%; flex-direction: row; flex-wrap: wrap; }
+    .search-card, .element-card { flex: 1; min-width: 300px; }
+    .props-card { width: 100%; order: 3; }
+    .config-card { width: 100%; order: 4; }
+}
