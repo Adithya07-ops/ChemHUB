@@ -127,33 +127,21 @@
 }
 .tool-card:hover .tool-card-glow { opacity: 1; }
 
-<<<<<<< HEAD
 .glow-cyan   { background: var(--accent-glow); }
 .glow-purple { background: var(--accent-purple-glow); }
 .glow-green  { background: var(--accent-green-glow); }
 .glow-gold   { background: var(--accent-gold-glow); }
-=======
-.glow-cyan     { background: var(--accent-glow); }
-.glow-purple   { background: var(--accent-purple-glow); }
->>>>>>> 8b9e678523a5196885c72897eca21e8f57d333d4
 .glow-gradient { background: radial-gradient(circle, var(--accent-glow), var(--accent-purple-glow)); }
 .glow-gold     { background: radial-gradient(circle, rgba(251,191,36,0.4), rgba(245,158,11,0.2)); }
 .glow-orange   { background: radial-gradient(circle, rgba(251,146,60,0.5), rgba(239,68,68,0.3)); }
 
 /* Card hover border */
-<<<<<<< HEAD
-#card-adme:hover   { border-color: rgba(0, 229, 255, 0.35); }
-#card-docking:hover { border-color: rgba(168, 85, 247, 0.35); }
-#card-chemcalc:hover{ border-color: rgba(16, 185, 129, 0.35); }
-#card-elements:hover{ border-color: rgba(251, 191, 36, 0.35); }
-#card-viewer:hover  { border-color: rgba(0, 229, 255, 0.25); }
-=======
 #card-adme:hover      { border-color: rgba(0, 229, 255, 0.35); }
 #card-docking:hover   { border-color: rgba(168, 85, 247, 0.35); }
 #card-viewer:hover    { border-color: rgba(0, 229, 255, 0.25); }
 #card-elements:hover  { border-color: rgba(251,191,36,0.35); }
+#card-chemcalc:hover  { border-color: rgba(16, 185, 129, 0.35); }
 #card-enthalpy:hover  { border-color: rgba(251,146,60,0.45); }
->>>>>>> 8b9e678523a5196885c72897eca21e8f57d333d4
 
 /* ── Card Header ── */
 .tool-card-header {
