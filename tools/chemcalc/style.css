@@ -1,0 +1,105 @@
+/* ========================================================
+   ChemCalc — Styles
+   ======================================================== */
+
+.app-header {
+    padding: 32px 0 20px;
+    margin-bottom: 24px;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.calc-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+}
+
+/* For continuous inputs like grids */
+.mass-grid, .temp-grid {
+    gap: 16px;
+}
+
+.volume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+@media (min-width: 800px) {
+    .temp-span {
+        grid-column: 1 / -1; /* Span full width to let items sit nicely if possible */
+    }
+    .temp-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.control-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.text-input {
+    width: 100%;
+    /* Accent glow specifically for valid inputs when focused */
+}
+.text-input:focus {
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px var(--accent-green-dim);
+}
+.text-input.invalid {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px var(--danger-bg);
+}
+
+.result-box {
+    margin-top: auto;
+    padding: 16px;
+    background: rgba(16, 185, 129, 0.08); /* slight green dim */
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.result-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    word-break: break-all;
+}
+
+/* Remove default number arrows */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}

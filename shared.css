@@ -23,6 +23,14 @@
     --accent-purple-dim: rgba(168, 85, 247, 0.15);
     --accent-purple-glow:rgba(168, 85, 247, 0.35);
 
+    --accent-green:      #10b981;
+    --accent-green-dim:  rgba(16, 185, 129, 0.15);
+    --accent-green-glow: rgba(16, 185, 129, 0.35);
+
+    --accent-gold:       #fbbf24;
+    --accent-gold-dim:   rgba(251, 191, 36, 0.15);
+    --accent-gold-glow:  rgba(251, 191, 36, 0.35);
+
     /* Text */
     --text-primary:   #e8ecf4;
     --text-secondary: #8892a8;
@@ -248,6 +256,16 @@ body {
     transform: translateY(-1px);
 }
 
+.btn-primary-green {
+    background: linear-gradient(135deg, var(--accent-green), #059669);
+    color: #fff;
+    box-shadow: 0 2px 16px var(--accent-green-dim);
+}
+.btn-primary-green:hover {
+    box-shadow: 0 4px 24px var(--accent-green-glow);
+    transform: translateY(-1px);
+}
+
 .btn-loader {
     display: none;
     width: 18px; height: 18px;
@@ -339,6 +357,8 @@ body {
 }
 .badge-active   { background: var(--accent-dim);         color: var(--accent);         border: 1px solid rgba(0,229,255,0.3); }
 .badge-purple   { background: var(--accent-purple-dim);  color: var(--accent-purple);  border: 1px solid rgba(168,85,247,0.3); }
+.badge-green    { background: var(--accent-green-dim);   color: var(--accent-green);   border: 1px solid rgba(16,185,129,0.3); }
+.badge-gold     { background: var(--accent-gold-dim);    color: var(--accent-gold);    border: 1px solid rgba(251,191,36,0.3); }
 .badge-soon     { background: var(--warning-bg);          color: var(--warning);        border: 1px solid rgba(245,158,11,0.3); }
 .badge-pass     { background: var(--success-bg);          color: var(--success);        border: 1px solid rgba(0,229,160,0.3); }
 .badge-fail     { background: var(--danger-bg);           color: var(--danger);         border: 1px solid rgba(255,77,106,0.3); }
