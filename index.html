@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ChemHub — A chemistry research platform for students. Access ADME analysis, molecular docking exploration, and 3D molecular visualization tools.">
+    <meta name="description"
+        content="ChemHub — A chemistry research platform for students. Access ADME analysis, molecular docking exploration, and 3D molecular visualization tools.">
     <title>ChemHub — Chemistry Research Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="hub.css">
 </head>
+
 <body>
     <!-- Animated Background -->
     <canvas id="bg-canvas"></canvas>
@@ -24,15 +29,15 @@
                 <div class="logo-group">
                     <div class="logo-icon">
                         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                            <circle cx="8"  cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                            <circle cx="32" cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                            <circle cx="20" cy="22" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                            <line x1="20" y1="14" x2="20" y2="18" stroke="currentColor" stroke-width="1.5"/>
-                            <line x1="17" y1="25" x2="11" y2="28" stroke="currentColor" stroke-width="1.5"/>
-                            <line x1="23" y1="25" x2="29" y2="28" stroke="currentColor" stroke-width="1.5"/>
-                            <circle cx="20" cy="10" r="2" fill="currentColor" opacity="0.7"/>
-                            <circle cx="20" cy="22" r="2" fill="currentColor" opacity="0.7"/>
+                            <circle cx="20" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="8" cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="32" cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="20" cy="22" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <line x1="20" y1="14" x2="20" y2="18" stroke="currentColor" stroke-width="1.5" />
+                            <line x1="17" y1="25" x2="11" y2="28" stroke="currentColor" stroke-width="1.5" />
+                            <line x1="23" y1="25" x2="29" y2="28" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="20" cy="10" r="2" fill="currentColor" opacity="0.7" />
+                            <circle cx="20" cy="22" r="2" fill="currentColor" opacity="0.7" />
                         </svg>
                     </div>
                     <div>
@@ -51,14 +56,16 @@
             <div class="hero-tag">⚗️ Built for Chemistry Students</div>
             <h2 class="hero-title">Explore Molecules.<br>Predict Properties.<br>Visualize Interactions.</h2>
             <p class="hero-subtitle">
-                A unified research toolkit combining ADME drug-likeness analysis, protein-ligand docking exploration, and 3D molecular visualization — all in your browser.
+                A unified research toolkit combining ADME drug-likeness analysis, protein-ligand docking exploration,
+                and 3D molecular visualization — all in your browser.
             </p>
             <div class="hero-stats">
-                <div class="stat"><span class="stat-num">3</span><span class="stat-label">Tools</span></div>
+                <div class="stat"><span class="stat-num">5</span><span class="stat-label">Tools</span></div>
                 <div class="stat-sep"></div>
                 <div class="stat"><span class="stat-num">PubChem</span><span class="stat-label">Data Source</span></div>
                 <div class="stat-sep"></div>
-                <div class="stat"><span class="stat-num">RCSB PDB</span><span class="stat-label">Protein Data</span></div>
+                <div class="stat"><span class="stat-num">RCSB PDB</span><span class="stat-label">Protein Data</span>
+                </div>
             </div>
         </section>
 
@@ -71,17 +78,21 @@
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-cyan">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <path d="M16 4 L16 12 M12 8 L20 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M10 12 L6 26 L26 26 L22 12 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-                            <circle cx="16" cy="21" r="3" fill="currentColor" opacity="0.5"/>
-                            <path d="M11 19 Q13 16 16 18 Q19 20 21 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                            <path d="M16 4 L16 12 M12 8 L20 8" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                            <path d="M10 12 L6 26 L26 26 L22 12 Z" stroke="currentColor" stroke-width="1.8"
+                                stroke-linejoin="round" fill="none" />
+                            <circle cx="16" cy="21" r="3" fill="currentColor" opacity="0.5" />
+                            <path d="M11 19 Q13 16 16 18 Q19 20 21 17" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" fill="none" />
                         </svg>
                     </div>
                     <span class="badge badge-active">Active</span>
                 </div>
                 <h3 class="tool-card-name">ADME Analyzer</h3>
                 <p class="tool-card-desc">
-                    Predict drug-likeness, absorption, distribution, metabolism, and excretion properties from any molecule name or SMILES string. Powered by Lipinski's Rule of Five.
+                    Predict drug-likeness, absorption, distribution, metabolism, and excretion properties from any
+                    molecule name or SMILES string. Powered by Lipinski's Rule of Five.
                 </p>
                 <div class="tool-card-tags">
                     <span class="tool-tag">Drug-likeness</span>
@@ -96,24 +107,30 @@
             </article>
 
             <!-- Docking Explorer -->
-            <article class="tool-card glass-card" id="card-docking" onclick="window.location='tools/docking/index.html'">
+            <article class="tool-card glass-card" id="card-docking"
+                onclick="window.location='tools/docking/index.html'">
                 <div class="tool-card-glow glow-purple"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-purple">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <ellipse cx="16" cy="16" rx="12" ry="8" stroke="currentColor" stroke-width="1.8" fill="none" opacity="0.4"/>
-                            <path d="M8 12 Q12 8 16 10 Q20 12 24 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                            <path d="M8 16 Q12 12 16 14 Q20 16 24 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-                            <circle cx="12" cy="20" r="2.5" fill="currentColor" opacity="0.6"/>
-                            <circle cx="20" cy="18" r="2" fill="currentColor" opacity="0.8"/>
-                            <line x1="12" y1="20" x2="20" y2="18" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                            <ellipse cx="16" cy="16" rx="12" ry="8" stroke="currentColor" stroke-width="1.8" fill="none"
+                                opacity="0.4" />
+                            <path d="M8 12 Q12 8 16 10 Q20 12 24 9" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" fill="none" />
+                            <path d="M8 16 Q12 12 16 14 Q20 16 24 13" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" fill="none" />
+                            <circle cx="12" cy="20" r="2.5" fill="currentColor" opacity="0.6" />
+                            <circle cx="20" cy="18" r="2" fill="currentColor" opacity="0.8" />
+                            <line x1="12" y1="20" x2="20" y2="18" stroke="currentColor" stroke-width="1.5"
+                                stroke-dasharray="2 2" />
                         </svg>
                     </div>
                     <span class="badge badge-active">Active</span>
                 </div>
                 <h3 class="tool-card-name">Docking Explorer</h3>
                 <p class="tool-card-desc">
-                    Explore protein-ligand binding interactions in 3D. Load any PDB structure and visualize how small molecules sit within binding pockets. WASM engine integration coming soon.
+                    Explore protein-ligand binding interactions in 3D. Load any PDB structure and visualize how small
+                    molecules sit within binding pockets. WASM engine integration coming soon.
                 </p>
                 <div class="tool-card-tags">
                     <span class="tool-tag">Protein-Ligand</span>
@@ -133,22 +150,23 @@
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-gradient">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="10" r="4.5" stroke="currentColor" stroke-width="1.8" fill="none"/>
-                            <circle cx="8"  cy="24" r="4.5" stroke="currentColor" stroke-width="1.8" fill="none"/>
-                            <circle cx="24" cy="24" r="4.5" stroke="currentColor" stroke-width="1.8" fill="none"/>
-                            <line x1="13" y1="13" x2="10" y2="21" stroke="currentColor" stroke-width="1.8"/>
-                            <line x1="19" y1="13" x2="22" y2="21" stroke="currentColor" stroke-width="1.8"/>
-                            <line x1="13" y1="24" x2="20" y2="24" stroke="currentColor" stroke-width="1.8"/>
-                            <circle cx="16" cy="10" r="2" fill="currentColor" opacity="0.7"/>
-                            <circle cx="8"  cy="24" r="2" fill="currentColor" opacity="0.7"/>
-                            <circle cx="24" cy="24" r="2" fill="currentColor" opacity="0.7"/>
+                            <circle cx="16" cy="10" r="4.5" stroke="currentColor" stroke-width="1.8" fill="none" />
+                            <circle cx="8" cy="24" r="4.5" stroke="currentColor" stroke-width="1.8" fill="none" />
+                            <circle cx="24" cy="24" r="4.5" stroke="currentColor" stroke-width="1.8" fill="none" />
+                            <line x1="13" y1="13" x2="10" y2="21" stroke="currentColor" stroke-width="1.8" />
+                            <line x1="19" y1="13" x2="22" y2="21" stroke="currentColor" stroke-width="1.8" />
+                            <line x1="13" y1="24" x2="20" y2="24" stroke="currentColor" stroke-width="1.8" />
+                            <circle cx="16" cy="10" r="2" fill="currentColor" opacity="0.7" />
+                            <circle cx="8" cy="24" r="2" fill="currentColor" opacity="0.7" />
+                            <circle cx="24" cy="24" r="2" fill="currentColor" opacity="0.7" />
                         </svg>
                     </div>
                     <span class="badge badge-active">Active</span>
                 </div>
                 <h3 class="tool-card-name">3D Molecular Visualizer</h3>
                 <p class="tool-card-desc">
-                    Render any molecule in interactive 3D from its name or SMILES string. Switch between stick, sphere, and ball-and-stick representations with real-time rotation.
+                    Render any molecule in interactive 3D from its name or SMILES string. Switch between stick, sphere,
+                    and ball-and-stick representations with real-time rotation.
                 </p>
                 <div class="tool-card-tags">
                     <span class="tool-tag">3D Rendering</span>
@@ -163,23 +181,27 @@
             </article>
 
             <!-- Element Information Finder -->
-            <article class="tool-card glass-card" id="card-elements" onclick="window.location='tools/elements/index.html'">
+            <article class="tool-card glass-card" id="card-elements"
+                onclick="window.location='tools/elements/index.html'">
                 <div class="tool-card-glow glow-gold"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-gold">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.8" fill="none" opacity="0.3"/>
-                            <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1.8" fill="none" opacity="0.6"/>
-                            <circle cx="16" cy="16" r="3" fill="currentColor"/>
-                            <circle cx="16" cy="2" r="2.5" fill="currentColor" opacity="0.8"/>
-                            <circle cx="30" cy="16" r="2.5" fill="currentColor" opacity="0.8"/>
+                            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.8" fill="none"
+                                opacity="0.3" />
+                            <circle cx="16" cy="16" r="8" stroke="currentColor" stroke-width="1.8" fill="none"
+                                opacity="0.6" />
+                            <circle cx="16" cy="16" r="3" fill="currentColor" />
+                            <circle cx="16" cy="2" r="2.5" fill="currentColor" opacity="0.8" />
+                            <circle cx="30" cy="16" r="2.5" fill="currentColor" opacity="0.8" />
                         </svg>
                     </div>
                     <span class="badge badge-active">Active</span>
                 </div>
                 <h3 class="tool-card-name">Periodic Table Explorer</h3>
                 <p class="tool-card-desc">
-                    Look up detailed information and key facts about chemical elements. Search by element symbol or full name.
+                    Look up detailed information and key facts about chemical elements. Search by element symbol or full
+                    name.
                 </p>
                 <div class="tool-card-tags">
                     <span class="tool-tag">Elements</span>
@@ -189,6 +211,42 @@
                 <div class="tool-card-footer">
                     <span class="tool-card-source">PubChem Elements</span>
                     <button class="tool-launch-btn btn-gold">Launch →</button>
+                </div>
+            </article>
+
+            <!-- Enthalpy Calculator -->
+            <article class="tool-card glass-card" id="card-enthalpy"
+                onclick="window.location='tools/enthalpy/index.html'">
+                <div class="tool-card-glow glow-orange"></div>
+                <div class="tool-card-header">
+                    <div class="tool-icon-wrap icon-orange">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path
+                                d="M16 4 C16 4 8 12 8 20 C8 24.4 11.6 28 16 28 C20.4 28 24 24.4 24 20 C24 12 16 4 16 4Z"
+                                stroke="currentColor" stroke-width="1.8" fill="none" stroke-linejoin="round" />
+                            <path d="M12 20 C12 22.2 13.8 24 16 24" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" fill="none" />
+                            <circle cx="16" cy="20" r="2.5" fill="currentColor" opacity="0.6" />
+                            <path d="M19 12 C21 14 21 17 19 19" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" fill="none" opacity="0.5" />
+                        </svg>
+                    </div>
+                    <span class="badge badge-active">Active</span>
+                </div>
+                <h3 class="tool-card-name">Enthalpy Calculator</h3>
+                <p class="tool-card-desc">
+                    Calculate standard enthalpy of reaction (ΔH°rxn) using Hess's Law. Enter any balanced equation,
+                    get individual molecule ΔHf° values and a full step-by-step thermochemical breakdown.
+                </p>
+                <div class="tool-card-tags">
+                    <span class="tool-tag">Hess's Law</span>
+                    <span class="tool-tag">ΔH°rxn</span>
+                    <span class="tool-tag">Thermochemistry</span>
+                    <span class="tool-tag">NIST Data</span>
+                </div>
+                <div class="tool-card-footer">
+                    <span class="tool-card-source">NIST + PubChem</span>
+                    <button class="tool-launch-btn btn-orange">Launch →</button>
                 </div>
             </article>
 
@@ -215,4 +273,5 @@
 
     <script src="hub.js"></script>
 </body>
+
 </html>

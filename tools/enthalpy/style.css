@@ -1,0 +1,517 @@
+/* ========================================================
+   ChemHub — Enthalpy Calculator Styles
+   ======================================================== */
+
+:root {
+    --orange:      #fb923c;
+    --orange-dim:  rgba(251,146,60,0.14);
+    --orange-glow: rgba(251,146,60,0.38);
+    --red-accent:  #ef4444;
+    --blue-accent: #60a5fa;
+    --blue-dim:    rgba(96,165,250,0.14);
+}
+
+/* App-title link */
+.app-title-link { text-decoration: none; }
+.app-title-link .app-title {
+    background: linear-gradient(135deg, var(--orange), var(--red-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Tool Layout ── */
+.tool-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    flex: 1;
+    padding-bottom: 60px;
+    align-items: start;
+}
+
+.panel { position: relative; }
+.panel-left {
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.panel-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 400px;
+}
+
+/* ── Panel Title ── */
+.panel-title-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.panel-icon {
+    width: 46px; height: 46px;
+    border-radius: var(--radius-md);
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px; flex-shrink: 0;
+}
+.panel-icon svg { width: 100%; height: 100%; }
+.icon-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid rgba(251,146,60,0.25); }
+.panel-title { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; }
+.panel-subtitle { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; font-family: var(--font-mono); }
+
+/* ── Inputs ── */
+.input-section { display: flex; flex-direction: column; gap: 16px; }
+.field-group   { display: flex; flex-direction: column; gap: 8px; }
+.field-label {
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.05em;
+}
+.reaction-textarea {
+    resize: vertical; min-height: 72px;
+    font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6;
+}
+.reaction-textarea:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px var(--orange-dim);
+}
+.field-hint { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ── Orange button ── */
+.btn-orange {
+    width: 100%;
+    background: linear-gradient(135deg, var(--orange), var(--red-accent));
+    color: #fff; font-weight: 700;
+    padding: 12px 20px;
+    border-radius: var(--radius-md); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 0.92rem; font-family: var(--font-sans);
+    position: relative; overflow: hidden;
+    transition: all var(--duration) var(--ease-out);
+    box-shadow: 0 4px 20px rgba(251,146,60,0.25);
+}
+.btn-orange:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(251,146,60,0.4); }
+.btn-orange:active { transform: translateY(0); }
+.btn-orange.loading .btn-text { opacity: 0; }
+.btn-orange.loading .btn-loader { display: block; }
+.btn-text { display: flex; align-items: center; gap: 8px; }
+
+/* Data note */
+.data-note {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.74rem; color: var(--text-muted); line-height: 1.5;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-sm);
+}
+.data-note svg { flex-shrink: 0; margin-top: 2px; opacity: 0.6; }
+
+/* ── Empty State ── */
+.empty-state {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center;
+    padding: 80px 32px; gap: 12px;
+    animation: fadeIn 0.5s ease;
+}
+.empty-icon { font-size: 3.5rem; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.empty-title { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
+.empty-desc  { font-size: 0.88rem; color: var(--text-secondary); max-width: 340px; line-height: 1.65; }
+.empty-desc strong { color: var(--orange); }
+
+/* ── Results wrap ── */
+.results-wrap {
+    display: flex; flex-direction: column; gap: 20px;
+    animation: fadeIn 0.5s var(--ease-out);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Summary card ── */
+.result-summary {
+    padding: 24px;
+    border: 1px solid rgba(251,146,60,0.2);
+    position: relative; overflow: hidden;
+}
+.result-summary::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--red-accent));
+}
+.summary-top { margin-bottom: 16px; }
+.summary-label {
+    font-size: 0.74rem; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 6px;
+}
+.summary-reaction { font-size: 0.9rem; color: var(--text-secondary); word-break: break-all; }
+.summary-value-row { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.summary-value {
+    font-size: 2.4rem; font-weight: 800;
+    font-family: var(--font-mono); letter-spacing: -0.03em;
+}
+.summary-value.exo     { color: var(--orange); }
+.summary-value.endo    { color: var(--blue-accent); }
+.summary-value.neutral { color: var(--text-secondary); }
+.summary-badge {
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em;
+}
+.badge-exo  { background: rgba(251,146,60,0.12); color: var(--orange); border: 1px solid rgba(251,146,60,0.3); }
+.badge-endo { background: var(--blue-dim); color: var(--blue-accent); border: 1px solid rgba(96,165,250,0.3); }
+.badge-zero { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.1); }
+.summary-energy-bar { height: 6px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+.energy-bar-fill {
+    height: 100%; border-radius: 999px;
+    transition: width 0.8s var(--ease-out);
+    background: linear-gradient(90deg, var(--orange), var(--red-accent));
+}
+.energy-bar-fill.endo { background: linear-gradient(90deg, #3b82f6, var(--blue-accent)); }
+
+/* ══════════════════════════════════════════════════
+   ENTHALPY BALANCE PANEL (Products − Reactants = ΔH)
+   ══════════════════════════════════════════════════ */
+.balance-panel { display: flex; flex-direction: column; gap: 16px; }
+
+.balance-columns {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto;
+    gap: 12px;
+    align-items: start;
+}
+
+/* Column */
+.balance-col {
+    display: flex; flex-direction: column;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.balance-col-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px;
+    font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+}
+.product-header  { background: rgba(251,146,60,0.08);  border-bottom: 1px solid rgba(251,146,60,0.15);  color: var(--orange); }
+.reactant-header { background: rgba(96,165,250,0.08);  border-bottom: 1px solid rgba(96,165,250,0.15);  color: var(--blue-accent); }
+.balance-col-sigma { font-family: var(--font-mono); font-weight: 500; opacity: 0.7; }
+
+/* Molecule rows inside balance panel */
+.balance-mol-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    gap: 8px;
+    animation: rowIn 0.35s var(--ease-out) both;
+}
+.balance-mol-row:last-child { border-bottom: none; }
+.balance-mol-row:hover { background: rgba(255,255,255,0.03); }
+@keyframes rowIn { from{opacity:0;transform:translateX(-6px)} to{opacity:1;transform:translateX(0)} }
+
+.bm-left { display: flex; flex-direction: column; gap: 1px; }
+.bm-formula { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--text-primary); }
+.bm-expr    { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
+.bm-dhf     { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; }
+.bm-dhf.product-val  { color: var(--orange); }
+.bm-dhf.reactant-val { color: var(--blue-accent); }
+.bm-dhf.zero-val     { color: var(--text-muted); }
+.bm-dhf.unknown-val  { color: var(--warning); }
+
+/* Subtotal bar */
+.balance-subtotal {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 14px;
+    font-size: 0.82rem; font-weight: 700;
+    font-family: var(--font-mono);
+}
+.product-subtotal  { background: rgba(251,146,60,0.08); color: var(--orange); border-top: 1px solid rgba(251,146,60,0.2); }
+.reactant-subtotal { background: rgba(96,165,250,0.08);  color: var(--blue-accent); border-top: 1px solid rgba(96,165,250,0.2); }
+
+/* Operator (−) */
+.balance-operator {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-weight: 300; color: var(--text-muted);
+    padding: 0 4px; align-self: center; margin-top: 24px;
+}
+
+/* Result column (= ΔH) */
+.balance-result-col {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 6px;
+    padding: 16px 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-md);
+    min-width: 110px;
+    align-self: center; margin-top: 24px;
+}
+.balance-equals {
+    font-size: 1.5rem; font-weight: 300;
+    color: var(--text-muted); line-height: 1;
+}
+.balance-dh {
+    font-family: var(--font-mono);
+    font-size: 1.25rem; font-weight: 800;
+    letter-spacing: -0.02em; text-align: center;
+    line-height: 1.2;
+}
+.balance-dh.exo  { color: var(--orange); }
+.balance-dh.endo { color: var(--blue-accent); }
+.balance-dh.zero { color: var(--text-secondary); }
+.balance-dh-label {
+    font-size: 0.68rem; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--text-muted); text-align: center;
+}
+
+/* ── Hess's Law Steps Section ── */
+.steps-section { display: flex; flex-direction: column; gap: 18px; }
+.formula-box {
+    background: rgba(251,146,60,0.07);
+    border: 1px solid rgba(251,146,60,0.18);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px; text-align: center;
+}
+.formula-text { font-family: var(--font-mono); font-size: 0.88rem; color: var(--orange); font-weight: 500; }
+
+/* Molecule table */
+.molecule-table-wrap { border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); overflow: hidden; }
+.molecule-table-header {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.7fr 1.2fr 1.1fr;
+    padding: 9px 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);
+}
+.molecule-row {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.7fr 1.2fr 1.1fr;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: center; font-size: 0.83rem;
+    transition: background 0.2s;
+    animation: rowIn 0.4s var(--ease-out) both;
+}
+.molecule-row:last-child { border-bottom: none; }
+.molecule-row:hover { background: rgba(255,255,255,0.03); }
+.mol-formula       { font-family: var(--font-mono); color: var(--text-primary); font-weight: 600; }
+.mol-role-product  { color: var(--orange);       font-weight: 600; font-size: 0.75rem; }
+.mol-role-reactant { color: var(--blue-accent);  font-weight: 600; font-size: 0.75rem; }
+.mol-coeff         { color: var(--text-secondary); text-align: center; font-family: var(--font-mono); }
+.mol-dhf           { color: var(--text-secondary); font-family: var(--font-mono); }
+.mol-contrib-pos   { color: var(--orange);       font-family: var(--font-mono); font-weight: 600; }
+.mol-contrib-neg   { color: var(--blue-accent);  font-family: var(--font-mono); font-weight: 600; }
+.mol-contrib-zero  { color: var(--text-muted);   font-family: var(--font-mono); }
+
+/* Calc steps */
+.calc-steps { display: flex; flex-direction: column; gap: 10px; }
+.step-item {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.02);
+    border-left: 3px solid rgba(251,146,60,0.4);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    animation: fadeIn 0.35s ease both;
+}
+.step-label { font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+.step-expr  { font-family: var(--font-mono); font-size: 0.84rem; color: var(--text-primary); line-height: 1.6; word-break: break-word; }
+.step-result { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; margin-top: 2px; }
+.step-result.exo  { color: var(--orange); }
+.step-result.endo { color: var(--blue-accent); }
+.step-result.zero { color: var(--text-muted); }
+
+/* Unknown warn */
+.unknown-warn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 9px;
+    background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 999px; font-size: 0.72rem; color: var(--warning); font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════
+   INDIVIDUAL MOLECULE CARDS (large 2D structure)
+   ══════════════════════════════════════════════════ */
+.molecule-cards-section { display: flex; flex-direction: column; gap: 16px; }
+
+.section-header { display: flex; flex-direction: column; gap: 6px; }
+.section-sub { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+
+.molecule-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.mol-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 0.3s var(--ease-out), border-color 0.3s, box-shadow 0.3s;
+    animation: fadeIn 0.45s var(--ease-out) both;
+    backdrop-filter: blur(20px);
+}
+.mol-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(251,146,60,0.35);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+.mol-card.reactant-card:hover { border-color: rgba(96,165,250,0.35); }
+
+/* Structure image hero */
+.mol-structure-hero {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #fff;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+}
+.mol-structure-img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 12px;
+    transition: transform 0.3s ease;
+}
+.mol-card:hover .mol-structure-img { transform: scale(1.05); }
+.mol-structure-placeholder {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 8px;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+}
+.mol-structure-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+.mol-structure-placeholder-text { font-size: 0.75rem; opacity: 0.5; }
+
+/* Role ribbon on image */
+.mol-role-ribbon {
+    position: absolute; top: 10px; right: 10px;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.04em; z-index: 2;
+}
+.ribbon-product  { background: rgba(251,146,60,0.9); color: #fff; }
+.ribbon-reactant { background: rgba(96,165,250,0.9);  color: #fff; }
+
+/* Card body */
+.mol-card-body {
+    padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 12px;
+    flex: 1;
+}
+
+.mol-card-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+}
+.mol-card-formula { font-family: var(--font-mono); font-size: 1.15rem; font-weight: 800; color: var(--text-primary); }
+.mol-card-name    { font-size: 0.76rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+.mol-cid          { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ΔHf° hero stat */
+.mol-dhf-hero {
+    display: flex; flex-direction: column;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    gap: 4px;
+}
+.mol-dhf-hero-label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); font-weight: 600;
+}
+.mol-dhf-hero-value {
+    font-family: var(--font-mono); font-size: 1.4rem; font-weight: 800;
+    letter-spacing: -0.02em;
+}
+.mol-dhf-hero-value.product-val  { color: var(--orange); }
+.mol-dhf-hero-value.reactant-val { color: var(--blue-accent); }
+.mol-dhf-hero-value.zero-val     { color: var(--text-secondary); }
+.mol-dhf-hero-value.unknown-val  { color: var(--warning); font-size: 1rem; }
+.mol-dhf-hero-sub {
+    font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono);
+}
+
+/* Stats grid */
+.mol-stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.mol-stat-box {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    display: flex; flex-direction: column; gap: 2px;
+}
+.mol-stat-box-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.mol-stat-box-value { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+.mol-stat-box-value.orange { color: var(--orange); }
+.mol-stat-box-value.blue   { color: var(--blue-accent); }
+
+/* Card footer links */
+.mol-card-links {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.mol-link {
+    flex: 1; min-width: 120px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem; font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.mol-link-pubchem {
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--accent);
+}
+.mol-link-pubchem:hover {
+    background: rgba(0,229,255,0.12);
+    border-color: rgba(0,229,255,0.4);
+    transform: translateY(-1px);
+}
+.mol-link-chemcompute {
+    background: rgba(251,146,60,0.07);
+    border: 1px solid rgba(251,146,60,0.2);
+    color: var(--orange);
+}
+.mol-link-chemcompute:hover {
+    background: rgba(251,146,60,0.14);
+    border-color: rgba(251,146,60,0.4);
+    transform: translateY(-1px);
+}
+.mol-link svg { flex-shrink: 0; }
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+    .balance-columns { grid-template-columns: 1fr auto 1fr; grid-template-rows: auto auto; }
+    .balance-result-col { grid-column: 1 / -1; flex-direction: row; justify-content: center; gap: 16px; margin-top: 0; }
+}
+@media (max-width: 1024px) {
+    .tool-layout { grid-template-columns: 1fr; }
+    .panel-left { position: static; }
+}
+@media (max-width: 640px) {
+    .molecule-table-header,
+    .molecule-row { grid-template-columns: 1.2fr 0.7fr 0.6fr 1fr 1fr; font-size: 0.75rem; }
+    .summary-value { font-size: 1.8rem; }
+    .molecule-cards-grid { grid-template-columns: 1fr; }
+    .balance-columns { grid-template-columns: 1fr; }
+    .balance-operator { display: none; }
+}

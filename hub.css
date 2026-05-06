@@ -127,14 +127,18 @@
 }
 .tool-card:hover .tool-card-glow { opacity: 1; }
 
-.glow-cyan   { background: var(--accent-glow); }
-.glow-purple { background: var(--accent-purple-glow); }
+.glow-cyan     { background: var(--accent-glow); }
+.glow-purple   { background: var(--accent-purple-glow); }
 .glow-gradient { background: radial-gradient(circle, var(--accent-glow), var(--accent-purple-glow)); }
+.glow-gold     { background: radial-gradient(circle, rgba(251,191,36,0.4), rgba(245,158,11,0.2)); }
+.glow-orange   { background: radial-gradient(circle, rgba(251,146,60,0.5), rgba(239,68,68,0.3)); }
 
 /* Card hover border */
-#card-adme:hover   { border-color: rgba(0, 229, 255, 0.35); }
-#card-docking:hover { border-color: rgba(168, 85, 247, 0.35); }
-#card-viewer:hover  { border-color: rgba(0, 229, 255, 0.25); }
+#card-adme:hover      { border-color: rgba(0, 229, 255, 0.35); }
+#card-docking:hover   { border-color: rgba(168, 85, 247, 0.35); }
+#card-viewer:hover    { border-color: rgba(0, 229, 255, 0.25); }
+#card-elements:hover  { border-color: rgba(251,191,36,0.35); }
+#card-enthalpy:hover  { border-color: rgba(251,146,60,0.45); }
 
 /* ── Card Header ── */
 .tool-card-header {
@@ -162,6 +166,8 @@
     color: var(--accent);
     border: 1px solid rgba(0,229,255,0.2);
 }
+.icon-gold   { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+.icon-orange { background: rgba(251,146,60,0.12); color: #fb923c; border: 1px solid rgba(251,146,60,0.25); }
 
 /* ── Card Body ── */
 .tool-card-name {
@@ -246,6 +252,20 @@
     box-shadow: 0 2px 12px rgba(0,229,255,0.2);
 }
 .tool-card:hover .btn-gradient { box-shadow: 0 4px 20px rgba(168,85,247,0.3); }
+
+.btn-gold {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1a0f00;
+    box-shadow: 0 2px 12px rgba(251,191,36,0.2);
+}
+.tool-card:hover .btn-gold { box-shadow: 0 4px 20px rgba(251,191,36,0.35); }
+
+.btn-orange {
+    background: linear-gradient(135deg, #fb923c, #ef4444);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(251,146,60,0.2);
+}
+.tool-card:hover .btn-orange { box-shadow: 0 4px 20px rgba(251,146,60,0.4); }
 
 /* ── Coming Soon overlay (for future cards) ── */
 .tool-card.coming-soon {
