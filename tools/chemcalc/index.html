@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="ChemCalc — Chemistry Utilities & Laboratory Calculator. Essential lab calculations and unit conversions.">
+    <title>ChemCalc | ChemHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../shared.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Main Container -->
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header" id="app-header">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <div class="logo-group">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="6" width="24" height="28" rx="4" stroke="currentColor" stroke-width="1.5"
+                                fill="none" />
+                            <rect x="13" y="11" width="14" height="6" rx="1" stroke="currentColor" stroke-width="1.5"
+                                fill="none" opacity="0.8" />
+                            <circle cx="14" cy="22" r="2" fill="currentColor" />
+                            <circle cx="20" cy="22" r="2" fill="currentColor" />
+                            <circle cx="26" cy="22" r="2" fill="currentColor" />
+                            <circle cx="14" cy="27" r="2" fill="currentColor" />
+                            <circle cx="20" cy="27" r="2" fill="currentColor" />
+                            <circle cx="26" cy="27" r="2" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="app-title">ChemCalc</h1>
+                        <p class="app-subtitle">Chemistry Utilities & Laboratory Calculator</p>
+                    </div>
+                </div>
+                <a href="../../index.html" class="back-link">← ChemHub</a>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <main class="main-layout">
+            <div class="calc-grid">
+
+                <!-- Mole Calculator (MOST IMPORTANT) -->
+                <div class="glass-card calc-card" id="card-mole">
+                    <h2 class="card-title">
+                        <span class="card-icon">⚖️</span>
+                        Mole Calculator
+                    </h2>
+                    <div class="calc-form">
+                        <div class="input-group">
+                            <label class="control-label" for="mole-mass">Mass (g)</label>
+                            <input type="number" id="mole-mass" class="text-input" placeholder="e.g. 10.5" step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="mole-molar-mass">Molar Mass (g/mol)</label>
+                            <input type="number" id="mole-molar-mass" class="text-input" placeholder="e.g. 18.015"
+                                step="any">
+                        </div>
+                        <div class="result-box">
+                            <span class="result-label">Moles:</span>
+                            <span class="result-value mono" id="res-moles">0.000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Molarity Calculator -->
+                <div class="glass-card calc-card" id="card-molarity">
+                    <h2 class="card-title">
+                        <span class="card-icon">🧪</span>
+                        Molarity Calculator
+                    </h2>
+                    <div class="calc-form">
+                        <div class="input-group">
+                            <label class="control-label" for="molarity-moles">Moles (mol)</label>
+                            <input type="number" id="molarity-moles" class="text-input" placeholder="e.g. 0.5"
+                                step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="molarity-volume">Volume (L)</label>
+                            <input type="number" id="molarity-volume" class="text-input" placeholder="e.g. 1.0"
+                                step="any">
+                        </div>
+                        <div class="result-box">
+                            <span class="result-label">Molarity (M):</span>
+                            <span class="result-value mono" id="res-molarity">0.000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mass Conversion -->
+                <div class="glass-card calc-card" id="card-mass">
+                    <h2 class="card-title">
+                        <span class="card-icon">⏲️</span>
+                        Mass Conversion
+                    </h2>
+                    <div class="calc-form mass-grid">
+                        <div class="input-group">
+                            <label class="control-label" for="mass-mg">Milligrams (mg)</label>
+                            <input type="number" id="mass-mg" class="text-input" placeholder="0" step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="mass-g">Grams (g)</label>
+                            <input type="number" id="mass-g" class="text-input" placeholder="0" step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="mass-kg">Kilograms (kg)</label>
+                            <input type="number" id="mass-kg" class="text-input" placeholder="0" step="any">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Volume Conversion -->
+                <div class="glass-card calc-card" id="card-vol">
+                    <h2 class="card-title">
+                        <span class="card-icon">💧</span>
+                        Volume Conversion
+                    </h2>
+                    <div class="calc-form volume-grid">
+                        <div class="input-group">
+                            <label class="control-label" for="vol-ml">Milliliters (mL)</label>
+                            <input type="number" id="vol-ml" class="text-input" placeholder="0" step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="vol-l">Liters (L)</label>
+                            <input type="number" id="vol-l" class="text-input" placeholder="0" step="any">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Temperature Conversion -->
+                <div class="glass-card calc-card temp-span" id="card-temp">
+                    <h2 class="card-title">
+                        <span class="card-icon">🌡️</span>
+                        Temperature Conversion
+                    </h2>
+                    <div class="calc-form temp-grid">
+                        <div class="input-group">
+                            <label class="control-label" for="temp-c">Celsius (°C)</label>
+                            <input type="number" id="temp-c" class="text-input" placeholder="0" step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="temp-k">Kelvin (K)</label>
+                            <input type="number" id="temp-k" class="text-input" placeholder="0" step="any">
+                        </div>
+                        <div class="input-group">
+                            <label class="control-label" for="temp-f">Fahrenheit (°F)</label>
+                            <input type="number" id="temp-f" class="text-input" placeholder="0" step="any">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Error Toast -->
+        <div class="toast hidden" id="error-toast">
+            <div class="toast-icon">⚠️</div>
+            <div class="toast-message" id="error-message">Something went wrong</div>
+            <button class="toast-close" id="toast-close">&times;</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer" id="app-footer">
+            <p>Built with <span class="heart">♥</span> for Chemistry Students</p>
+            <p class="footer-sub">ChemHub &copy; 2026 &mdash; <a href="../../index.html">Back to Hub</a></p>
+        </footer>
+    </div>
+
+    <!-- Reusing hub's animated background function from a shared place or just duplicating for isolation -->
+    <script src="script.js"></script>
+</body>
+
+</html>

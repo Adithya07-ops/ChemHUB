@@ -24,6 +24,7 @@ const elements = {
     errorToast: document.getElementById('error-toast'),
     errorMessage: document.getElementById('error-message'),
     toastClose: document.getElementById('toast-close'),
+    sendChemcalcBtn: document.getElementById('send-chemcalc-btn'),
     bgCanvas: document.getElementById('bg-canvas'),
     viewerLoading: document.getElementById('viewer-loading'), // NEW
     atomTooltip: document.getElementById('atom-tooltip'),   // NEW
@@ -219,6 +220,7 @@ async function fetchMoleculeData(query) {
         name: props.IUPACName || trimmed,
         formula: props.MolecularFormula || '—',
         weight: props.MolecularWeight ? `${props.MolecularWeight} g/mol` : '—',
+        rawWeight: props.MolecularWeight || null,
         smiles: smiles || '—',
         sdf,
     };
@@ -443,6 +445,13 @@ function showInfo(data) {
     elements.infoWeight.textContent = data.weight;
     elements.infoSmiles.textContent = data.smiles;
     elements.infoSmiles.title = data.smiles; // Show full SMILES on hover
+
+    if (data.rawWeight) {
+        elements.sendChemcalcBtn.classList.remove('hidden');
+        elements.sendChemcalcBtn.dataset.weight = data.rawWeight;
+    } else {
+        elements.sendChemcalcBtn.classList.add('hidden');
+    }
 }
 
 /**
@@ -594,6 +603,14 @@ function initEventListeners() {
                 state.viewer.render();
             }
         }, 200);
+    });
+
+    // Send to ChemCalc
+    elements.sendChemcalcBtn.addEventListener('click', () => {
+        const weight = elements.sendChemcalcBtn.dataset.weight;
+        if (weight) {
+            window.location.href = '../chemcalc/index.html?molarmass=' + encodeURIComponent(weight);
+        }
     });
 }
 

@@ -133,8 +133,10 @@
 }
 .tool-card:hover .tool-card-glow { opacity: 1; }
 
-.glow-cyan     { background: var(--accent-glow); }
-.glow-purple   { background: var(--accent-purple-glow); }
+.glow-cyan   { background: var(--accent-glow); }
+.glow-purple { background: var(--accent-purple-glow); }
+.glow-green  { background: var(--accent-green-glow); }
+.glow-gold   { background: var(--accent-gold-glow); }
 .glow-gradient { background: radial-gradient(circle, var(--accent-glow), var(--accent-purple-glow)); }
 .glow-gold     { background: radial-gradient(circle, rgba(251,191,36,0.4), rgba(245,158,11,0.2)); }
 .glow-orange   { background: radial-gradient(circle, rgba(251,146,60,0.5), rgba(239,68,68,0.3)); }
@@ -144,6 +146,7 @@
 #card-docking:hover   { border-color: rgba(168, 85, 247, 0.35); }
 #card-viewer:hover    { border-color: rgba(0, 229, 255, 0.25); }
 #card-elements:hover  { border-color: rgba(251,191,36,0.35); }
+#card-chemcalc:hover  { border-color: rgba(16, 185, 129, 0.35); }
 #card-enthalpy:hover  { border-color: rgba(251,146,60,0.45); }
 
 /* ── Card Header ── */
@@ -167,6 +170,8 @@
 
 .icon-cyan     { background: var(--accent-dim);        color: var(--accent);        border: 1px solid rgba(0,229,255,0.25); }
 .icon-purple   { background: var(--accent-purple-dim); color: var(--accent-purple); border: 1px solid rgba(168,85,247,0.25); }
+.icon-green    { background: var(--accent-green-dim);  color: var(--accent-green);  border: 1px solid rgba(16,185,129,0.25); }
+.icon-gold     { background: var(--accent-gold-dim);   color: var(--accent-gold);   border: 1px solid rgba(251,191,36,0.25); }
 .icon-gradient {
     background: linear-gradient(135deg, var(--accent-dim), var(--accent-purple-dim));
     color: var(--accent);
@@ -255,6 +260,20 @@
     box-shadow: 0 2px 12px var(--accent-purple-dim);
 }
 .tool-card:hover .btn-purple { box-shadow: 0 4px 20px var(--accent-purple-glow); }
+
+.btn-green {
+    background: linear-gradient(135deg, var(--accent-green), #059669);
+    color: #fff;
+    box-shadow: 0 2px 12px var(--accent-green-dim);
+}
+.tool-card:hover .btn-green { box-shadow: 0 4px 20px var(--accent-green-glow); }
+
+.btn-gold {
+    background: linear-gradient(135deg, var(--accent-gold), #d97706);
+    color: #fff;
+    box-shadow: 0 2px 12px var(--accent-gold-dim);
+}
+.tool-card:hover .btn-gold { box-shadow: 0 4px 20px var(--accent-gold-glow); }
 
 .btn-gradient {
     background: linear-gradient(135deg, var(--accent), var(--accent-purple));
