@@ -7,7 +7,13 @@
     padding: 32px 0 0;
     text-align: left;
 }
-.header-badge { margin-left: auto; }
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+.header-badge { flex-shrink: 0; }
 
 /* ── Hero Section ── */
 .hero {
@@ -81,7 +87,7 @@
 .stat-sep {
     width: 1px;
     height: 32px;
-    background: rgba(255,255,255,0.08);
+    background: var(--divider);
 }
 
 /* ── Tool Grid ── */
@@ -237,6 +243,10 @@
     color: #0a0a1a;
     box-shadow: 0 2px 12px var(--accent-dim);
 }
+[data-theme="light"] .btn-cyan {
+    background: linear-gradient(135deg, var(--accent), #850047);
+    color: #fff;
+}
 .tool-card:hover .btn-cyan { box-shadow: 0 4px 20px var(--accent-glow); }
 
 .btn-purple {
@@ -288,4 +298,72 @@
     .hero-stats { gap: 14px; }
     .tool-card-footer { flex-direction: column; gap: 12px; align-items: flex-start; }
     .tool-launch-btn { align-self: stretch; text-align: center; }
+}
+
+/* ═══════════════════════════════════════════
+   LIGHT THEME OVERRIDES — Hub Page
+   ═══════════════════════════════════════════ */
+
+/* Hero title: luminous rose-to-purple gradient (avoids near-black start) */
+[data-theme="light"] .hero-title {
+    background: linear-gradient(135deg, #ff5faa 0%, var(--accent) 45%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 16px rgba(181, 0, 95, 0.18));
+}
+
+/* Hero tag */
+[data-theme="light"] .hero-tag {
+    background: var(--accent-dim);
+    border-color: var(--accent-glow);
+    color: var(--accent);
+}
+
+/* Stat separator */
+[data-theme="light"] .stat-sep {
+    background: rgba(200, 0, 106, 0.16);
+}
+
+/* Tool tags */
+[data-theme="light"] .tool-tag {
+    background: rgba(200, 0, 106, 0.06);
+    border-color: rgba(200, 0, 106, 0.14);
+    color: var(--text-muted);
+}
+
+/* Card footer border */
+[data-theme="light"] .tool-card-footer {
+    border-top-color: rgba(200, 0, 106, 0.10);
+}
+
+/* Card hover shadow */
+[data-theme="light"] .tool-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* Card hover border accents — pink for cyan cards, purple stays purple */
+[data-theme="light"] #card-adme:hover      { border-color: rgba(200, 0, 106, 0.40); }
+[data-theme="light"] #card-docking:hover   { border-color: rgba(156, 39, 176, 0.38); }
+[data-theme="light"] #card-viewer:hover    { border-color: rgba(200, 0, 106, 0.32); }
+[data-theme="light"] #card-elements:hover  { border-color: rgba(160, 100, 0, 0.35); }
+[data-theme="light"] #card-enthalpy:hover  { border-color: rgba(190, 60, 0, 0.35); }
+
+/* Glow orbs on light — rose-pink tinted, subtle */
+[data-theme="light"] .glow-cyan     { background: rgba(200, 0, 106, 0.18); }
+[data-theme="light"] .glow-purple   { background: rgba(156, 39, 176, 0.18); }
+[data-theme="light"] .glow-gradient { background: radial-gradient(circle, rgba(200, 0, 106, 0.18), rgba(156, 39, 176, 0.16)); }
+[data-theme="light"] .glow-gold     { background: radial-gradient(circle, rgba(160, 100, 0, 0.20), rgba(180, 110, 0, 0.12)); }
+[data-theme="light"] .glow-orange   { background: radial-gradient(circle, rgba(190, 60, 0, 0.20), rgba(170, 40, 40, 0.14)); }
+
+/* Icon wraps on light — warm pink tints */
+[data-theme="light"] .icon-cyan     { background: rgba(200, 0, 106, 0.09); border-color: rgba(200, 0, 106, 0.22); color: var(--accent); }
+[data-theme="light"] .icon-purple   { background: rgba(156, 39, 176, 0.09); border-color: rgba(156, 39, 176, 0.22); }
+[data-theme="light"] .icon-gradient { background: linear-gradient(135deg, rgba(200,0,106,0.09), rgba(156,39,176,0.09)); border-color: rgba(200,0,106,0.18); }
+[data-theme="light"] .icon-gold     { background: rgba(160, 100, 0, 0.10); border-color: rgba(160, 100, 0, 0.22); }
+[data-theme="light"] .icon-orange   { background: rgba(190, 60, 0, 0.10); border-color: rgba(190, 60, 0, 0.22); }
+
+/* Coming soon card on light */
+[data-theme="light"] .tool-card.coming-soon:hover {
+    box-shadow: var(--shadow-card);
 }
