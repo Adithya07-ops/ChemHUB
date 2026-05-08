@@ -1,0 +1,193 @@
+﻿diff --git a/hub.css b/hub.css
+index 6fc9079..1e7d7f9 100644
+--- a/hub.css
++++ b/hub.css
+@@ -127,33 +127,21 @@
+ }
+ .tool-card:hover .tool-card-glow { opacity: 1; }
+ 
+-<<<<<<< HEAD
+ .glow-cyan   { background: var(--accent-glow); }
+ .glow-purple { background: var(--accent-purple-glow); }
+ .glow-green  { background: var(--accent-green-glow); }
+ .glow-gold   { background: var(--accent-gold-glow); }
+-=======
+-.glow-cyan     { background: var(--accent-glow); }
+-.glow-purple   { background: var(--accent-purple-glow); }
+->>>>>>> 8b9e678523a5196885c72897eca21e8f57d333d4
+ .glow-gradient { background: radial-gradient(circle, var(--accent-glow), var(--accent-purple-glow)); }
+ .glow-gold     { background: radial-gradient(circle, rgba(251,191,36,0.4), rgba(245,158,11,0.2)); }
+ .glow-orange   { background: radial-gradient(circle, rgba(251,146,60,0.5), rgba(239,68,68,0.3)); }
+ 
+ /* Card hover border */
+-<<<<<<< HEAD
+-#card-adme:hover   { border-color: rgba(0, 229, 255, 0.35); }
+-#card-docking:hover { border-color: rgba(168, 85, 247, 0.35); }
+-#card-chemcalc:hover{ border-color: rgba(16, 185, 129, 0.35); }
+-#card-elements:hover{ border-color: rgba(251, 191, 36, 0.35); }
+-#card-viewer:hover  { border-color: rgba(0, 229, 255, 0.25); }
+-=======
+ #card-adme:hover      { border-color: rgba(0, 229, 255, 0.35); }
+ #card-docking:hover   { border-color: rgba(168, 85, 247, 0.35); }
+ #card-viewer:hover    { border-color: rgba(0, 229, 255, 0.25); }
+ #card-elements:hover  { border-color: rgba(251,191,36,0.35); }
++#card-chemcalc:hover  { border-color: rgba(16, 185, 129, 0.35); }
+ #card-enthalpy:hover  { border-color: rgba(251,146,60,0.45); }
+->>>>>>> 8b9e678523a5196885c72897eca21e8f57d333d4
+ 
+ /* ΓöÇΓöÇ Card Header ΓöÇΓöÇ */
+ .tool-card-header {
+diff --git a/index.html b/index.html
+index 33cb02e..5b81f68 100644
+--- a/index.html
++++ b/index.html
+@@ -6,14 +6,17 @@
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description"
+         content="ChemHub ΓÇö A chemistry research platform for students. Access ADME analysis, molecular docking exploration, and 3D molecular visualization tools.">
++    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
++    <meta http-equiv="Pragma" content="no-cache">
++    <meta http-equiv="Expires" content="0">
+     <title>ChemHub ΓÇö Chemistry Research Platform</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link
+         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+         rel="stylesheet">
+-    <link rel="stylesheet" href="shared.css">
+-    <link rel="stylesheet" href="hub.css">
++    <link rel="stylesheet" href="shared.css?v=2">
++    <link rel="stylesheet" href="hub.css?v=2">
+ </head>
+ 
+ <body>
+@@ -214,7 +217,6 @@
+                 </div>
+             </article>
+ 
+-<<<<<<< HEAD
+             <!-- ChemCalc Calculator -->
+             <article class="tool-card glass-card" id="card-chemcalc" onclick="window.location='tools/chemcalc/index.html'">
+                 <div class="tool-card-glow glow-green"></div>
+@@ -229,7 +231,26 @@
+                             <circle cx="11" cy="22" r="1.5" fill="currentColor" />
+                             <circle cx="16" cy="22" r="1.5" fill="currentColor" />
+                             <circle cx="21" cy="22" r="1.5" fill="currentColor" />
+-=======
++                        </svg>
++                    </div>
++                    <span class="badge badge-active">Active</span>
++                </div>
++                <h3 class="tool-card-name">ChemCalc</h3>
++                <p class="tool-card-desc">
++                    Perform chemistry-focused calculations and laboratory unit conversions including molarity, mole calculations, temperature conversion, and scientific utilities.
++                </p>
++                <div class="tool-card-tags">
++                    <span class="tool-tag">Mole Calculator</span>
++                    <span class="tool-tag">Unit Conversion</span>
++                    <span class="tool-tag">Molarity</span>
++                    <span class="tool-tag">Laboratory Tools</span>
++                </div>
++                <div class="tool-card-footer">
++                    <span class="tool-card-source">Local Utility</span>
++                    <button class="tool-launch-btn btn-green">Launch ΓåÆ</button>
++                </div>
++            </article>
++
+             <!-- Enthalpy Calculator -->
+             <article class="tool-card glass-card" id="card-enthalpy"
+                 onclick="window.location='tools/enthalpy/index.html'">
+@@ -245,26 +266,10 @@
+                             <circle cx="16" cy="20" r="2.5" fill="currentColor" opacity="0.6" />
+                             <path d="M19 12 C21 14 21 17 19 19" stroke="currentColor" stroke-width="1.4"
+                                 stroke-linecap="round" fill="none" opacity="0.5" />
+->>>>>>> 8b9e678523a5196885c72897eca21e8f57d333d4
+                         </svg>
+                     </div>
+                     <span class="badge badge-active">Active</span>
+                 </div>
+-<<<<<<< HEAD
+-                <h3 class="tool-card-name">ChemCalc</h3>
+-                <p class="tool-card-desc">
+-                    Perform chemistry-focused calculations and laboratory unit conversions including molarity, mole calculations, temperature conversion, and scientific utilities.
+-                </p>
+-                <div class="tool-card-tags">
+-                    <span class="tool-tag">Mole Calculator</span>
+-                    <span class="tool-tag">Unit Conversion</span>
+-                    <span class="tool-tag">Molarity</span>
+-                    <span class="tool-tag">Laboratory Tools</span>
+-                </div>
+-                <div class="tool-card-footer">
+-                    <span class="tool-card-source">Local Utility</span>
+-                    <button class="tool-launch-btn btn-green">Launch ΓåÆ</button>
+-=======
+                 <h3 class="tool-card-name">Enthalpy Calculator</h3>
+                 <p class="tool-card-desc">
+                     Calculate standard enthalpy of reaction (╬öH┬░rxn) using Hess's Law. Enter any balanced equation,
+@@ -279,7 +284,6 @@
+                 <div class="tool-card-footer">
+                     <span class="tool-card-source">NIST + PubChem</span>
+                     <button class="tool-launch-btn btn-orange">Launch ΓåÆ</button>
+->>>>>>> 8b9e678523a5196885c72897eca21e8f57d333d4
+                 </div>
+             </article>
+ 
+diff --git a/tools/chemcalc/index.html b/tools/chemcalc/index.html
+index 97fe933..523f2d9 100644
+--- a/tools/chemcalc/index.html
++++ b/tools/chemcalc/index.html
+@@ -30,8 +30,10 @@
+                 <div class="logo-group">
+                     <div class="logo-icon">
+                         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+-                            <rect x="8" y="6" width="24" height="28" rx="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+-                            <rect x="13" y="11" width="14" height="6" rx="1" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.8" />
++                            <rect x="8" y="6" width="24" height="28" rx="4" stroke="currentColor" stroke-width="1.5"
++                                fill="none" />
++                            <rect x="13" y="11" width="14" height="6" rx="1" stroke="currentColor" stroke-width="1.5"
++                                fill="none" opacity="0.8" />
+                             <circle cx="14" cy="22" r="2" fill="currentColor" />
+                             <circle cx="20" cy="22" r="2" fill="currentColor" />
+                             <circle cx="26" cy="22" r="2" fill="currentColor" />
+@@ -52,7 +54,7 @@
+         <!-- Main Layout -->
+         <main class="main-layout">
+             <div class="calc-grid">
+-                
++
+                 <!-- Mole Calculator (MOST IMPORTANT) -->
+                 <div class="glass-card calc-card" id="card-mole">
+                     <h2 class="card-title">
+@@ -66,7 +68,8 @@
+                         </div>
+                         <div class="input-group">
+                             <label class="control-label" for="mole-molar-mass">Molar Mass (g/mol)</label>
+-                            <input type="number" id="mole-molar-mass" class="text-input" placeholder="e.g. 18.015" step="any">
++                            <input type="number" id="mole-molar-mass" class="text-input" placeholder="e.g. 18.015"
++                                step="any">
+                         </div>
+                         <div class="result-box">
+                             <span class="result-label">Moles:</span>
+@@ -84,11 +87,13 @@
+                     <div class="calc-form">
+                         <div class="input-group">
+                             <label class="control-label" for="molarity-moles">Moles (mol)</label>
+-                            <input type="number" id="molarity-moles" class="text-input" placeholder="e.g. 0.5" step="any">
++                            <input type="number" id="molarity-moles" class="text-input" placeholder="e.g. 0.5"
++                                step="any">
+                         </div>
+                         <div class="input-group">
+                             <label class="control-label" for="molarity-volume">Volume (L)</label>
+-                            <input type="number" id="molarity-volume" class="text-input" placeholder="e.g. 1.0" step="any">
++                            <input type="number" id="molarity-volume" class="text-input" placeholder="e.g. 1.0"
++                                step="any">
+                         </div>
+                         <div class="result-box">
+                             <span class="result-label">Molarity (M):</span>
+@@ -180,4 +185,4 @@
+     <script src="script.js"></script>
+ </body>
+ 
+-</html>
++</html>
+\ No newline at end of file
