@@ -1,5 +1,5 @@
 /* ========================================================
-   ChemHub — Background Particle Animation (shared)
+   ChemHub — Background Particle Animation (theme-aware)
    ======================================================== */
 
 function initBackground() {
@@ -19,18 +19,21 @@ function initBackground() {
         canvas.height = window.innerHeight;
     }
 
+    function isLight() {
+        return document.documentElement.getAttribute('data-theme') === 'light';
+    }
+
     function drawCenterpiece() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Subtly adaptive glow based on theme (using the CSS variable values implicitly or fallback to soft white/blue)
-        const isLight = document.documentElement.classList.contains('light-theme');
-        const coreColor = isLight ? 'rgba(2, 132, 199, ' : 'rgba(0, 229, 255, ';
-        const bgCenter = isLight ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 6, 14, 0)';
-        const bgEdge = isLight ? 'rgba(240, 244, 248, 1)' : 'rgba(6, 6, 14, 1)';
+        const light = isLight();
+        /* Dynamic colors based on theme */
+        const coreColor = light ? 'rgba(200, 0, 106, ' : 'rgba(0, 229, 255, ';
+        const bgCenter = light ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 6, 14, 0)';
+        const bgEdge = light ? 'rgba(240, 244, 248, 1)' : 'rgba(6, 6, 14, 1)';
 
         // Background gradient
         const cx = canvas.width / 2;
-        // Move centerpiece slightly up or align with hero
         const cy = canvas.height * 0.35; 
         
         const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, canvas.width * 0.6);
@@ -58,9 +61,9 @@ function initBackground() {
 
         // Draw orbits and electrons
         for (let i = 0; i < ORBIT_COUNT; i++) {
-            const angleOffset = (Math.PI / ORBIT_COUNT) * i + (time * 0.0001); // Slow global rotation
+            const angleOffset = (Math.PI / ORBIT_COUNT) * i + (time * 0.0001);
             const radiusX = BASE_RADIUS + (i * 20);
-            const radiusY = radiusX * 0.3; // Ellipse squash
+            const radiusY = radiusX * 0.3;
 
             ctx.save();
             ctx.translate(cx, cy);
@@ -81,8 +84,6 @@ function initBackground() {
             ctx.beginPath();
             ctx.arc(ex, ey, DOT_RADIUS, 0, Math.PI * 2);
             ctx.fillStyle = coreColor + '0.9)';
-            
-            // Add trail
             ctx.shadowBlur = 6;
             ctx.shadowColor = coreColor + '0.8)';
             ctx.fill();
@@ -91,14 +92,10 @@ function initBackground() {
             ctx.restore();
         }
 
-        // Draw ambient dust particles (lightweight)
-        drawDust(ctx, isLight);
-        
-        // Draw floating chemical symbols
-        drawChemicals(ctx, isLight);
-        
-        // Draw decorative skeletal molecule fragments
-        drawMolecules(ctx, isLight);
+        // Ambient elements
+        drawDust(ctx, light);
+        drawChemicals(ctx, light);
+        drawMolecules(ctx, light);
 
         time += 16;
         requestAnimationFrame(drawCenterpiece);
@@ -119,23 +116,23 @@ function initBackground() {
         y: Math.random(),
         symbol: chemSymbols[Math.floor(Math.random() * chemSymbols.length)],
         size: Math.floor(Math.random() * 8) + 14,
-        speed: Math.random() * 0.00008 + 0.00002, // Slower
-        opacity: Math.random() * 0.15 + 0.08 // Balanced
+        speed: Math.random() * 0.00008 + 0.00002,
+        opacity: Math.random() * 0.15 + 0.08
     }));
 
     // Skeletal fragments setup
     const molFragments = Array.from({length: 6}, () => ({
         x: Math.random(),
         y: Math.random(),
-        type: Math.floor(Math.random() * 3), // benzene, branched, or pair
+        type: Math.floor(Math.random() * 3),
         angle: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.008, // Slower rotation
-        speed: Math.random() * 0.00006 + 0.00002, // Slower float
-        opacity: Math.random() * 0.15 + 0.08 // Balanced
+        rotationSpeed: (Math.random() - 0.5) * 0.008,
+        speed: Math.random() * 0.00006 + 0.00002,
+        opacity: Math.random() * 0.15 + 0.08
     }));
 
-    function drawDust(ctx, isLight) {
-        const color = isLight ? 'rgba(2, 132, 199, 0.25)' : 'rgba(0, 229, 255, 0.2)';
+    function drawDust(ctx, light) {
+        const color = light ? 'rgba(200, 0, 106, 0.25)' : 'rgba(0, 229, 255, 0.2)';
         ctx.fillStyle = color;
         dust.forEach(d => {
             const px = (d.x * canvas.width + time * d.speed * canvas.width) % canvas.width;
@@ -147,8 +144,8 @@ function initBackground() {
         });
     }
 
-    function drawChemicals(ctx, isLight) {
-        const color = isLight ? 'rgba(2, 132, 199, ' : 'rgba(0, 229, 255, ';
+    function drawChemicals(ctx, light) {
+        const color = light ? 'rgba(200, 0, 106, ' : 'rgba(0, 229, 255, ';
         chems.forEach(c => {
             ctx.font = `bold ${c.size}px "JetBrains Mono", monospace`;
             const px = (c.x * canvas.width + time * c.speed * canvas.width) % canvas.width;
@@ -160,8 +157,8 @@ function initBackground() {
         });
     }
 
-    function drawMolecules(ctx, isLight) {
-        const color = isLight ? 'rgba(2, 132, 199, ' : 'rgba(0, 229, 255, ';
+    function drawMolecules(ctx, light) {
+        const color = light ? 'rgba(200, 0, 106, ' : 'rgba(0, 229, 255, ';
         molFragments.forEach(m => {
             const px = (m.x * canvas.width + time * m.speed * canvas.width * 0.7) % canvas.width;
             const py = (m.y * canvas.height - time * m.speed * canvas.height * 0.4) % canvas.height;
@@ -173,7 +170,7 @@ function initBackground() {
             ctx.strokeStyle = color + m.opacity + ')';
             ctx.lineWidth = 1.5;
 
-            const scale = 1.5; // Scale up structures
+            const scale = 1.5;
 
             if (m.type === 0) { // Benzene ring
                 ctx.beginPath();
