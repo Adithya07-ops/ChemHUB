@@ -17,6 +17,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="shared.css?v=2">
     <link rel="stylesheet" href="hub.css?v=2">
+    <script src="theme.js"></script>
+    <script src="shared/transitions.js" defer></script>
+    <link rel="stylesheet" href="shared/transitions.css">
 </head>
 
 <body>
@@ -48,7 +51,7 @@
                         <p class="app-subtitle">Chemistry Research Platform</p>
                     </div>
                 </div>
-                <div class="header-badge">
+                <div class="header-badge" style="display:flex; align-items:center;">
                     <span class="badge badge-active">● Beta</span>
                 </div>
             </div>
@@ -56,6 +59,17 @@
 
         <!-- Hero -->
         <section class="hero">
+            <div class="hero-molecule-ornament">
+                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M50 20 L70 30 L70 50 L50 60 L30 50 L30 30 Z" opacity="0.4" />
+                    <path d="M70 30 L85 22" />
+                    <path d="M70 50 L85 58" />
+                    <path d="M30 30 L15 22" />
+                    <circle cx="85" cy="22" r="3" fill="currentColor" />
+                    <circle cx="85" cy="58" r="3" fill="currentColor" />
+                    <circle cx="15" cy="22" r="3" fill="currentColor" />
+                </svg>
+            </div>
             <div class="hero-tag">⚗️ Built for Chemistry Students</div>
             <h2 class="hero-title">Explore Molecules.<br>Predict Properties.<br>Visualize Interactions.</h2>
             <p class="hero-subtitle">
@@ -76,7 +90,7 @@
         <main class="tool-grid" id="tool-grid">
 
             <!-- ADME Analyzer -->
-            <article class="tool-card glass-card" id="card-adme" onclick="window.location='tools/adme/index.html'">
+            <a href="tools/adme/index.html" class="tool-card glass-card" id="card-adme">
                 <div class="tool-card-glow glow-cyan"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-cyan">
@@ -107,11 +121,10 @@
                     <span class="tool-card-source">PubChem API</span>
                     <button class="tool-launch-btn btn-cyan">Launch →</button>
                 </div>
-            </article>
+            </a>
 
             <!-- Docking Explorer -->
-            <article class="tool-card glass-card" id="card-docking"
-                onclick="window.location='tools/docking/index.html'">
+            <a href="tools/docking/index.html" class="tool-card glass-card" id="card-docking">
                 <div class="tool-card-glow glow-purple"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-purple">
@@ -145,10 +158,10 @@
                     <span class="tool-card-source">RCSB PDB + PubChem</span>
                     <button class="tool-launch-btn btn-purple">Launch →</button>
                 </div>
-            </article>
+            </a>
 
             <!-- 3D Visualizer -->
-            <article class="tool-card glass-card" id="card-viewer" onclick="window.location='tools/viewer/index.html'">
+            <a href="tools/viewer/index.html" class="tool-card glass-card" id="card-viewer">
                 <div class="tool-card-glow glow-gradient"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-gradient">
@@ -181,11 +194,10 @@
                     <span class="tool-card-source">PubChem API</span>
                     <button class="tool-launch-btn btn-gradient">Launch →</button>
                 </div>
-            </article>
+            </a>
 
             <!-- Element Information Finder -->
-            <article class="tool-card glass-card" id="card-elements"
-                onclick="window.location='tools/elements/index.html'">
+            <a href="tools/elements/index.html" class="tool-card glass-card" id="card-elements">
                 <div class="tool-card-glow glow-gold"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-gold">
@@ -215,16 +227,18 @@
                     <span class="tool-card-source">PubChem Elements</span>
                     <button class="tool-launch-btn btn-gold">Launch →</button>
                 </div>
-            </article>
+            </a>
 
             <!-- ChemCalc Calculator -->
-            <article class="tool-card glass-card" id="card-chemcalc" onclick="window.location='tools/chemcalc/index.html'">
+            <a href="tools/chemcalc/index.html" class="tool-card glass-card" id="card-chemcalc">
                 <div class="tool-card-glow glow-green"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-green">
                         <svg viewBox="0 0 32 32" fill="none">
-                            <rect x="6" y="4" width="20" height="24" rx="3" stroke="currentColor" stroke-width="1.8" fill="none" />
-                            <rect x="10" y="8" width="12" height="6" rx="1" stroke="currentColor" stroke-width="1.8" fill="none" opacity="0.8" />
+                            <rect x="6" y="4" width="20" height="24" rx="3" stroke="currentColor" stroke-width="1.8"
+                                fill="none" />
+                            <rect x="10" y="8" width="12" height="6" rx="1" stroke="currentColor" stroke-width="1.8"
+                                fill="none" opacity="0.8" />
                             <circle cx="11" cy="18" r="1.5" fill="currentColor" />
                             <circle cx="16" cy="18" r="1.5" fill="currentColor" />
                             <circle cx="21" cy="18" r="1.5" fill="currentColor" />
@@ -237,7 +251,8 @@
                 </div>
                 <h3 class="tool-card-name">ChemCalc</h3>
                 <p class="tool-card-desc">
-                    Perform chemistry-focused calculations and laboratory unit conversions including molarity, mole calculations, temperature conversion, and scientific utilities.
+                    Perform chemistry-focused calculations and laboratory unit conversions including molarity, mole
+                    calculations, temperature conversion, and scientific utilities.
                 </p>
                 <div class="tool-card-tags">
                     <span class="tool-tag">Mole Calculator</span>
@@ -249,11 +264,10 @@
                     <span class="tool-card-source">Local Utility</span>
                     <button class="tool-launch-btn btn-green">Launch →</button>
                 </div>
-            </article>
+            </a>
 
             <!-- Enthalpy Calculator -->
-            <article class="tool-card glass-card" id="card-enthalpy"
-                onclick="window.location='tools/enthalpy/index.html'">
+            <a href="tools/enthalpy/index.html" class="tool-card glass-card" id="card-enthalpy">
                 <div class="tool-card-glow glow-orange"></div>
                 <div class="tool-card-header">
                     <div class="tool-icon-wrap icon-orange">
@@ -285,13 +299,13 @@
                     <span class="tool-card-source">NIST + PubChem</span>
                     <button class="tool-launch-btn btn-orange">Launch →</button>
                 </div>
-            </article>
+            </a>
 
         </main>
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p>Built with <span class="heart">♥</span> using
+            <p>Built with
                 <a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubChem</a>,
                 <a href="https://www.rcsb.org/" target="_blank" rel="noopener">RCSB PDB</a> &amp;
                 <a href="https://3dmol.csb.pitt.edu/" target="_blank" rel="noopener">3Dmol.js</a>

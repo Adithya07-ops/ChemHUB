@@ -91,7 +91,7 @@ body {
 .app-header {
     position: relative;
     padding: 28px 0 20px;
-    text-align: center;
+    text-align: left;
 }
 
 .header-glow {
@@ -109,7 +109,7 @@ body {
 
 .header-content {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 

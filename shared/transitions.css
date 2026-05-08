@@ -1,0 +1,193 @@
+/* ========================================================
+   ChemHub — Global Page Transitions
+   Premium Linear/Vercel-inspired subtle animations
+   ======================================================== */
+
+/* Prevent scrollbars during transition */
+html.is-transitioning {
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* ── 1. Page Enter/Exit States ── */
+.page-transition-wrapper {
+    will-change: transform, opacity, filter;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0; /* Default to hidden to ensure transition is ALWAYS seen */
+}
+
+/* Initial enter state (Dramatic zoom and slide) */
+.page-enter {
+    opacity: 0 !important;
+    transform: translateY(120px) scale(0.85);
+    filter: blur(25px) brightness(0.6) contrast(1.2);
+}
+
+/* Active enter state */
+.page-enter-active {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1);
+    filter: blur(0) brightness(1) contrast(1);
+}
+
+/* Exit state (Dramatic fly-forward) */
+.page-exit {
+    opacity: 0 !important;
+    transform: translateY(-120px) scale(1.1);
+    filter: blur(25px) brightness(0.6) contrast(1.2);
+}
+
+/* ── 2. Card Click Interaction ── */
+.tool-card {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                filter 0.4s ease;
+}
+
+.tool-card.card-clicking {
+    transform: scale(0.92) translateY(5px) !important;
+    box-shadow: 0 0 60px var(--accent-glow) !important;
+    filter: brightness(1.3) contrast(1.1);
+    z-index: 10;
+}
+
+/* Dim unrelated elements smoothly */
+body.is-exiting main > *:not(.card-clicking) {
+    opacity: 0.3;
+    filter: blur(4px);
+    transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* ── 3. Minimal Loading Overlay ── */
+.transition-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 6, 14, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+:root.light-theme .transition-overlay {
+    background: rgba(240, 244, 248, 0.2);
+}
+
+.transition-overlay.show {
+    opacity: 1;
+}
+
+/* ── 4. Atomic Rotating Loader ── */
+.atomic-loader {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.atom-nucleus {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px var(--accent-glow);
+    animation: nucleus-pulse 1s ease-in-out infinite alternate;
+}
+
+.atom-orbit {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 1.5px solid rgba(0, 229, 255, 0.2);
+    border-radius: 50%;
+}
+
+.orbit-1 {
+    transform: rotateX(70deg) rotateY(20deg);
+    animation: orbit-rotate-1 2s linear infinite;
+}
+
+.orbit-2 {
+    transform: rotateX(70deg) rotateY(-20deg);
+    animation: orbit-rotate-2 2s linear infinite;
+}
+
+/* Electron dots on orbits */
+.atom-orbit::after {
+    content: '';
+    position: absolute;
+    top: -4px; left: 50%;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+@keyframes nucleus-pulse {
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; }
+    to { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+@keyframes orbit-rotate-1 {
+    from { transform: rotateX(70deg) rotateY(20deg) rotateZ(0deg); }
+    to { transform: rotateX(70deg) rotateY(20deg) rotateZ(360deg); }
+}
+
+@keyframes orbit-rotate-2 {
+    from { transform: rotateX(70deg) rotateY(-20deg) rotateZ(0deg); }
+    to { transform: rotateX(70deg) rotateY(-20deg) rotateZ(360deg); }
+}
+
+/* ── 5. Theme Toggle Chemistry Swoosh ── */
+.theme-swoosh-burst {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    width: 100px; height: 100px;
+    color: var(--accent);
+    z-index: 100000;
+    pointer-events: none;
+    opacity: 0;
+    filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: chem-wipe 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.theme-swoosh-burst::before {
+    content: '';
+    width: 100%; height: 100%;
+    border: 2px solid currentColor;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+@keyframes chem-wipe {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+        opacity: 0;
+        filter: blur(20px);
+    }
+    30% {
+        opacity: 0.8;
+        filter: blur(5px);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(15) rotate(60deg);
+        opacity: 0;
+        filter: blur(40px);
+    }
+}
+
+#theme-toggle svg {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#theme-toggle:active svg {
+    transform: scale(0.7) rotate(-45deg);
+}

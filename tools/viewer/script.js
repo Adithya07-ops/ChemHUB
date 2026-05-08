@@ -93,8 +93,9 @@ function initBackground() {
             canvas.width / 2, canvas.height / 2, 0,
             canvas.width / 2, canvas.height / 2, canvas.width * 0.7
         );
-        grad.addColorStop(0, 'rgba(10, 10, 40, 0)');
-        grad.addColorStop(1, 'rgba(6, 6, 14, 0.4)');
+        const isLight = document.documentElement.classList.contains('light-theme');
+        grad.addColorStop(0, isLight ? 'rgba(255, 255, 255, 0)' : 'rgba(10, 10, 40, 0)');
+        grad.addColorStop(1, isLight ? 'rgba(240, 244, 248, 1)' : 'rgba(6, 6, 14, 0.4)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 

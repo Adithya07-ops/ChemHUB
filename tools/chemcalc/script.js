@@ -71,8 +71,9 @@ function initBackground() {
             canvas.width / 2, canvas.height / 2, 0,
             canvas.width / 2, canvas.height / 2, canvas.width * 0.7
         );
-        grad.addColorStop(0, 'rgba(10, 10, 40, 0)');
-        grad.addColorStop(1, 'rgba(6, 6, 14, 0.4)');
+        const isLight = document.documentElement.classList.contains('light-theme');
+        grad.addColorStop(0, isLight ? 'rgba(255, 255, 255, 0)' : 'rgba(10, 10, 40, 0)');
+        grad.addColorStop(1, isLight ? 'rgba(240, 244, 248, 1)' : 'rgba(6, 6, 14, 0.4)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -181,8 +182,8 @@ elems.molVol.addEventListener('input', calcMolarity);
 // 3. Mass Conversion
 let massLock = false;
 elems.massMg.addEventListener('input', (e) => {
-    if(massLock) return; massLock = true;
-    if(isValidNum(e.target.value)) {
+    if (massLock) return; massLock = true;
+    if (isValidNum(e.target.value)) {
         const val = Number(e.target.value);
         elems.massG.value = val / 1000;
         elems.massKg.value = val / 1000000;
@@ -192,8 +193,8 @@ elems.massMg.addEventListener('input', (e) => {
     massLock = false;
 });
 elems.massG.addEventListener('input', (e) => {
-    if(massLock) return; massLock = true;
-    if(isValidNum(e.target.value)) {
+    if (massLock) return; massLock = true;
+    if (isValidNum(e.target.value)) {
         const val = Number(e.target.value);
         elems.massMg.value = val * 1000;
         elems.massKg.value = val / 1000;
@@ -203,8 +204,8 @@ elems.massG.addEventListener('input', (e) => {
     massLock = false;
 });
 elems.massKg.addEventListener('input', (e) => {
-    if(massLock) return; massLock = true;
-    if(isValidNum(e.target.value)) {
+    if (massLock) return; massLock = true;
+    if (isValidNum(e.target.value)) {
         const val = Number(e.target.value);
         elems.massMg.value = val * 1000000;
         elems.massG.value = val * 1000;
@@ -217,8 +218,8 @@ elems.massKg.addEventListener('input', (e) => {
 // 4. Volume Conversion
 let volLock = false;
 elems.volMl.addEventListener('input', (e) => {
-    if(volLock) return; volLock = true;
-    if(isValidNum(e.target.value)) {
+    if (volLock) return; volLock = true;
+    if (isValidNum(e.target.value)) {
         elems.volL.value = Number(e.target.value) / 1000;
     } else {
         elems.volL.value = '';
@@ -226,8 +227,8 @@ elems.volMl.addEventListener('input', (e) => {
     volLock = false;
 });
 elems.volL.addEventListener('input', (e) => {
-    if(volLock) return; volLock = true;
-    if(isValidNum(e.target.value)) {
+    if (volLock) return; volLock = true;
+    if (isValidNum(e.target.value)) {
         elems.volMl.value = Number(e.target.value) * 1000;
     } else {
         elems.volMl.value = '';
@@ -238,34 +239,34 @@ elems.volL.addEventListener('input', (e) => {
 // 5. Temperature Conversion
 let tempLock = false;
 elems.tempC.addEventListener('input', (e) => {
-    if(tempLock) return; tempLock = true;
-    if(isValidNum(e.target.value)) {
+    if (tempLock) return; tempLock = true;
+    if (isValidNum(e.target.value)) {
         const c = Number(e.target.value);
         elems.tempK.value = parseFloat((c + 273.15).toFixed(3));
-        elems.tempF.value = parseFloat(((c * 9/5) + 32).toFixed(3));
+        elems.tempF.value = parseFloat(((c * 9 / 5) + 32).toFixed(3));
     } else {
         elems.tempK.value = elems.tempF.value = '';
     }
     tempLock = false;
 });
 elems.tempK.addEventListener('input', (e) => {
-    if(tempLock) return; tempLock = true;
-    if(isValidNum(e.target.value)) {
+    if (tempLock) return; tempLock = true;
+    if (isValidNum(e.target.value)) {
         const k = Number(e.target.value);
-        if(k < 0) showError("Kelvin cannot be negative");
+        if (k < 0) showError("Kelvin cannot be negative");
         elems.tempC.value = parseFloat((k - 273.15).toFixed(3));
-        elems.tempF.value = parseFloat(((k - 273.15) * 9/5 + 32).toFixed(3));
+        elems.tempF.value = parseFloat(((k - 273.15) * 9 / 5 + 32).toFixed(3));
     } else {
         elems.tempC.value = elems.tempF.value = '';
     }
     tempLock = false;
 });
 elems.tempF.addEventListener('input', (e) => {
-    if(tempLock) return; tempLock = true;
-    if(isValidNum(e.target.value)) {
+    if (tempLock) return; tempLock = true;
+    if (isValidNum(e.target.value)) {
         const f = Number(e.target.value);
-        elems.tempC.value = parseFloat(((f - 32) * 5/9).toFixed(3));
-        elems.tempK.value = parseFloat(((f - 32) * 5/9 + 273.15).toFixed(3));
+        elems.tempC.value = parseFloat(((f - 32) * 5 / 9).toFixed(3));
+        elems.tempK.value = parseFloat(((f - 32) * 5 / 9 + 273.15).toFixed(3));
     } else {
         elems.tempC.value = elems.tempK.value = '';
     }
@@ -277,14 +278,14 @@ elems.tempF.addEventListener('input', (e) => {
 // ════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
     initBackground();
-    
+
     elems.toastClose.addEventListener('click', hideError);
 
     // Read URL params for Viewer integration
     const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.has('molarmass')) {
+    if (urlParams.has('molarmass')) {
         const mm = urlParams.get('molarmass');
-        if(isValidNum(mm)) {
+        if (isValidNum(mm)) {
             elems.moleMolarMass.value = mm;
             // Optionally set focus to mass input so user can type mass directly
             elems.moleMass.focus();
