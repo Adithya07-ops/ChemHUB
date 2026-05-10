@@ -104,13 +104,14 @@
                 and 3D molecular visualization — all in your browser.
             </p>
             <div class="hero-stats">
-                <div class="stat"><span class="stat-num">5</span><span class="stat-label">Tools</span></div>
+                <div class="stat" data-icon="⚗"><span class="stat-num">6</span><span class="stat-label">Tools</span></div>
                 <div class="stat-sep"></div>
-                <div class="stat"><span class="stat-num">PubChem</span><span class="stat-label">Data Source</span></div>
+                <div class="stat" data-icon="⬡"><span class="stat-num">PubChem</span><span class="stat-label">Data Source</span></div>
                 <div class="stat-sep"></div>
-                <div class="stat"><span class="stat-num">RCSB PDB</span><span class="stat-label">Protein Data</span>
+                <div class="stat" data-icon="◌"><span class="stat-num">RCSB PDB</span><span class="stat-label">Protein Data</span>
                 </div>
             </div>
+            <a class="hero-cta" href="#tool-grid">Explore Tools →</a>
         </section>
 
         <!-- Tool Grid -->
@@ -146,7 +147,7 @@
                 </div>
                 <div class="tool-card-footer">
                     <span class="tool-card-source">PubChem API</span>
-                    <button class="tool-launch-btn btn-cyan">Launch →</button>
+                    <span class="tool-launch-btn btn-cyan">Launch →</span>
                 </div>
             </a>
 
@@ -183,7 +184,7 @@
                 </div>
                 <div class="tool-card-footer">
                     <span class="tool-card-source">RCSB PDB + PubChem</span>
-                    <button class="tool-launch-btn btn-purple">Launch →</button>
+                    <span class="tool-launch-btn btn-purple">Launch →</span>
                 </div>
             </a>
 
@@ -219,7 +220,7 @@
                 </div>
                 <div class="tool-card-footer">
                     <span class="tool-card-source">PubChem API</span>
-                    <button class="tool-launch-btn btn-gradient">Launch →</button>
+                    <span class="tool-launch-btn btn-gradient">Launch →</span>
                 </div>
             </a>
 
@@ -252,7 +253,7 @@
                 </div>
                 <div class="tool-card-footer">
                     <span class="tool-card-source">PubChem Elements</span>
-                    <button class="tool-launch-btn btn-gold">Launch →</button>
+                    <span class="tool-launch-btn btn-gold">Launch →</span>
                 </div>
             </a>
 
@@ -289,7 +290,7 @@
                 </div>
                 <div class="tool-card-footer">
                     <span class="tool-card-source">Local Utility</span>
-                    <button class="tool-launch-btn btn-green">Launch →</button>
+                    <span class="tool-launch-btn btn-green">Launch →</span>
                 </div>
             </a>
 
@@ -324,7 +325,7 @@
                 </div>
                 <div class="tool-card-footer">
                     <span class="tool-card-source">NIST + PubChem</span>
-                    <button class="tool-launch-btn btn-orange">Launch →</button>
+                    <span class="tool-launch-btn btn-orange">Launch →</span>
                 </div>
             </a>
 
@@ -346,10 +347,9 @@
     <div class="toast hidden" id="error-toast">
         <div class="toast-icon">⚠️</div>
         <div class="toast-message" id="error-message">Something went wrong</div>
-        <button class="toast-close" id="toast-close">&times;</button>
+        <button class="toast-close" id="toast-close" aria-label="Close notification">&times;</button>
     </div>
 
-    <script src="theme.js"></script>
     <script src="hub.js"></script>
 </body>
 

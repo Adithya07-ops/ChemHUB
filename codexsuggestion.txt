@@ -1,0 +1,31 @@
+Codex Review Notes
+
+Bugs fixed:
+- Synced theme handling so both data-theme="light" and the legacy light-theme class are applied consistently.
+- Made theme localStorage access safe for restricted browser contexts.
+- Replaced invalid nested buttons inside hub card links with styled spans.
+- Fixed Docking Explorer ligand styling so the newly loaded ligand model is styled instead of the protein model.
+- Added clear 3Dmol.js load failure errors for viewer and docking pages.
+- Expanded Enthalpy Calculator reaction parsing to accept ->, =>, =, and arrow characters.
+
+Features completed:
+- Wired the 3D viewer Labels button.
+- Wired the 3D viewer Image download button.
+- Wired the SMILES copy button.
+- Added atom and bond counts by parsing SDF count lines.
+- Populated the molecule info panel with the new atom and bond stats.
+
+UI/UX improvements:
+- Added keyboard focus-visible outlines for links, buttons, inputs, textareas, selects, and tabindex targets.
+- Improved mobile header layout and toast positioning.
+- Made the hub card grid safer on narrow screens.
+- Improved launch button styling after replacing nested buttons with spans.
+
+Verification:
+- Ran node --check successfully on all JavaScript files.
+- Ran a local HTTP smoke test with Node and confirmed index.html returns status 200.
+
+Remaining suggestions:
+- The Docking Explorer WASM docking section is still marked coming soon and would need a real engine/upload workflow to be complete.
+- Several tools depend on external CDNs/APIs, so offline and network-failure states could be made more robust.
+- A visual browser QA pass is still recommended because browser automation was unavailable in this tool session.

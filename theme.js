@@ -11,9 +11,25 @@
 
     /* ── Read saved preference or system default ── */
     function getSavedTheme() {
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const saved = readStoredTheme();
         if (saved === DARK || saved === LIGHT) return saved;
         return window.matchMedia('(prefers-color-scheme: light)').matches ? LIGHT : DARK;
+    }
+
+    function readStoredTheme() {
+        try {
+            return localStorage.getItem(STORAGE_KEY);
+        } catch {
+            return null;
+        }
+    }
+
+    function writeStoredTheme(theme) {
+        try {
+            localStorage.setItem(STORAGE_KEY, theme);
+        } catch {
+            /* Storage can be unavailable in restricted browser contexts. */
+        }
     }
 
     /* ── Apply theme to <html> ── */
@@ -24,7 +40,8 @@
             setTimeout(() => html.classList.remove('theme-transitioning'), 400);
         }
         html.setAttribute('data-theme', theme);
-        localStorage.setItem(STORAGE_KEY, theme);
+        html.classList.toggle('light-theme', theme === LIGHT);
+        writeStoredTheme(theme);
         updateToggleIcon(theme);
         listeners.forEach(fn => fn(theme));
     }
@@ -62,6 +79,7 @@
     /* ── Init: apply saved theme immediately (no flash) ── */
     const initialTheme = getSavedTheme();
     document.documentElement.setAttribute('data-theme', initialTheme);
+    document.documentElement.classList.toggle('light-theme', initialTheme === LIGHT);
 
     /* ── Wire up toggle buttons and Ambient Glow ── */
     function init() {

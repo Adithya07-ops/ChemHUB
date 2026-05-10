@@ -12,9 +12,9 @@
     --glass-bg: rgba(18, 18, 44, 0.55);
     --glass-hover: rgba(24, 24, 56, 0.7);
 
-    --accent: #00e5ff;
-    --accent-dim: rgba(0, 229, 255, 0.15);
-    --accent-glow: rgba(0, 229, 255, 0.35);
+    --accent: #e91e8c;
+    --accent-dim: rgba(233, 30, 140, 0.14);
+    --accent-glow: rgba(233, 30, 140, 0.32);
     --accent-purple: #a855f7;
     --accent-purple-dim: rgba(168, 85, 247, 0.15);
 
@@ -252,15 +252,15 @@ body {
     font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all var(--duration) var(--ease-out);
+    transition: all 180ms ease;
     white-space: nowrap;
     position: relative;
     overflow: hidden;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--accent), #00b8d4);
-    color: #0a0a1a;
+    background: linear-gradient(135deg, var(--accent), #c21875);
+    color: #fff;
     box-shadow: 0 2px 16px var(--accent-dim);
 }
 
@@ -603,16 +603,28 @@ body {
     gap: 20px;
     z-index: 2;
     pointer-events: none;
+    padding: 32px;
+    text-align: center;
 }
 
 .viewer-empty.hidden {
     display: none;
 }
 
+.viewer-empty::before {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 320'%3E%3Cg fill='none' stroke='%23e91e8c' stroke-width='3' opacity='.18'%3E%3Cpath d='M92 175 165 102l90 40 88-68 86 112-76 58-98-45-92 72z'/%3E%3Ccircle cx='92' cy='175' r='24'/%3E%3Ccircle cx='165' cy='102' r='19'/%3E%3Ccircle cx='255' cy='142' r='30'/%3E%3Ccircle cx='343' cy='74' r='22'/%3E%3Ccircle cx='429' cy='186' r='28'/%3E%3Ccircle cx='353' cy='244' r='20'/%3E%3Ccircle cx='255' cy='199' r='17'/%3E%3Ccircle cx='163' cy='271' r='21'/%3E%3C/g%3E%3C/svg%3E");
+    animation: emptyWireFloat 7s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
 .empty-molecule-anim {
     position: relative;
     width: 120px;
     height: 120px;
+    z-index: 1;
 }
 
 .nucleus {
@@ -677,15 +689,58 @@ body {
 }
 
 .empty-text {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    position: relative;
+    z-index: 1;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    font-weight: 700;
 }
 
 .empty-hint {
+    position: relative;
+    z-index: 1;
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
+}
+
+@keyframes emptyWireFloat {
+    from { transform: translateY(0) rotate(-2deg); opacity: 0.65; }
+    to { transform: translateY(-10px) rotate(2deg); opacity: 1; }
+}
+
+[data-theme="light"] {
+    --bg-deep: #f6f8fb;
+    --bg-mid: #eef2f7;
+    --bg-surface: rgba(255,255,255,0.9);
+    --glass-bg: rgba(255,255,255,0.88);
+    --glass-border: #e2e8f0;
+    --text-primary: #111827;
+    --text-secondary: #374151;
+    --text-muted: #4b5563;
+}
+
+[data-theme="light"] .glass-card {
+    background: rgba(255,255,255,0.88);
+    border-color: #e2e8f0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+[data-theme="light"] .viewer-container {
+    background: #f0f2f5;
+}
+
+[data-theme="light"] .molecule-input,
+[data-theme="light"] .style-btn,
+[data-theme="light"] .btn-ghost,
+[data-theme="light"] .chip {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #374151;
+}
+
+[data-theme="light"] .molecule-input::placeholder {
+    color: #4b5563;
 }
 
 /* ── Error Toast ── */

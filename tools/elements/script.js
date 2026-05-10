@@ -32,14 +32,32 @@ document.addEventListener('DOMContentLoaded', () => {
     let lockedData = null;
 
     // Build the grid map
+    function categoryClass(data) {
+        const group = data.group.toLowerCase();
+        if (group.includes('post-transition')) return 'g-post';
+        if (group.includes('alkaline')) return 'g-alkaline';
+        if (group.includes('alkali')) return 'g-alkali';
+        if (group.includes('transition')) return 'g-transition';
+        if (group.includes('metalloid')) return 'g-metalloid';
+        if (group.includes('nonmetal')) return 'g-nonmetal';
+        if (group.includes('halogen')) return 'g-halogen';
+        if (group.includes('noble')) return 'g-noble';
+        if (group.includes('lanthanide')) return 'g-lanthanide';
+        if (group.includes('actinide')) return 'g-actinide';
+        return data.c;
+    }
+
     function renderGrid() {
         gridContainer.innerHTML = '';
         
         elementsData.forEach(el => {
             const cell = document.createElement('div');
-            cell.className = `p-cell ${el.c}`;
+            cell.className = `p-cell ${categoryClass(el)}`;
             cell.style.gridColumn = el.x;
             cell.style.gridRow = el.y;
+            cell.tabIndex = 0;
+            cell.setAttribute('role', 'button');
+            cell.setAttribute('aria-label', `${el.name}, atomic number ${el.num}`);
             
             cell.innerHTML = `
                 <span class="c-num">${el.num}</span>
@@ -51,6 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             cell.addEventListener('click', () => {
+                selectElement(el, cell);
+            });
+
+            cell.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    selectElement(el, cell);
+                }
+            });
+
+            function selectElement(el, cell) {
                 if (lockedData === el) {
                     // Unlock if clicking the already locked element
                     lockedData = null;
@@ -64,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     cell.classList.add('active');
                     updateDisplay(el);
                 }
-            });
+            }
 
             gridContainer.appendChild(cell);
             
@@ -92,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cVal.textContent = data.val;
 
         // Apply theme color
-        const colorClass = data.c;
+        const colorClass = categoryClass(data);
         const colorMap = {
             'g-alkali': '#f87171', 'g-alkaline': '#fbbf24', 'g-transition': '#f472b6', 
             'g-post': '#a78bfa', 'g-metalloid': '#34d399', 'g-nonmetal': '#60a5fa', 

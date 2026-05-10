@@ -61,9 +61,9 @@ const NAMES = {
 
 /* ── Parser ── */
 function parseReaction(raw) {
-  const str = raw.replace(/→|⟶|=>/g,'→').replace(/\s*=\s*/g,'→').trim();
+  const str = raw.replace(/→|⟶|⟷|=>|->/g,'→').replace(/\s*=\s*/g,'→').trim();
   const parts = str.split('→');
-  if (parts.length !== 2) throw new Error('No reaction arrow found (use → or =).');
+  if (parts.length !== 2) throw new Error('No reaction arrow found (use →, ->, =>, or =).');
   const reactants = parseSide(parts[0]);
   const products  = parseSide(parts[1]);
   if (!reactants.length) throw new Error('No reactants found.');

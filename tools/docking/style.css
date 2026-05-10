@@ -35,12 +35,13 @@
 
 /* ── Buttons (purple) ── */
 .btn-purple {
-    background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+    /* Brand primary CTA. Purple is kept elsewhere as Docking's identity color. */
+    background: linear-gradient(135deg, var(--accent), #c21875);
     color: #fff;
-    box-shadow: 0 2px 16px var(--accent-purple-dim);
+    box-shadow: 0 2px 16px var(--accent-dim);
 }
 .btn-purple:hover {
-    box-shadow: 0 4px 24px var(--accent-purple-glow);
+    box-shadow: 0 4px 24px var(--accent-glow);
     transform: translateY(-1px);
 }
 .btn-purple.loading .btn-text  { opacity: 0; }
@@ -225,13 +226,25 @@
     gap: 20px;
     z-index: 2;
     pointer-events: none;
+    padding: 32px;
+    text-align: center;
 }
 .viewer-empty.hidden { display: none; }
+
+.viewer-empty::before {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 560 330'%3E%3Cg fill='none' stroke='%237b1fa2' stroke-width='3' opacity='.18'%3E%3Cpath d='M102 210c54-88 112-92 174-10s118 77 182-17'/%3E%3Cpath d='M101 122c63 74 124 78 184 12s113-63 173 21'/%3E%3Cpath d='M138 166h284M178 104l58 96M250 83l62 153M334 87l58 122'/%3E%3Ccircle cx='102' cy='210' r='20'/%3E%3Ccircle cx='276' cy='200' r='26'/%3E%3Ccircle cx='458' cy='183' r='22'/%3E%3Ccircle cx='101' cy='122' r='16'/%3E%3Ccircle cx='285' cy='134' r='18'/%3E%3Ccircle cx='458' cy='155' r='16'/%3E%3C/g%3E%3C/svg%3E");
+    animation: emptyProteinFloat 7s ease-in-out infinite alternate;
+    pointer-events: none;
+}
 
 .empty-protein-anim {
     position: relative;
     width: 120px;
     height: 100px;
+    z-index: 1;
 }
 
 .helix-strand {
@@ -274,16 +287,36 @@
 }
 
 .empty-text {
+    position: relative;
+    z-index: 1;
     font-size: 0.95rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    color: var(--text-primary);
+    font-weight: 700;
     text-align: center;
     max-width: 280px;
 }
 .empty-hint {
+    position: relative;
+    z-index: 1;
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-family: var(--font-mono);
+}
+
+@keyframes emptyProteinFloat {
+    from { transform: translateY(0) rotate(1deg); opacity: 0.65; }
+    to { transform: translateY(-10px) rotate(-2deg); opacity: 1; }
+}
+
+[data-theme="light"] .viewer-container {
+    background: #f0f2f5;
+}
+
+[data-theme="light"] .style-btn,
+[data-theme="light"] .btn-ghost {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #374151;
 }
 
 /* 3Dmol div fade-in */

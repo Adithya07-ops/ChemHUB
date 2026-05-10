@@ -82,7 +82,8 @@
 }
 .field-hint { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
 
-/* ── Orange button ── */
+/* Tool identity exception: the enthalpy calculator keeps an orange/red action
+   button because heat/reaction energy is the core task cue for this tool. */
 .btn-orange {
     width: 100%;
     background: linear-gradient(135deg, var(--orange), var(--red-accent));

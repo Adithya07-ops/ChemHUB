@@ -38,23 +38,22 @@
     align-items: center;
     gap: 7px;
     padding: 0 14px;
-    background: rgba(0, 229, 255, 0.08);
-    border: 1px solid rgba(0, 229, 255, 0.25);
-    color: var(--accent);
+    background: var(--surface-inset);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
     border-radius: var(--radius-md);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background var(--duration) var(--ease-out),
-                border-color var(--duration) var(--ease-out),
-                box-shadow var(--duration) var(--ease-out);
+    transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
     white-space: nowrap;
     font-family: var(--font-sans);
 }
 .btn-draw:hover {
-    background: rgba(0, 229, 255, 0.15);
-    border-color: rgba(0, 229, 255, 0.5);
-    box-shadow: 0 0 14px rgba(0, 229, 255, 0.15);
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 14px var(--accent-dim);
 }
 .draw-btn-icon {
     width: 15px;
@@ -158,11 +157,25 @@
 
 .filter-section-title {
     font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--text-muted);
+    font-weight: 800;
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 10px;
+}
+
+[data-theme="light"] .filter-section-title,
+[data-theme="light"] .card-title {
+    color: #1f2937;
+    font-weight: 800;
+}
+
+[data-theme="light"] .prop-item,
+[data-theme="light"] .pk-item,
+[data-theme="light"] .filter-overall,
+[data-theme="light"] #egg-canvas {
+    background: #f8fafc;
+    border-color: #e2e8f0;
 }
 
 .filter-row {

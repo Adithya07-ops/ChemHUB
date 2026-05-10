@@ -58,7 +58,7 @@
                     <div class="input-group">
                         <input type="text" id="pdb-input" class="text-input"
                             placeholder="PDB ID, e.g. 6LU7" autocomplete="off" spellcheck="false" maxlength="4">
-                        <button id="load-pdb-btn" class="btn btn-purple">
+                        <button id="load-pdb-btn" class="btn btn-purple" aria-label="Load PDB structure">
                             <span class="btn-text">Load</span>
                             <span class="btn-loader" id="btn-loader"></span>
                         </button>
@@ -82,7 +82,7 @@
                     <div class="input-group" style="margin-top:12px">
                         <input type="text" id="ligand-input" class="text-input"
                             placeholder="Ligand name or SMILES" autocomplete="off" spellcheck="false">
-                        <button id="load-ligand-btn" class="btn btn-ghost">Add</button>
+                        <button id="load-ligand-btn" class="btn btn-ghost" aria-label="Add ligand">Add</button>
                     </div>
                 </div>
 
@@ -123,11 +123,11 @@
                         </div>
                     </div>
                     <div class="control-actions">
-                        <button class="btn btn-ghost" id="reset-view-btn">
+                        <button class="btn btn-ghost" id="reset-view-btn" aria-label="Reset view">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
                             Reset
                         </button>
-                        <button class="btn btn-ghost" id="spin-btn">
+                        <button class="btn btn-ghost" id="spin-btn" aria-label="Toggle spin">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m0 0a9 9 0 0 1 9-9m-9 9a9 9 0 0 0 9 9"/></svg>
                             Spin
                         </button>
@@ -153,7 +153,7 @@
                                 <div class="helix-dot"></div>
                                 <div class="helix-dot dot-2"></div>
                             </div>
-                            <p class="empty-text">Enter a PDB ID to explore a protein structure</p>
+                            <p class="empty-text">Load a PDB Structure to Begin</p>
                             <p class="empty-hint">Try "6LU7" (COVID-19 protease) or "1HSG" (HIV protease)</p>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
     <div class="toast hidden" id="error-toast">
         <div class="toast-icon">⚠️</div>
         <div class="toast-message" id="error-message">Something went wrong</div>
-        <button class="toast-close" id="toast-close">&times;</button>
+        <button class="toast-close" id="toast-close" aria-label="Close notification">&times;</button>
     </div>
 
     <script src="script.js"></script>

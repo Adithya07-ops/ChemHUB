@@ -9,7 +9,7 @@
 
 .calc-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
     width: 100%;
     margin-bottom: 60px;
@@ -40,9 +40,6 @@
 }
 
 @media (min-width: 800px) {
-    .temp-span {
-        grid-column: 1 / -1; /* Span full width to let items sit nicely if possible */
-    }
     .temp-grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -102,4 +99,18 @@ input[type=number]::-webkit-outer-spin-button {
 }
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+@media (max-width: 1180px) {
+    .calc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .calc-grid,
+    .volume-grid,
+    .temp-grid {
+        grid-template-columns: 1fr;
+    }
 }

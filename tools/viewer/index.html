@@ -72,7 +72,7 @@
                     <div class="input-group">
                         <input type="text" id="molecule-input" class="molecule-input"
                             placeholder="e.g. caffeine, aspirin, CCO…" autocomplete="off" spellcheck="false">
-                        <button id="visualize-btn" class="btn btn-primary">
+                        <button id="visualize-btn" class="btn btn-primary" aria-label="Visualize molecule">
                             <span class="btn-text">Visualize</span>
                             <span class="btn-loader" id="btn-loader"></span>
                         </button>
@@ -123,7 +123,7 @@
                         <div class="info-row" style="flex-wrap: wrap;">
                             <span class="info-label">Weight</span>
                             <span class="info-value" id="info-weight">—</span>
-                            <button class="btn btn-ghost hidden" id="send-chemcalc-btn" title="Send to ChemCalc for calculations" style="padding: 2px 6px; font-size: 0.7rem; margin-top: 4px; width: 100%;">
+                            <button class="btn btn-ghost hidden" id="send-chemcalc-btn" title="Send to ChemCalc for calculations" aria-label="Send molar mass to ChemCalc" style="padding: 2px 6px; font-size: 0.7rem; margin-top: 4px; width: 100%;">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/><path d="M14 4h6v6"/><path d="M10 14L20 4"/></svg>
                                 Send to ChemCalc
                             </button>
@@ -131,7 +131,7 @@
                         <div class="info-row smiles-row">
                             <span class="info-label">SMILES</span>
                             <span class="info-value mono smiles" id="info-smiles">—</span>
-                            <button class="smiles-copy-btn hidden" id="smiles-copy-btn" title="Copy SMILES to clipboard">
+                            <button class="smiles-copy-btn hidden" id="smiles-copy-btn" title="Copy SMILES to clipboard" aria-label="Copy SMILES to clipboard">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                                 Copy
                             </button>
@@ -181,14 +181,14 @@
                         </div>
                     </div>
                     <div class="control-actions">
-                        <button class="btn btn-ghost" id="reset-view-btn" title="Reset View">
+                        <button class="btn btn-ghost" id="reset-view-btn" title="Reset View" aria-label="Reset view">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M1 4v6h6" />
                                 <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
                             </svg>
                             Reset View
                         </button>
-                        <button class="btn btn-ghost" id="spin-btn" title="Toggle Spin">
+                        <button class="btn btn-ghost" id="spin-btn" title="Toggle Spin" aria-label="Toggle spin">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path
                                     d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m0 0a9 9 0 0 1 9-9m-9 9a9 9 0 0 0 9 9" />
@@ -198,14 +198,14 @@
                     </div>
                     <!-- NEW: Labels toggle + Download -->
                     <div class="control-actions" style="margin-top:8px">
-                        <button class="btn btn-ghost" id="labels-btn" title="Toggle Atom Labels">
+                        <button class="btn btn-ghost" id="labels-btn" title="Toggle Atom Labels" aria-label="Toggle atom labels">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <text x="5" y="18" font-size="16" fill="currentColor" stroke="none"
                                     font-family="Inter,sans-serif" font-weight="600">A</text>
                             </svg>
                             Labels
                         </button>
-                        <button class="btn btn-ghost" id="download-btn" title="Download as PNG">
+                        <button class="btn btn-ghost" id="download-btn" title="Download as PNG" aria-label="Download molecule image">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
@@ -229,7 +229,7 @@
                                 <div class="orbit-ring ring-3"></div>
                                 <div class="nucleus"></div>
                             </div>
-                            <p class="empty-text">Enter a molecule name or SMILES to begin</p>
+                            <p class="empty-text">Load a Molecule to Begin</p>
                             <p class="empty-hint">Try "caffeine" or "C1=CC=CC=C1" (benzene)</p>
                         </div>
                         <!-- NEW: Viewer loading overlay -->
@@ -248,7 +248,7 @@
         <div class="toast hidden" id="error-toast">
             <div class="toast-icon">⚠️</div>
             <div class="toast-message" id="error-message">Something went wrong</div>
-            <button class="toast-close" id="toast-close">&times;</button>
+            <button class="toast-close" id="toast-close" aria-label="Close notification">&times;</button>
         </div>
 
         <!-- Footer -->

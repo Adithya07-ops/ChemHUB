@@ -173,3 +173,45 @@
     .props-card { width: 100%; order: 3; }
     .config-card { width: 100%; order: 4; }
 }
+
+/* Standard element category colors, tuned as soft pastels for light mode. */
+.g-alkali { color: #dc6b6b; border-color: #efb1b1; }
+.g-alkaline { color: #d9942b; border-color: #edc983; }
+.g-transition { color: #c46ba0; border-color: #e8b4d2; }
+.g-post { color: #8b7ad1; border-color: #c9c1ee; }
+.g-metalloid { color: #3aa37a; border-color: #9ed8c3; }
+.g-nonmetal { color: #4f8fd8; border-color: #aacbef; }
+.g-halogen { color: #2d9fc2; border-color: #9ddbe8; }
+.g-noble { color: #9b6bd3; border-color: #d0b5ed; }
+.g-lanthanide { color: #d07842; border-color: #edbea1; }
+.g-actinide { color: #7fa338; border-color: #c6dc8c; }
+
+.p-cell.g-alkali { background: #fde2e2; }
+.p-cell.g-alkaline { background: #fceccf; }
+.p-cell.g-transition { background: #f7ddec; }
+.p-cell.g-post { background: #e8e4fb; }
+.p-cell.g-metalloid { background: #d9f2e8; }
+.p-cell.g-nonmetal { background: #dcebfb; }
+.p-cell.g-halogen { background: #d9f1f7; }
+.p-cell.g-noble { background: #eadffc; }
+.p-cell.g-lanthanide { background: #fbe4d5; }
+.p-cell.g-actinide { background: #edf6d3; }
+
+.p-cell .c-num { color: color-mix(in srgb, currentColor 70%, #111827); }
+.p-cell .c-sym { color: #1f2937; }
+.p-cell:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+[data-theme="light"] .element-box,
+[data-theme="light"] .prop-item,
+[data-theme="light"] .config-display {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] .table-legend {
+    border-top-color: #e2e8f0;
+}

@@ -88,6 +88,10 @@ function initBackground() {
 // 2. 3DMOL VIEWER
 // ════════════════════════════════════════════════════════════
 function initViewer() {
+    if (typeof $3Dmol === 'undefined') {
+        throw new Error('3Dmol.js failed to load. Check your internet connection and reload the page.');
+    }
+
     if (state.viewer) { state.viewer.clear(); state.viewer = null; }
 
     const existing = el.viewerContainer.querySelectorAll('.mol-viewer-div');
@@ -284,9 +288,9 @@ async function loadLigand() {
         }
         if (!sdf) throw new Error('3D structure unavailable for this ligand.');
 
-        state.viewer.addModel(sdf, 'sdf');
+        const ligandModel = state.viewer.addModel(sdf, 'sdf');
         state.viewer.setStyle(
-            { model: state.viewer.getModel() },
+            { model: ligandModel },
             { stick: { radius: 0.2, colorscheme: 'Jmol' }, sphere: { scale: 0.3, colorscheme: 'Jmol' } }
         );
         state.viewer.zoomTo();

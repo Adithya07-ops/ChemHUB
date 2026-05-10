@@ -25,6 +25,9 @@ const elements = {
     errorMessage: document.getElementById('error-message'),
     toastClose: document.getElementById('toast-close'),
     sendChemcalcBtn: document.getElementById('send-chemcalc-btn'),
+    labelsBtn: document.getElementById('labels-btn'),
+    downloadBtn: document.getElementById('download-btn'),
+    smilesCopyBtn: document.getElementById('smiles-copy-btn'),
     bgCanvas: document.getElementById('bg-canvas'),
     viewerLoading: document.getElementById('viewer-loading'), // NEW
     atomTooltip: document.getElementById('atom-tooltip'),   // NEW
@@ -39,6 +42,7 @@ const state = {
     showLabels: false,      // NEW: atom labels toggle
     currentMolData: null,
     toastTimer: null,
+    tooltipTrackingReady: false,
 };
 
 // ── Atomic Number Lookup (NEW) ──
@@ -93,7 +97,7 @@ function initBackground() {
             canvas.width / 2, canvas.height / 2, 0,
             canvas.width / 2, canvas.height / 2, canvas.width * 0.7
         );
-        const isLight = document.documentElement.classList.contains('light-theme');
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
         grad.addColorStop(0, isLight ? 'rgba(255, 255, 255, 0)' : 'rgba(10, 10, 40, 0)');
         grad.addColorStop(1, isLight ? 'rgba(240, 244, 248, 1)' : 'rgba(6, 6, 14, 0.4)');
         ctx.fillStyle = grad;
@@ -151,6 +155,16 @@ function initBackground() {
 // ════════════════════════════════════════════════════════════
 
 const PUBCHEM_BASE = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug';
+
+function parseSdfCounts(sdf) {
+    const countsLine = sdf.split(/\r?\n/)[3] || '';
+    const atoms = Number.parseInt(countsLine.slice(0, 3), 10);
+    const bonds = Number.parseInt(countsLine.slice(3, 6), 10);
+    return {
+        atoms: Number.isFinite(atoms) ? atoms : null,
+        bonds: Number.isFinite(bonds) ? bonds : null,
+    };
+}
 
 /**
  * Determines if the input looks like a SMILES string.
@@ -235,6 +249,10 @@ async function fetchMoleculeData(query) {
  * Initializes or resets the 3Dmol.js viewer in the container.
  */
 function initViewer() {
+    if (typeof $3Dmol === 'undefined') {
+        throw new Error('3Dmol.js failed to load. Check your internet connection and reload the page.');
+    }
+
     // Clear previous viewer if it exists
     if (state.viewer) {
         state.viewer.clear();
@@ -346,6 +364,9 @@ function setupAtomHover(viewer) {
         }
     );
 
+    if (state.tooltipTrackingReady) return;
+    state.tooltipTrackingReady = true;
+
     // Track mouse to position tooltip inside viewer container
     elements.viewerContainer.addEventListener('mousemove', (e) => {
         if (elements.atomTooltip.classList.contains('hidden')) return;
@@ -446,12 +467,20 @@ function showInfo(data) {
     elements.infoWeight.textContent = data.weight;
     elements.infoSmiles.textContent = data.smiles;
     elements.infoSmiles.title = data.smiles; // Show full SMILES on hover
+    elements.infoAtoms.textContent = data.atoms ?? '—';
+    elements.infoBonds.textContent = data.bonds ?? '—';
 
     if (data.rawWeight) {
         elements.sendChemcalcBtn.classList.remove('hidden');
         elements.sendChemcalcBtn.dataset.weight = data.rawWeight;
     } else {
         elements.sendChemcalcBtn.classList.add('hidden');
+    }
+
+    if (data.smiles && data.smiles !== '—') {
+        elements.smilesCopyBtn.classList.remove('hidden');
+    } else {
+        elements.smilesCopyBtn.classList.add('hidden');
     }
 }
 
@@ -521,6 +550,9 @@ async function visualizeMolecule() {
 
     try {
         const data = await fetchMoleculeData(query);
+        const counts = parseSdfCounts(data.sdf);
+        data.atoms = counts.atoms;
+        data.bonds = counts.bonds;
         state.currentMolData = data;
 
         // Hide empty state
@@ -611,6 +643,35 @@ function initEventListeners() {
         const weight = elements.sendChemcalcBtn.dataset.weight;
         if (weight) {
             window.location.href = '../chemcalc/index.html?molarmass=' + encodeURIComponent(weight);
+        }
+    });
+
+    elements.labelsBtn.addEventListener('click', () => {
+        if (!state.viewer) {
+            showError('Load a molecule first before toggling labels.');
+            return;
+        }
+        state.showLabels = !state.showLabels;
+        elements.labelsBtn.classList.toggle('active', state.showLabels);
+        if (state.showLabels) addAtomLabels();
+        else removeAtomLabels();
+    });
+
+    elements.downloadBtn.addEventListener('click', downloadViewerImage);
+
+    elements.smilesCopyBtn.addEventListener('click', async () => {
+        const smiles = state.currentMolData?.smiles;
+        if (!smiles || smiles === '—') return;
+        try {
+            await navigator.clipboard.writeText(smiles);
+            elements.smilesCopyBtn.classList.add('copied');
+            elements.smilesCopyBtn.textContent = 'Copied';
+            setTimeout(() => {
+                elements.smilesCopyBtn.classList.remove('copied');
+                elements.smilesCopyBtn.textContent = 'Copy';
+            }, 1400);
+        } catch {
+            showError('Clipboard access was blocked by the browser.');
         }
     });
 }
