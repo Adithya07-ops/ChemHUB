@@ -321,7 +321,7 @@ function drawRadar(d) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    // Draw molecule polygon (cyan)
+    // Draw molecule polygon (magenta)
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
         const angle = (Math.PI * 2 * i) / N - Math.PI / 2;
@@ -330,9 +330,9 @@ function drawRadar(d) {
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.fillStyle = 'rgba(0,229,255,0.18)';
+    ctx.fillStyle = 'rgba(233, 30, 140, 0.18)';
     ctx.fill();
-    ctx.strokeStyle = '#00e5ff';
+    ctx.strokeStyle = '#e91e8c';
     ctx.lineWidth = 2;
     ctx.stroke();
 
@@ -343,7 +343,7 @@ function drawRadar(d) {
         const x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle);
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = '#e91e8c';
         ctx.fill();
     }
 
@@ -360,7 +360,7 @@ function drawRadar(d) {
 
         // Score value
         ctx.font = '500 10px JetBrains Mono, monospace';
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = '#e91e8c';
         ctx.fillText(scores[i].toFixed(2), lx, ly + 14);
         ctx.font = '600 12px Inter, sans-serif';
     }
