@@ -6,7 +6,7 @@
 (function () {
     const STORAGE_KEY = 'chemhub-theme';
     const GITHUB_URL = 'https://github.com/Adithya07-ops/-3D-Molecular-Viewer.git';
-    const THEME_TRANSITION_MS = 1800;
+    const THEME_TRANSITION_MS = 500;
     const DARK = 'dark';
     const LIGHT = 'light';
     const listeners = [];
@@ -47,6 +47,12 @@
         };
 
         if (animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            // Modern View Transitions API (Fast & Native)
+            if (document.startViewTransition) {
+                document.startViewTransition(commitTheme);
+                return;
+            }
+            // Fallback for older browsers (Expensive cloning)
             runThemeCrossfade(commitTheme);
             return;
         }
@@ -65,14 +71,18 @@
 
         snapshot.className = 'theme-crossfade-snapshot';
         snapshot.setAttribute('aria-hidden', 'true');
+        
+        // Optimize: Only clone top-level elements that are visible and relevant
         Array.from(document.body.children).forEach(child => {
-            if (!child.classList?.contains('theme-crossfade-snapshot')) {
+            if (!child.classList?.contains('theme-crossfade-snapshot') && 
+                !child.classList?.contains('transition-overlay')) {
                 snapshot.appendChild(child.cloneNode(true));
             }
         });
 
         document.body.appendChild(snapshot);
 
+        // Sync canvases if any exist
         const clonedCanvases = Array.from(snapshot.querySelectorAll('canvas'));
         clonedCanvases.forEach((canvas, index) => {
             const source = originalCanvases[index];
@@ -105,17 +115,16 @@
             const sunIcon  = btn.querySelector('.icon-sun');
             const moonIcon = btn.querySelector('.icon-moon');
             const label    = btn.querySelector('.theme-toggle-label');
+            
             if (theme === LIGHT) {
-                sunIcon  && (sunIcon.style.opacity  = '0');
-                moonIcon && (moonIcon.style.opacity = '1');
-                label    && (label.textContent = 'Dark');
+                btn.setAttribute('aria-label', 'Switch to dark mode');
+                btn.setAttribute('title', 'Switch to dark mode');
+                if (label) label.textContent = 'Dark';
             } else {
-                sunIcon  && (sunIcon.style.opacity  = '1');
-                moonIcon && (moonIcon.style.opacity = '0');
-                label    && (label.textContent = 'Light');
+                btn.setAttribute('aria-label', 'Switch to light mode');
+                btn.setAttribute('title', 'Switch to light mode');
+                if (label) label.textContent = 'Light';
             }
-            btn.setAttribute('aria-label', theme === LIGHT ? 'Switch to dark mode' : 'Switch to light mode');
-            btn.setAttribute('title', theme === LIGHT ? 'Switch to dark mode' : 'Switch to light mode');
         });
     }
 
