@@ -209,6 +209,15 @@ function initBackground() {
 document.addEventListener('DOMContentLoaded', () => {
     initBackground();
 
+    const exploreToolsLink = document.querySelector('.hero-cta[href="#tool-grid"]');
+    const toolGrid = document.getElementById('tool-grid');
+    if (exploreToolsLink && toolGrid) {
+        exploreToolsLink.addEventListener('click', event => {
+            event.preventDefault();
+            toolGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
     // Toast close
     const toastClose = document.getElementById('toast-close');
     if (toastClose) {
