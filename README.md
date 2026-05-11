@@ -74,3 +74,5 @@ This project is part of a computational chemistry assignment. Instead of making 
 ## Author
 
 Adithya S
+Aldorn K Joetreson
+Aaliya Alias
