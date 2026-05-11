@@ -103,14 +103,19 @@ function initBackground() {
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const g = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width*0.7);
-        g.addColorStop(0, 'rgba(10,10,40,0)'); g.addColorStop(1, 'rgba(6,6,14,0.4)');
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        g.addColorStop(0, isLight ? 'rgba(255, 255, 255, 0)' : 'rgba(10,10,40,0)');
+        g.addColorStop(1, isLight ? 'rgba(240, 244, 248, 1)' : 'rgba(6,6,14,0.4)');
         ctx.fillStyle = g; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        const particleColor = isLight ? '233,30,140' : '0,229,255';
+        
         for (const p of particles) {
             p.x += p.dx; p.y += p.dy;
             if (p.x < -10) p.x = canvas.width + 10; if (p.x > canvas.width + 10) p.x = -10;
             if (p.y < -10) p.y = canvas.height + 10; if (p.y > canvas.height + 10) p.y = -10;
             ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(0,229,255,${p.opacity})`; ctx.fill();
+            ctx.fillStyle = `rgba(${particleColor},${p.opacity})`; ctx.fill();
         }
         for (let i = 0; i < particles.length; i++) {
             for (let j = i+1; j < particles.length; j++) {
@@ -118,7 +123,7 @@ function initBackground() {
                 const dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < 150) {
                     ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(0,229,255,${0.03*(1-dist/150)})`; ctx.lineWidth = 0.5; ctx.stroke();
+                    ctx.strokeStyle = `rgba(${particleColor},${0.03*(1-dist/150)})`; ctx.lineWidth = 0.5; ctx.stroke();
                 }
             }
         }
@@ -752,10 +757,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.activeElement !== el.input &&
             !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
             openDrawModal();
-        }
-    });
-});
-Modal();
         }
     });
 });
