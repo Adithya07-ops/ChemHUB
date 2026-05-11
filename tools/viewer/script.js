@@ -312,8 +312,11 @@ function initViewer() {
     viewerDiv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
     elements.viewerContainer.appendChild(viewerDiv);
 
+    const theme = window.ChemHubTheme ? window.ChemHubTheme.getTheme() : 'dark';
+    const bgColor = theme === 'light' ? '#ffffff' : 'rgba(0,0,0,0)';
+
     state.viewer = $3Dmol.createViewer(viewerDiv, {
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: bgColor,
         antialias: true,
     });
 
@@ -423,16 +426,20 @@ function setupAtomHover(viewer) {
 function addAtomLabels() {
     if (!state.viewer) return;
     state.viewer.removeAllLabels();
+    
+    const theme = window.ChemHubTheme ? window.ChemHubTheme.getTheme() : 'dark';
+    const isLight = theme === 'light';
+    
     const atoms = state.viewer.getModel()?.selectedAtoms({}) || [];
     for (const atom of atoms) {
         state.viewer.addLabel(atom.elem, {
             position: { x: atom.x, y: atom.y, z: atom.z },
             fontSize: 11,
-            fontColor: 'white',
-            backgroundOpacity: 0.35,
-            backgroundColor: '#1a1a3a',
-            borderColor: '#00e5ff',
-            borderThickness: 0.5,
+            fontColor: isLight ? '#1a1a3a' : 'white',
+            backgroundOpacity: isLight ? 0.8 : 0.35,
+            backgroundColor: isLight ? '#f0f4f8' : '#1a1a3a',
+            borderColor: isLight ? '#e91e8c' : '#00e5ff',
+            borderThickness: 0.8,
             padding: 2,
         });
     }
@@ -695,6 +702,21 @@ function initEventListeners() {
     });
 
     elements.downloadBtn.addEventListener('click', downloadViewerImage);
+
+    // Sync with ChemHub Theme Changes
+    if (window.ChemHubTheme) {
+        window.ChemHubTheme.onThemeChange((theme) => {
+            if (state.viewer) {
+                const bgColor = theme === 'light' ? '#ffffff' : 'rgba(0,0,0,0)';
+                state.viewer.setBackgroundColor(bgColor);
+                
+                // Update labels if visible
+                if (state.showLabels) addAtomLabels();
+                
+                state.viewer.render();
+            }
+        });
+    }
 
     elements.smilesCopyBtn.addEventListener('click', async () => {
         const smiles = state.currentMolData?.smiles;

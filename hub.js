@@ -209,12 +209,14 @@ function initBackground() {
 document.addEventListener('DOMContentLoaded', () => {
     initBackground();
 
-    const exploreToolsLink = document.querySelector('.hero-cta[href="#tool-grid"]');
+    const exploreToolsLinks = document.querySelectorAll('a[href="#tool-grid"]');
     const toolGrid = document.getElementById('tool-grid');
-    if (exploreToolsLink && toolGrid) {
-        exploreToolsLink.addEventListener('click', event => {
-            event.preventDefault();
-            toolGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (toolGrid) {
+        exploreToolsLinks.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                toolGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         });
     }
 

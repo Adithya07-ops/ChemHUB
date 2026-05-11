@@ -321,7 +321,7 @@ function drawRadar(d) {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    // Draw molecule polygon (cyan)
+    // Draw molecule polygon (magenta)
     ctx.beginPath();
     for (let i = 0; i < N; i++) {
         const angle = (Math.PI * 2 * i) / N - Math.PI / 2;
@@ -330,9 +330,9 @@ function drawRadar(d) {
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
     ctx.closePath();
-    ctx.fillStyle = 'rgba(0,229,255,0.18)';
+    ctx.fillStyle = 'rgba(233, 30, 140, 0.18)';
     ctx.fill();
-    ctx.strokeStyle = '#00e5ff';
+    ctx.strokeStyle = '#e91e8c';
     ctx.lineWidth = 2;
     ctx.stroke();
 
@@ -343,7 +343,7 @@ function drawRadar(d) {
         const x = cx + r * Math.cos(angle), y = cy + r * Math.sin(angle);
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = '#e91e8c';
         ctx.fill();
     }
 
@@ -360,7 +360,7 @@ function drawRadar(d) {
 
         // Score value
         ctx.font = '500 10px JetBrains Mono, monospace';
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = '#e91e8c';
         ctx.fillText(scores[i].toFixed(2), lx, ly + 14);
         ctx.font = '600 12px Inter, sans-serif';
     }
@@ -458,19 +458,22 @@ function drawBoiledEgg(d) {
     if (tpsaVal >= minTPSA && tpsaVal <= maxTPSA && logPVal >= minWLOGP && logPVal <= maxWLOGP) {
         const x = mapX(tpsaVal);
         const y = mapY(logPVal);
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const markerColor = isLight ? '233,30,140' : '0,229,255';
+        const markerHex = isLight ? '#e91e8c' : '#00e5ff';
 
         // Glow
         ctx.beginPath();
         ctx.arc(x, y, 8, 0, 2 * Math.PI);
-        ctx.fillStyle = 'rgba(0,229,255,0.4)';
+        ctx.fillStyle = `rgba(${markerColor},0.4)`;
         ctx.fill();
 
         // Core dot
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = markerHex;
         ctx.fill();
-        ctx.strokeStyle = '#111';
+        ctx.strokeStyle = isLight ? '#fff' : '#111';
         ctx.lineWidth = 1.5;
         ctx.stroke();
     }
@@ -749,6 +752,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.activeElement !== el.input &&
             !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
             openDrawModal();
+        }
+    });
+});
+Modal();
         }
     });
 });

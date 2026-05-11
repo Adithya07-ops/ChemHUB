@@ -155,13 +155,13 @@
 .theme-transitioning *::before,
 .theme-transitioning *::after {
     transition:
-        background-color 1.8s var(--ease-out),
-        background       1.8s var(--ease-out),
-        border-color     1.8s var(--ease-out),
-        color            1.8s var(--ease-out),
-        box-shadow       1.8s var(--ease-out),
-        filter           1.8s var(--ease-out),
-        opacity          1.4s ease !important;
+        background-color 0.5s var(--ease-out),
+        background       0.5s var(--ease-out),
+        border-color     0.5s var(--ease-out),
+        color            0.5s var(--ease-out),
+        box-shadow       0.5s var(--ease-out),
+        filter           0.5s var(--ease-out),
+        opacity          0.5s ease !important;
 }
 
 .theme-crossfade-snapshot {
@@ -172,7 +172,7 @@
     overflow: hidden;
     background: var(--bg-deep);
     opacity: 1;
-    transition: opacity 1.8s var(--ease-out), filter 1.8s var(--ease-out);
+    transition: opacity 0.5s var(--ease-out), filter 0.5s var(--ease-out);
 }
 
 .theme-crossfade-snapshot.theme-crossfade-out {
