@@ -155,11 +155,42 @@
 .theme-transitioning *::before,
 .theme-transitioning *::after {
     transition:
-        background-color 0.35s ease,
-        border-color     0.35s ease,
-        color            0.35s ease,
-        box-shadow       0.35s ease,
-        opacity          0.2s ease !important;
+        background-color 1.8s var(--ease-out),
+        background       1.8s var(--ease-out),
+        border-color     1.8s var(--ease-out),
+        color            1.8s var(--ease-out),
+        box-shadow       1.8s var(--ease-out),
+        filter           1.8s var(--ease-out),
+        opacity          1.4s ease !important;
+}
+
+.theme-crossfade-snapshot {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    pointer-events: none;
+    overflow: hidden;
+    background: var(--bg-deep);
+    opacity: 1;
+    transition: opacity 1.8s var(--ease-out), filter 1.8s var(--ease-out);
+}
+
+.theme-crossfade-snapshot.theme-crossfade-out {
+    opacity: 0;
+    filter: blur(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-transitioning,
+    .theme-transitioning *,
+    .theme-transitioning *::before,
+    .theme-transitioning *::after {
+        transition-duration: 0.01ms !important;
+    }
+
+    .theme-crossfade-snapshot {
+        display: none !important;
+    }
 }
 
 html {

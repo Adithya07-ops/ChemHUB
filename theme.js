@@ -6,6 +6,7 @@
 (function () {
     const STORAGE_KEY = 'chemhub-theme';
     const GITHUB_URL = 'https://github.com/Adithya07-ops/-3D-Molecular-Viewer.git';
+    const THEME_TRANSITION_MS = 1800;
     const DARK = 'dark';
     const LIGHT = 'light';
     const listeners = [];
@@ -36,15 +37,66 @@
     /* ── Apply theme to <html> ── */
     function applyTheme(theme, animate) {
         const html = document.documentElement;
+
+        const commitTheme = () => {
+            html.setAttribute('data-theme', theme);
+            html.classList.toggle('light-theme', theme === LIGHT);
+            writeStoredTheme(theme);
+            updateToggleIcon(theme);
+            listeners.forEach(fn => fn(theme));
+        };
+
+        if (animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            runThemeCrossfade(commitTheme);
+            return;
+        }
+
         if (animate) {
             html.classList.add('theme-transitioning');
-            setTimeout(() => html.classList.remove('theme-transitioning'), 400);
+            setTimeout(() => html.classList.remove('theme-transitioning'), THEME_TRANSITION_MS);
         }
-        html.setAttribute('data-theme', theme);
-        html.classList.toggle('light-theme', theme === LIGHT);
-        writeStoredTheme(theme);
-        updateToggleIcon(theme);
-        listeners.forEach(fn => fn(theme));
+        commitTheme();
+    }
+
+    function runThemeCrossfade(commitTheme) {
+        const html = document.documentElement;
+        const snapshot = document.createElement('div');
+        const originalCanvases = Array.from(document.querySelectorAll('canvas'));
+
+        snapshot.className = 'theme-crossfade-snapshot';
+        snapshot.setAttribute('aria-hidden', 'true');
+        Array.from(document.body.children).forEach(child => {
+            if (!child.classList?.contains('theme-crossfade-snapshot')) {
+                snapshot.appendChild(child.cloneNode(true));
+            }
+        });
+
+        document.body.appendChild(snapshot);
+
+        const clonedCanvases = Array.from(snapshot.querySelectorAll('canvas'));
+        clonedCanvases.forEach((canvas, index) => {
+            const source = originalCanvases[index];
+            if (!source) return;
+            try {
+                canvas.width = source.width;
+                canvas.height = source.height;
+                canvas.getContext('2d')?.drawImage(source, 0, 0);
+            } catch {
+                /* Cross-origin or WebGL canvases may not be readable. */
+            }
+        });
+
+        html.classList.add('theme-transitioning');
+        commitTheme();
+
+        requestAnimationFrame(() => {
+            snapshot.classList.add('theme-crossfade-out');
+        });
+
+        setTimeout(() => {
+            snapshot.remove();
+            html.classList.remove('theme-transitioning');
+        }, THEME_TRANSITION_MS);
     }
 
     /* ── Update all toggle buttons on the page ── */

@@ -28,7 +28,7 @@ function initBackground() {
 
         const light = isLight();
         /* Dynamic colors based on theme */
-        const coreColor = light ? 'rgba(200, 0, 106, ' : 'rgba(0, 229, 255, ';
+        const coreColor = 'rgba(200, 0, 106, ';
         const bgCenter = light ? 'rgba(255, 255, 255, 0.5)' : 'rgba(6, 6, 14, 0)';
         const bgEdge = light ? 'rgba(240, 244, 248, 1)' : 'rgba(6, 6, 14, 1)';
 
@@ -132,7 +132,7 @@ function initBackground() {
     }));
 
     function drawDust(ctx, light) {
-        const color = light ? 'rgba(200, 0, 106, 0.25)' : 'rgba(0, 229, 255, 0.2)';
+        const color = light ? 'rgba(200, 0, 106, 0.25)' : 'rgba(200, 0, 106, 0.22)';
         ctx.fillStyle = color;
         dust.forEach(d => {
             const px = (d.x * canvas.width + time * d.speed * canvas.width) % canvas.width;
@@ -145,7 +145,7 @@ function initBackground() {
     }
 
     function drawChemicals(ctx, light) {
-        const color = light ? 'rgba(200, 0, 106, ' : 'rgba(0, 229, 255, ';
+        const color = 'rgba(200, 0, 106, ';
         chems.forEach(c => {
             ctx.font = `bold ${c.size}px "JetBrains Mono", monospace`;
             const px = (c.x * canvas.width + time * c.speed * canvas.width) % canvas.width;
@@ -158,7 +158,7 @@ function initBackground() {
     }
 
     function drawMolecules(ctx, light) {
-        const color = light ? 'rgba(200, 0, 106, ' : 'rgba(0, 229, 255, ';
+        const color = 'rgba(200, 0, 106, ';
         molFragments.forEach(m => {
             const px = (m.x * canvas.width + time * m.speed * canvas.width * 0.7) % canvas.width;
             const py = (m.y * canvas.height - time * m.speed * canvas.height * 0.4) % canvas.height;
