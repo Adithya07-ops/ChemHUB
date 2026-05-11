@@ -458,19 +458,22 @@ function drawBoiledEgg(d) {
     if (tpsaVal >= minTPSA && tpsaVal <= maxTPSA && logPVal >= minWLOGP && logPVal <= maxWLOGP) {
         const x = mapX(tpsaVal);
         const y = mapY(logPVal);
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const markerColor = isLight ? '233,30,140' : '0,229,255';
+        const markerHex = isLight ? '#e91e8c' : '#00e5ff';
 
         // Glow
         ctx.beginPath();
         ctx.arc(x, y, 8, 0, 2 * Math.PI);
-        ctx.fillStyle = 'rgba(0,229,255,0.4)';
+        ctx.fillStyle = `rgba(${markerColor},0.4)`;
         ctx.fill();
 
         // Core dot
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = markerHex;
         ctx.fill();
-        ctx.strokeStyle = '#111';
+        ctx.strokeStyle = isLight ? '#fff' : '#111';
         ctx.lineWidth = 1.5;
         ctx.stroke();
     }
@@ -749,6 +752,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.activeElement !== el.input &&
             !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
             openDrawModal();
+        }
+    });
+});
+Modal();
         }
     });
 });
