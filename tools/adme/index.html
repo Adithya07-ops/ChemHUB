@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ADME Analyzer — Predict drug-likeness, absorption, distribution, metabolism, and excretion properties using Lipinski's Rule of Five and PubChem data.">
+    <title>ADME Analyzer | ChemHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="../../theme.js"></script>
+    <script src="../../shared/transitions.js" defer></script>
+    <link rel="stylesheet" href="../../shared/transitions.css">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <a href="../../index.html" class="logo-link">
+                    <div class="logo-group">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none">
+                                <path d="M20 6 L20 14 M16 10 L24 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M12 14 L6 34 L34 34 L28 14 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+                                <circle cx="20" cy="26" r="4" fill="currentColor" opacity="0.4"/>
+                                <path d="M14 23 Q17 19 20 22 Q23 25 26 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="app-title">ADME Analyzer</h1>
+                            <p class="app-subtitle">ChemHub · Drug-likeness & Pharmacokinetics</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="theme-toggle-btn"
+                        aria-label="Switch to light mode" title="Switch to light mode">
+                        <span class="theme-toggle-icons" aria-hidden="true">
+                            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <circle cx="12" cy="12" r="4"/>
+                                <line x1="12" y1="2" x2="12" y2="5"/>
+                                <line x1="12" y1="19" x2="12" y2="22"/>
+                                <line x1="2" y1="12" x2="5" y2="12"/>
+                                <line x1="19" y1="12" x2="22" y2="12"/>
+                                <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+                                <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+                                <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+                                <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+                            </svg>
+                            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                            </svg>
+                        </span>
+                        <span class="theme-toggle-label">Light</span>
+                    </button>
+                    <a href="../../index.html" class="back-link">← Back to ChemHub</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Layout -->
+        <main class="main-layout">
+
+            <!-- Left Panel -->
+            <aside class="side-panel">
+
+                <!-- Search Card -->
+                <div class="glass-card search-card">
+                    <h2 class="card-title"><span class="card-icon">🔍</span> Molecule Input</h2>
+                    <div class="input-group">
+                        <input type="text" id="molecule-input" class="text-input molecule-input"
+                            placeholder="e.g. aspirin, ibuprofen, CCO…" autocomplete="off" spellcheck="false">
+                        <button id="draw-btn" class="btn btn-draw" title="Open molecule sketcher (D)" aria-label="Open molecule sketcher">
+                            <svg class="draw-btn-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" fill="currentColor"/>
+                            </svg>
+                            <span class="btn-text">Draw</span>
+                        </button>
+                        <button id="analyze-btn" class="btn btn-primary">
+                            <span class="btn-text">Analyze</span>
+                            <span class="btn-loader" id="btn-loader"></span>
+                        </button>
+                    </div>
+                    <div class="quick-picks">
+                        <span class="quick-label">Quick picks:</span>
+                        <div class="quick-chips">
+                            <button class="chip" data-molecule="aspirin">Aspirin</button>
+                            <button class="chip" data-molecule="ibuprofen">Ibuprofen</button>
+                            <button class="chip" data-molecule="paracetamol">Paracetamol</button>
+                            <button class="chip" data-molecule="caffeine">Caffeine</button>
+                            <button class="chip" data-molecule="penicillin">Penicillin</button>
+                            <button class="chip" data-molecule="sildenafil">Sildenafil</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Card -->
+                <div class="glass-card" id="props-card">
+                    <h2 class="card-title"><span class="card-icon">📊</span> Molecular Properties</h2>
+                    <div class="info-placeholder" id="props-placeholder">
+                        <div class="placeholder-icon">
+                            <svg viewBox="0 0 48 48" fill="none">
+                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.4"/>
+                                <text x="24" y="28" text-anchor="middle" fill="currentColor" font-size="16" opacity="0.4">⚗</text>
+                            </svg>
+                        </div>
+                        <p>Analyze a molecule to see its properties</p>
+                    </div>
+                    <div class="props-loading hidden" id="props-loading">
+                        <p class="loading-note">Fetching from PubChem may take a few seconds</p>
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block short"></div>
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block short"></div>
+                    </div>
+                    <div class="props-content hidden" id="props-content">
+                        <div class="mol-name" id="mol-name">—</div>
+                        <div class="info-divider"></div>
+                        <div class="prop-grid" id="prop-grid">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drug Filters Card -->
+                <div class="glass-card" id="filters-card">
+                    <h2 class="card-title"><span class="card-icon">✅</span> Drug-likeness Filters</h2>
+                    <div class="filters-placeholder" id="filters-placeholder">
+                        <p class="placeholder-text">Run analysis to see filter results</p>
+                    </div>
+                    <div class="filters-content hidden" id="filters-content">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Right Panel -->
+            <section class="results-section">
+
+                <!-- Bioavailability Radar -->
+                <div class="glass-card radar-card" id="radar-card">
+                    <h2 class="card-title"><span class="card-icon">🎯</span> Bioavailability Radar</h2>
+                    <div class="radar-placeholder" id="radar-placeholder">
+                        <div class="radar-orbit-anim">
+                            <div class="radar-ring r1"></div>
+                            <div class="radar-ring r2"></div>
+                            <div class="radar-ring r3"></div>
+                            <div class="radar-center"></div>
+                        </div>
+                        <p>Radar chart will appear after analysis</p>
+                    </div>
+                    <div class="radar-container hidden" id="radar-container">
+                        <canvas id="radar-canvas" width="420" height="380"></canvas>
+                        <div class="radar-legend">
+                            <div class="legend-item"><span class="legend-dot dot-molecule"></span>Molecule</div>
+                            <div class="legend-item"><span class="legend-dot dot-ideal"></span>Ideal Space</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pharmacokinetics Card -->
+                <div class="glass-card pk-card" id="pk-card">
+                    <h2 class="card-title"><span class="card-icon">💊</span> Pharmacokinetics Predictions</h2>
+                    <div class="pk-placeholder" id="pk-placeholder">
+                        <p class="placeholder-text">Run analysis to see PK predictions</p>
+                    </div>
+                    <div class="pk-grid hidden" id="pk-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- BOILED-Egg Card -->
+                <div class="glass-card egg-card" id="egg-card">
+                    <h2 class="card-title"><span class="card-icon">🍳</span> BOILED-Egg Model</h2>
+                    <div class="egg-placeholder" id="egg-placeholder">
+                        <p class="placeholder-text">Run analysis to plot molecule on BOILED-Egg</p>
+                    </div>
+                    <div class="egg-container hidden" id="egg-container">
+                        <canvas id="egg-canvas" width="420" height="300"></canvas>
+                        <div class="egg-legend">
+                            <div class="legend-item"><span class="legend-dot" style="background:#fff;border:1px solid #ccc;"></span>HIA (White)</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:#fde047;"></span>BBB (Yolk)</div>
+                            <div class="legend-item"><span class="legend-dot" style="background:var(--accent);"></span>Molecule</div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Built with <span class="heart">♥</span> using
+                <a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubChem</a>,
+                <a href="https://www.rcsb.org/" target="_blank" rel="noopener">RCSB PDB</a> &amp;
+                <a href="https://3dmol.csb.pitt.edu/" target="_blank" rel="noopener">3Dmol.js</a>
+            </p>
+            <p class="footer-sub">ChemHub &copy; 2026</p>
+        </footer>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="toast hidden" id="error-toast">
+        <div class="toast-icon">⚠️</div>
+        <div class="toast-message" id="error-message">Something went wrong</div>
+        <button class="toast-close" id="toast-close" aria-label="Close notification">&times;</button>
+    </div>
+
+    <!-- Draw Modal -->
+    <div class="modal hidden" id="draw-modal" role="dialog" aria-modal="true" aria-labelledby="draw-modal-title">
+        <div class="modal-backdrop" id="draw-backdrop"></div>
+        <div class="modal-content draw-modal-content glass-card">
+
+            <!-- Accent line at top -->
+            <div class="modal-accent-line"></div>
+
+            <!-- Header -->
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-header-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" fill="currentColor" opacity="0.7"/>
+                            <path d="M16.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM14.379 6.793L6 15.172V18h2.828l8.38-8.379-2.83-2.828z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="modal-title" id="draw-modal-title">Molecule Sketcher</h3>
+                        <p class="modal-subtitle">Draw your structure — SMILES will be extracted automatically</p>
+                    </div>
+                </div>
+                <div class="modal-header-right">
+                    <kbd class="kbd-hint">Esc</kbd>
+                    <button class="modal-close" id="draw-close" aria-label="Close sketcher">&times;</button>
+                </div>
+            </div>
+
+            <!-- Editor body -->
+            <div class="modal-body">
+                <div class="jsme-wrapper">
+                    <div id="jsme_container"></div>
+                    <!-- Status bar -->
+                    <div class="jsme-status-bar" id="jsme-status">
+                        <span class="status-item" id="status-atoms">Atoms: —</span>
+                        <span class="status-sep">·</span>
+                        <span class="status-item" id="status-bonds">Bonds: —</span>
+                        <span class="status-flex"></span>
+                        <span class="status-hint">Click atoms to build · drag to move</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMILES preview strip -->
+            <div class="smiles-preview-strip" id="smiles-preview-strip">
+                <span class="smiles-preview-label">SMILES</span>
+                <span class="smiles-preview-value" id="smiles-preview-value">—</span>
+                <button class="smiles-copy-btn" id="smiles-copy-btn" title="Copy SMILES to clipboard" aria-label="Copy SMILES">
+                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M4 14H3a1 1 0 01-1-1V3a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="copy-label">Copy</span>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="draw-clear">Clear</button>
+                <div class="modal-footer-right">
+                    <button class="btn btn-secondary" id="draw-cancel">Cancel</button>
+                    <button class="btn btn-primary btn-use-structure" id="draw-submit">
+                        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="use-icon">
+                            <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill="currentColor"/>
+                        </svg>
+                        Use Structure
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSME Editor -->
+    <script src="https://jsme-editor.github.io/dist/jsme/jsme.nocache.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
