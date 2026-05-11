@@ -125,9 +125,9 @@ This project was developed as part of a computational chemistry project with the
 
 ## Author
 
-Adithya S
-Aldorn K Joetreson
-Aaliya Alias
+* Adithya S
+* Aldorn K Joetreson
+* Aaliya Alias
 
 ---
 
