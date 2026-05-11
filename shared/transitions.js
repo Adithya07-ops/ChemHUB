@@ -19,6 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.remove('is-transitioning');
         body.classList.remove('is-exiting');
         
+        // Remove any individual card animation states
+        document.querySelectorAll('.tool-card.card-clicking').forEach(card => {
+            card.classList.remove('card-clicking');
+        });
+        
         main.classList.add('page-transition-wrapper');
         main.classList.remove('page-exit');
         
@@ -85,8 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Back-to-hub navigation detection
-        // We look for index.html at the root or parent levels
-        const isBackToHub = href.includes('index.html') && (href.startsWith('..') || href.startsWith('./index.html') || href === 'index.html');
+        // We only trigger this if we are in a subfolder (href contains ..)
+        // to avoid the logo on the home page accidentally triggering a history.back()
+        const isBackToHub = href.includes('index.html') && href.includes('..');
         
         if (isBackToHub && window.history.length > 1) {
             e.preventDefault();
