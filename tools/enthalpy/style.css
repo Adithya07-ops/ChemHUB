@@ -544,3 +544,54 @@
 }
 
 [data-theme="light"] .card-title { color: #1f2937; }
+
+/* ── Light Mode Tool Overrides ── */
+[data-theme="light"] .panel-title-row { border-bottom-color: #e2e8f0; }
+[data-theme="light"] .field-label { color: #475569; }
+[data-theme="light"] .field-hint { color: #64748b; }
+[data-theme="light"] .data-note { background: #f8fafc; border-color: #e2e8f0; color: #475569; }
+
+[data-theme="light"] .summary-energy-bar { background: #e2e8f0; }
+[data-theme="light"] .badge-zero { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
+
+/* Balance Panel Light Mode */
+[data-theme="light"] .balance-col { background: #f8fafc; border-color: #e2e8f0; }
+[data-theme="light"] .balance-mol-row { border-bottom-color: #f1f5f9; }
+[data-theme="light"] .balance-mol-row:hover { background: #f1f5f9; }
+[data-theme="light"] .bm-expr { color: #64748b; }
+[data-theme="light"] .balance-result-col { background: #f8fafc; border-color: #e2e8f0; }
+
+/* Steps & Table Light Mode */
+[data-theme="light"] .molecule-table-wrap { border-color: #e2e8f0; }
+[data-theme="light"] .molecule-table-header { background: #f8fafc; border-bottom-color: #e2e8f0; }
+[data-theme="light"] .molecule-row { border-bottom-color: #f1f5f9; }
+[data-theme="light"] .molecule-row:hover { background: #f1f5f9; }
+[data-theme="light"] .mol-coeff,
+[data-theme="light"] .mol-dhf { color: #475569; }
+
+[data-theme="light"] .step-item { background: #f8fafc; }
+[data-theme="light"] .step-label { color: #64748b; }
+
+/* Molecule Card Light Mode Overrides */
+[data-theme="light"] .mol-card:hover {
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+[data-theme="light"] .mol-structure-placeholder { background: #f8fafc; color: #94a3b8; }
+[data-theme="light"] .mol-card-name,
+[data-theme="light"] .mol-cid { color: #64748b; }
+
+[data-theme="light"] .mol-dhf-hero {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+[data-theme="light"] .mol-dhf-hero-label,
+[data-theme="light"] .mol-dhf-hero-sub { color: #64748b; }
+
+[data-theme="light"] .mol-stat-box {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+[data-theme="light"] .mol-stat-box-label { color: #64748b; }
+[data-theme="light"] .mol-stat-box-value { color: #334155; }
+
+[data-theme="light"] .mol-card-links { border-top-color: #f1f5f9; }

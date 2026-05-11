@@ -307,7 +307,7 @@ function renderResults(rawEq, resolved, sumProd, sumReact, dH, pcData, unknown) 
     const dhfCls=sp.dhf===undefined?'unknown-val':sp.dhf===0?'zero-val':isP?'product-val':'reactant-val';
 
     const card=document.createElement('div');
-    card.className=`mol-card ${isP?'product-card':'reactant-card'}`;
+    card.className=`mol-card glass-card ${isP?'product-card':'reactant-card'}`;
     card.style.animationDelay=`${i*90}ms`;
 
     const imgHtml = pc
