@@ -54,22 +54,24 @@
                     </div>
                 </a>
                 <div class="header-controls">
-                    <button class="theme-toggle" id="theme-toggle-btn"
-                        aria-label="Switch to light mode" title="Switch to light mode">
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Switch to light mode"
+                        title="Switch to light mode">
                         <span class="theme-toggle-icons" aria-hidden="true">
-                            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                                <circle cx="12" cy="12" r="4"/>
-                                <line x1="12" y1="2" x2="12" y2="5"/>
-                                <line x1="12" y1="19" x2="12" y2="22"/>
-                                <line x1="2" y1="12" x2="5" y2="12"/>
-                                <line x1="19" y1="12" x2="22" y2="12"/>
-                                <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
-                                <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
-                                <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
-                                <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+                            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round">
+                                <circle cx="12" cy="12" r="4" />
+                                <line x1="12" y1="2" x2="12" y2="5" />
+                                <line x1="12" y1="19" x2="12" y2="22" />
+                                <line x1="2" y1="12" x2="5" y2="12" />
+                                <line x1="19" y1="12" x2="22" y2="12" />
+                                <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
+                                <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
+                                <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
+                                <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
                             </svg>
-                            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                             </svg>
                         </span>
                         <span class="theme-toggle-label">Light</span>
@@ -146,16 +148,28 @@
                         <div class="info-row" style="flex-wrap: wrap;">
                             <span class="info-label">Weight</span>
                             <span class="info-value" id="info-weight">—</span>
-                            <button class="btn btn-ghost hidden" id="send-chemcalc-btn" title="Send to ChemCalc for calculations" aria-label="Send molar mass to ChemCalc" style="padding: 2px 6px; font-size: 0.7rem; margin-top: 4px; width: 100%;">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px;"><path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/><path d="M14 4h6v6"/><path d="M10 14L20 4"/></svg>
+                            <button class="btn btn-ghost hidden" id="send-chemcalc-btn"
+                                title="Send to ChemCalc for calculations" aria-label="Send molar mass to ChemCalc"
+                                style="padding: 2px 6px; font-size: 0.7rem; margin-top: 4px; width: 100%;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" style="width:12px;height:12px;">
+                                    <path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" />
+                                    <path d="M14 4h6v6" />
+                                    <path d="M10 14L20 4" />
+                                </svg>
                                 Send to ChemCalc
                             </button>
                         </div>
                         <div class="info-row smiles-row">
                             <span class="info-label">SMILES</span>
                             <span class="info-value mono smiles" id="info-smiles">—</span>
-                            <button class="smiles-copy-btn hidden" id="smiles-copy-btn" title="Copy SMILES to clipboard" aria-label="Copy SMILES to clipboard">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <button class="smiles-copy-btn hidden" id="smiles-copy-btn" title="Copy SMILES to clipboard"
+                                aria-label="Copy SMILES to clipboard">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" />
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                </svg>
                                 Copy
                             </button>
                         </div>
@@ -221,14 +235,16 @@
                     </div>
                     <!-- NEW: Labels toggle + Download -->
                     <div class="control-actions" style="margin-top:8px">
-                        <button class="btn btn-ghost" id="labels-btn" title="Toggle Atom Labels" aria-label="Toggle atom labels">
+                        <button class="btn btn-ghost" id="labels-btn" title="Toggle Atom Labels"
+                            aria-label="Toggle atom labels">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <text x="5" y="18" font-size="16" fill="currentColor" stroke="none"
                                     font-family="Inter,sans-serif" font-weight="600">A</text>
                             </svg>
                             Labels
                         </button>
-                        <button class="btn btn-ghost" id="download-btn" title="Download as PNG" aria-label="Download molecule image">
+                        <button class="btn btn-ghost" id="download-btn" title="Download as PNG"
+                            aria-label="Download molecule image">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
@@ -276,7 +292,7 @@
 
         <!-- Footer -->
         <footer class="app-footer" id="app-footer">
-            <p>Built with <span class="heart">♥</span> using
+            <p>Built using
                 <a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubChem</a>,
                 <a href="https://www.rcsb.org/" target="_blank" rel="noopener">RCSB PDB</a> &amp;
                 <a href="https://3dmol.csb.pitt.edu/" target="_blank" rel="noopener">3Dmol.js</a>
