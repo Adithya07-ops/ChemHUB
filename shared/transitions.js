@@ -7,91 +7,128 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Setup Wrapper
     const body = document.body;
     const main = document.querySelector('main') || body;
-    const skipEnter = sessionStorage.getItem('chemhub-skip-enter') === 'true';
-    if (skipEnter) {
-        sessionStorage.removeItem('chemhub-skip-enter');
-    }
-    main.classList.add('page-transition-wrapper');
-    if (!skipEnter) {
-        main.classList.add('page-enter');
+    
+    // Function to initialize/reset page state
+    const initPageTransitions = () => {
+        const skipEnter = sessionStorage.getItem('chemhub-skip-enter') === 'true';
+        if (skipEnter) {
+            sessionStorage.removeItem('chemhub-skip-enter');
+        }
+
+        // Reset global transition states
+        document.documentElement.classList.remove('is-transitioning');
+        body.classList.remove('is-exiting');
+        
+        main.classList.add('page-transition-wrapper');
+        main.classList.remove('page-exit');
+        
+        if (!skipEnter) {
+            main.classList.add('page-enter');
+            main.classList.remove('page-enter-active');
+            
+            setTimeout(() => {
+                requestAnimationFrame(() => {
+                    main.classList.add('page-enter-active');
+                });
+            }, 50);
+        } else {
+            main.classList.remove('page-enter');
+            main.classList.add('page-enter-active');
+        }
+    };
+
+    // 2. Add Loading Overlay to DOM if it doesn't exist
+    let overlay = document.querySelector('.transition-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'transition-overlay';
+        overlay.innerHTML = `
+            <div class="atomic-loader">
+                <div class="atom-nucleus"></div>
+                <div class="atom-orbit orbit-1"></div>
+                <div class="atom-orbit orbit-2"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
     }
 
-    // 2. Add Loading Overlay to DOM
-    const overlay = document.createElement('div');
-    overlay.className = 'transition-overlay';
-    overlay.innerHTML = `
-        <div class="atomic-loader">
-            <div class="atom-nucleus"></div>
-            <div class="atom-orbit orbit-1"></div>
-            <div class="atom-orbit orbit-2"></div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
+    // 3. Initial execution
+    initPageTransitions();
 
-    // 3. Trigger Enter Animation
-    if (skipEnter) {
-        main.classList.add('page-enter-active');
-    } else {
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                main.classList.add('page-enter-active');
-            });
-        }, 50);
-    }
+    // 4. Handle BFCache (Back-Forward Cache) restoration
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            overlay.classList.remove('show');
+            initPageTransitions();
+        }
+    });
 
-    // 4. Intercept Links
+    // 5. Intercept Links
     const handleNavigation = (e) => {
         const link = e.target.closest('a');
         if (!link) return;
 
         const href = link.getAttribute('href');
+        
+        // Skip if it's a hash link, mailto, tel, or opens in new tab
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || link.hasAttribute('target')) {
+            return;
+        }
 
-        // Only transition internal links that aren't anchors or same-page
-        if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:') && !link.hasAttribute('target')) {
+        // Only transition internal links
+        // Check if it's the same origin
+        try {
+            const url = new URL(link.href);
+            if (url.origin !== window.location.origin) return;
+        } catch (err) {
+            return;
+        }
 
-            // Back-to-hub navigation: use history.back() to restore cached page
-            // instantly without re-running entry animations or triggering a reload.
-            const isBackToHub = href.includes('../../index.html') || href === '../../index.html' || href.endsWith('/index.html') && (href.includes('../../'));
-            if (isBackToHub && window.history.length > 1) {
-                e.preventDefault();
-                sessionStorage.setItem('chemhub-skip-enter', 'true');
-                window.history.back();
-                return;
-            }
-            if (isBackToHub) {
-                e.preventDefault();
-                sessionStorage.setItem('chemhub-skip-enter', 'true');
-                window.location.href = link.href;
-                return;
-            }
-
+        // Back-to-hub navigation detection
+        // We look for index.html at the root or parent levels
+        const isBackToHub = href.includes('index.html') && (href.startsWith('..') || href.startsWith('./index.html') || href === 'index.html');
+        
+        if (isBackToHub && window.history.length > 1) {
             e.preventDefault();
-
-            const targetUrl = link.href;
-            const isToolCard = link.classList.contains('tool-card');
-
-            // Start Exit Sequence
+            sessionStorage.setItem('chemhub-skip-enter', 'true');
+            
+            // Start exit sequence for visual feedback before history.back()
             document.documentElement.classList.add('is-transitioning');
             body.classList.add('is-exiting');
-
-            if (isToolCard) {
-                link.classList.add('card-clicking');
-            }
-
-            // Show overlay slightly before redirect
-            setTimeout(() => {
-                overlay.classList.add('show');
-            }, 100);
-
-            // Exit animation on the main content
-            main.classList.remove('page-enter-active');
             main.classList.add('page-exit');
-
-            // Hard redirect after animation duration (match CSS transition)
+            
             setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 650);
+                window.history.back();
+            }, 150); // Shorter delay for back navigation
+            return;
         }
+
+        e.preventDefault();
+
+        const targetUrl = link.href;
+        const isToolCard = link.classList.contains('tool-card');
+
+        // Start Exit Sequence
+        document.documentElement.classList.add('is-transitioning');
+        body.classList.add('is-exiting');
+
+        if (isToolCard) {
+            link.classList.add('card-clicking');
+        }
+
+        // Show overlay slightly before redirect
+        setTimeout(() => {
+            overlay.classList.add('show');
+        }, 100);
+
+        // Exit animation on the main content
+        main.classList.remove('page-enter-active');
+        main.classList.add('page-exit');
+
+        // Hard redirect after animation duration (match CSS transition)
+        setTimeout(() => {
+            window.location.href = targetUrl;
+        }, 650);
     };
 
     document.addEventListener('click', handleNavigation);
