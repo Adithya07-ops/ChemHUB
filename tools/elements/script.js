@@ -64,8 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="c-sym">${el.sym}</span>
             `;
 
-            cell.addEventListener('mouseenter', () => {
-                if (!lockedData) updateDisplayFast(el, false);
+    cell.addEventListener('mouseenter', () => {
+                updateDisplayFast(el, false);
+            });
+
+            cell.addEventListener('mouseleave', () => {
+                if (lockedData) {
+                    updateDisplayFast(lockedData, false);
+                } else {
+                    clearDisplay();
+                }
             });
             
             cell.addEventListener('click', () => {
@@ -80,19 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             function selectElement(el, cell) {
-                if (lockedData === el) {
-                    // Unlock if clicking the already locked element
-                    lockedData = null;
-                    cell.classList.remove('active');
-                    activeCell = null;
-                } else {
-                    // Lock onto new element
-                    if (activeCell) activeCell.classList.remove('active');
-                    lockedData = el;
-                    activeCell = cell;
-                    cell.classList.add('active');
-                    updateDisplay(el);
-                }
+                // Lock onto new element
+                if (activeCell) activeCell.classList.remove('active');
+                lockedData = el;
+                activeCell = cell;
+                cell.classList.add('active');
+                updateDisplay(el);
             }
 
             gridContainer.appendChild(cell);
@@ -100,6 +101,32 @@ document.addEventListener('DOMContentLoaded', () => {
             // Store cell reference in data for search to lock it
             el.domNode = cell;
         });
+    }
+
+    // Clear display for empty state
+    function clearDisplay() {
+        dNum.textContent = '--';
+        dSym.textContent = '?';
+        dMass.textContent = '--';
+        dName.textContent = 'Select Element';
+        dGroup.textContent = 'Hover element to preview';
+        dGroup.style.color = 'var(--text-muted)';
+
+        props.state.textContent = '-';
+        props.density.textContent = '-';
+        props.mp.textContent = '-';
+        props.bp.textContent = '-';
+        props.en.textContent = '-';
+        props.year.textContent = '-';
+
+        cCore.textContent = '-';
+        cVal.textContent = '-';
+
+        mainElBox.style.color = 'var(--text-muted)';
+        mainElBox.style.borderColor = 'rgba(255,255,255,0.1)';
+        mainElBox.style.boxShadow = 'none';
+        
+        input.value = '';
     }
 
     // Update display without heavy animations (for hover)
@@ -129,6 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         const themeColor = colorMap[colorClass] || '#ffffff';
         mainElBox.style.color = themeColor;
+        mainElBox.style.borderColor = themeColor;
+        mainElBox.style.boxShadow = `0 0 20px ${themeColor}44`;
         dGroup.style.color = themeColor;
         
         if (triggerPulse) {
@@ -169,12 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize
     renderGrid();
-    if(elementsData[10]) {
-        // Start by locking Gold
-        lockedData = elementsData[10];
-        activeCell = lockedData.domNode;
-        if(activeCell) activeCell.classList.add('active');
-        updateDisplay(lockedData);
-    }
+    clearDisplay();
 
 });
