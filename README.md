@@ -1,73 +1,125 @@
-# Computational Chemistry 3D Viewer
+# ChemHub
 
-This project is a web-based tool that lets you visualize molecular structures in 3D. You can enter the name of a compound or a SMILES string, and the application will fetch real data and display the molecule interactively.
+ChemHub is a browser-based computational chemistry platform built for students and educational research. The project combines molecular visualization, ADME analysis, chemistry utilities, and interactive chemistry tools into a single modern web application.
 
-The idea behind this project was to combine basic computational chemistry concepts with a clean and interactive interface that anyone can use.
-
----
-
-## What it can do
-
-* Search molecules using common names (like *ethanol* or *caffeine*)
-* Accept SMILES input for more advanced use
-* Display molecules in 3D with full interaction (rotate, zoom, move)
-* Switch between different display styles (stick, sphere, ball-and-stick)
-* Show basic molecular information:
-
-  * Name
-  * Molecular formula
-  * Molecular weight
-  * SMILES notation
+The goal of the project was to create a platform that feels closer to real scientific software rather than a basic student project, while still remaining lightweight and accessible through the browser.
 
 ---
 
-## How it works
+## Features
 
-The app takes your input and sends a request to the PubChem database. Once it gets the molecular data, it uses a 3D rendering library to display the structure on screen.
+### 3D Molecular Visualizer
 
-Everything runs directly in the browser — no installation required.
+* Visualize molecules in interactive 3D
+* Search using molecule names or SMILES strings
+* Rotate, zoom, and inspect structures
+* Multiple render styles:
+
+  * Stick
+  * Sphere
+  * Ball-and-stick
+
+### ADME Analyzer
+
+* Basic drug-likeness analysis inspired by SwissADME
+* Lipinski Rule of Five checks
+* Molecular property visualization
+* Bioavailability-related metrics
+
+### Docking Explorer
+
+* Explore protein-ligand structures in 3D
+* Integration with RCSB PDB data
+* Interactive molecular inspection
+
+### ChemCalc
+
+Chemistry utility toolkit containing:
+
+* Mass conversion
+* Volume conversion
+* Temperature conversion
+* Mole calculator
+* Molarity calculator
+
+### Periodic Table Explorer
+
+* Search chemical elements
+* View atomic properties and information
+* Educational chemistry reference tool
+
+### Enthalpy Calculator
+
+* Calculate standard enthalpy of calculation
+* Uses Hess's Law
+* NIST Data + PubChem
 
 ---
 
-## Tech used
+## Tech Stack
 
-* HTML, CSS, JavaScript
-* 3Dmol.js for rendering molecules
-* PubChem API for real chemical data
+* HTML5
+* CSS3
+* Vanilla JavaScript
+* 3Dmol.js
+* PubChem API
+* RCSB PDB API
 
 ---
 
-## Project structure
+## Project Structure
 
+```text
+ChemHub/
+│
+├── index.html
+├── shared/
+│   ├── shared.css
+│   ├── theme.js
+│   └── animations.css
+│
+├── tools/
+│   ├── viewer/
+│   ├── adme/
+│   ├── docking/
+│   ├── chemcalc/
+│   └── elements/
+│
+└── assets/
 ```
-index.html   → layout and structure  
-style.css    → design and UI  
-script.js    → logic and API handling  
-```
 
 ---
 
-## Running the project
+## APIs & Libraries Used
 
-You can either:
-
-* Open `index.html` directly in a browser
-  or
-* Use the live version hosted with GitHub Pages
+* PubChem API — molecular and compound data
+* RCSB Protein Data Bank — protein structure data
+* 3Dmol.js — molecular rendering engine
 
 ---
 
-## Why I made this
+## Running the Project
 
-This project is part of a computational chemistry assignment. Instead of making a basic calculator-type program, I wanted to build something more interactive and visual that actually feels useful.
+The project can be:
+
+* Run locally in a browser
+* Hosted using GitHub Pages
 
 ---
 
-## Possible improvements
+## Objective
 
-* Show bond angles and molecular geometry
-* Add support for saving or exporting structures
-* Improve performance for larger molecules
+This project was developed as part of a computational chemistry project with the aim of combining chemistry concepts, visualization, and interactive web technologies into a single unified platform.
+
+---
+
+## Future Improvements
+
+* Advanced molecular property prediction
+* Better docking simulations
+* Export options for structures and reports
+* Expanded chemistry utilities
+* Improved molecular interaction analysis
 
 ---
 
@@ -76,3 +128,9 @@ This project is part of a computational chemistry assignment. Instead of making 
 Adithya S
 Aldorn K Joetreson
 Aaliya Alias
+
+---
+
+## Live Website
+
+https://adithya07-ops.github.io/-3D-Molecular-Viewer/
