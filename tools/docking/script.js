@@ -58,15 +58,20 @@ function initBackground() {
     }
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const g = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width*0.7);
-        g.addColorStop(0, 'rgba(10,10,40,0)'); g.addColorStop(1, 'rgba(6,6,14,0.4)');
-        ctx.fillStyle = g; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width*0.7);
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        grad.addColorStop(0, isLight ? 'rgba(255, 255, 255, 0)' : 'rgba(10,10,40,0)');
+        grad.addColorStop(1, isLight ? 'rgba(240, 244, 248, 1)' : 'rgba(6,6,14,0.4)');
+        ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        const particleColor = isLight ? '233,30,140' : '168,85,247';
+
         for (const p of particles) {
             p.x += p.dx; p.y += p.dy;
             if (p.x < -10) p.x = canvas.width + 10; if (p.x > canvas.width + 10) p.x = -10;
             if (p.y < -10) p.y = canvas.height + 10; if (p.y > canvas.height + 10) p.y = -10;
             ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(168,85,247,${p.opacity * 0.6})`; ctx.fill();
+            ctx.fillStyle = `rgba(${particleColor},${p.opacity * 0.6})`; ctx.fill();
         }
         for (let i = 0; i < particles.length; i++) {
             for (let j = i+1; j < particles.length; j++) {
@@ -74,7 +79,7 @@ function initBackground() {
                 const dist = Math.sqrt(dx*dx + dy*dy);
                 if (dist < 140) {
                     ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(168,85,247,${0.025*(1-dist/140)})`; ctx.lineWidth = 0.5; ctx.stroke();
+                    ctx.strokeStyle = `rgba(${particleColor},${0.025*(1-dist/140)})`; ctx.lineWidth = 0.5; ctx.stroke();
                 }
             }
         }
@@ -102,8 +107,11 @@ function initViewer() {
     div.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
     el.viewerContainer.appendChild(div);
 
+    const theme = window.ChemHubTheme ? window.ChemHubTheme.getTheme() : 'dark';
+    const bgColor = theme === 'light' ? '#ffffff' : 'rgba(0,0,0,0)';
+
     state.viewer = $3Dmol.createViewer(div, {
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: bgColor,
         antialias: true,
     });
     return state.viewer;
@@ -114,18 +122,18 @@ function applyProteinStyle() {
     state.viewer.setStyle({ hetflag: false }, {});
 
     const cs = state.colorScheme === 'spectrum' ? 'spectrum' :
-               state.colorScheme === 'chain'    ? 'chainHetatm' : 'ssJmol';
+               state.colorScheme === 'chain'    ? 'chain' : 'ssJmol';
 
     switch (state.proteinStyle) {
         case 'cartoon':
-            state.viewer.setStyle({ hetflag: false }, { cartoon: { color: cs } });
+            state.viewer.setStyle({ hetflag: false }, { cartoon: { colorscheme: cs } });
             break;
         case 'surface':
             state.viewer.setStyle({ hetflag: false }, {
-                cartoon: { color: cs, opacity: 0.3 },
+                cartoon: { colorscheme: cs, opacity: 0.3 },
             });
             state.viewer.addSurface($3Dmol.SurfaceType.MS, {
-                opacity: 0.55, color: cs === 'spectrum' ? 'spectrum' : '#4444cc',
+                opacity: 0.55, colorscheme: cs,
             }, { hetflag: false });
             break;
         case 'stick':
@@ -396,6 +404,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     el.toastClose.addEventListener('click', hideError);
+
+    // Sync with ChemHub Theme Changes
+    if (window.ChemHubTheme) {
+        window.ChemHubTheme.onThemeChange((theme) => {
+            if (state.viewer) {
+                const bgColor = theme === 'light' ? '#ffffff' : 'rgba(0,0,0,0)';
+                state.viewer.setBackgroundColor(bgColor);
+                state.viewer.render();
+            }
+        });
+    }
 
     // Resize
     let resizeTimer;
