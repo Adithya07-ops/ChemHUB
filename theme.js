@@ -164,6 +164,20 @@
     document.documentElement.setAttribute('data-theme', initialTheme);
     document.documentElement.classList.toggle('light-theme', initialTheme === LIGHT);
 
+    /* ── Handle BFCache restoration ── */
+    window.addEventListener('pageshow', (event) => {
+        // Always check and apply theme on pageshow to handle BFCache restores
+        const theme = getSavedTheme();
+        applyTheme(theme, false);
+    });
+
+    /* ── Handle cross-tab synchronization ── */
+    window.addEventListener('storage', (event) => {
+        if (event.key === STORAGE_KEY && (event.newValue === DARK || event.newValue === LIGHT)) {
+            applyTheme(event.newValue, false);
+        }
+    });
+
     /* ── Wire up toggle buttons and Ambient Glow ── */
     function init() {
         initGitHubLinks();
