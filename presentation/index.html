@@ -867,19 +867,20 @@
             </section>
 
             <!-- ═══════════════════════════════════════
-         SLIDE 12 — THANK YOU
+         SLIDE 12 — CINEMATIC END CREDITS
          ═══════════════════════════════════════ -->
             <section>
-                <div class="slide outro-slide" style="justify-content:center;align-items:center;">
+                <div class="slide outro-slide cinematic-credits-container"
+                    style="justify-content:center;align-items:center;">
                     <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
 
-                    <!-- Full ambient orbs -->
-                    <div class="orb orb-1" style="opacity:0.6;"></div>
-                    <div class="orb orb-2" style="opacity:0.5;"></div>
-                    <div class="orb orb-3" style="opacity:0.35;width:500px;height:500px;top:20%;left:25%;"></div>
+                    <!-- Cinematic ambient orbs (brighter, larger for ending) -->
+                    <div class="orb orb-1 credits-orb-1" style="opacity:0.6; animation-duration: 20s;"></div>
+                    <div class="orb orb-2 credits-orb-2" style="opacity:0.5; animation-duration: 25s;"></div>
+                    <div class="orb orb-3" style="opacity:0.35;width:800px;height:800px;top:10%;left:15%;"></div>
 
-                    <!-- Orbit rings -->
-                    <div class="orbit-container">
+                    <!-- Orbit rings in background (low opacity) -->
+                    <div class="orbit-container" style="opacity: 0.2;">
                         <div class="orbit-ring">
                             <div class="orbit-dot orbit-dot-accent"></div>
                         </div>
@@ -891,77 +892,34 @@
                         </div>
                     </div>
 
-                    <div class="slide-inner" style="text-align:center;">
-                        <!-- Outro molecule -->
-                        <svg class="outro-mol" width="120" height="120" viewBox="0 0 120 120" fill="none">
-                            <circle cx="60" cy="60" r="55" stroke="rgba(233,30,140,0.15)" stroke-width="1"
-                                stroke-dasharray="4 4" />
-                            <circle cx="60" cy="60" r="38" stroke="rgba(168,85,247,0.15)" stroke-width="1"
-                                stroke-dasharray="3 5" />
-                            <line x1="60" y1="10" x2="60" y2="60" stroke="rgba(0,229,255,0.5)" stroke-width="1.5" />
-                            <line x1="60" y1="60" x2="103" y2="85" stroke="rgba(233,30,140,0.5)" stroke-width="1.5" />
-                            <line x1="60" y1="60" x2="17" y2="85" stroke="rgba(168,85,247,0.5)" stroke-width="1.5" />
-                            <circle cx="60" cy="10" r="7" fill="var(--accent)" opacity="0.9" />
-                            <circle cx="103" cy="85" r="7" fill="var(--accent-purple)" opacity="0.9" />
-                            <circle cx="17" cy="85" r="7" fill="var(--accent-cyan)" opacity="0.9" />
-                            <circle cx="60" cy="60" r="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)"
-                                stroke-width="1" />
-                            <text x="60" y="63" text-anchor="middle" fill="white" font-size="9" font-family="monospace"
-                                font-weight="bold" opacity="0.8">CH</text>
-                        </svg>
+                    <div class="slide-inner credits-inner">
+                        <!-- 1. Typing effect -->
+                        <div class="credits-typing">Initializing Credits...</div>
 
-                        <h2 class="outro-title">Thank You</h2>
+                        <!-- 2. Cinematic Title -->
+                        <h2 class="credits-title">ChemHub</h2>
 
-                        <p class="outro-sub">
-                            ChemHub — making computational chemistry<br>
-                            <strong style="color:var(--accent);">accessible, beautiful, and browser-native</strong><br>
-                            for every student.
-                        </p>
+                        <!-- 3. Developed By -->
+                        <div class="credits-developed-by">Developed By</div>
 
-                        <div
-                            style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:40px;">
-                            <a class="outro-link" href="https://adithya07-ops.github.io/ChemHUB/" target="_blank">
-                                🚀 Open ChemHub
+                        <!-- 4. Group Members (Auto-staggered) -->
+                        <div class="credits-members">
+                            <div class="credit-member">Aldron K Joetreson</div>
+                            <div class="credit-member">Adithya S</div>
+                            <div class="credit-member">Aaliya Alias</div>
+                            <div class="credit-member">Aryadev A</div>
+                            <div class="credit-member">Giridev J</div>
+                            <div class="credit-member">Vinayak R Nath</div>
+                        </div>
+
+                        <!-- 5. Thank You & Button -->
+                        <div class="credits-finale">
+                            <div class="credits-thank-you">Thank You</div>
+                            <a class="credits-link outro-link" href="https://adithya07-ops.github.io/ChemHUB/"
+                                target="_blank">
+                                Open Live Platform →
                             </a>
-                            <div class="glass"
-                                style="padding:12px 24px;border-radius:999px;font-size:0.88rem;color:var(--text-secondary);">
-                                <span
-                                    style="font-family:var(--font-mono);color:var(--accent);">https://adithya07-ops.github.io/ChemHUB/</span>
-                            </div>
                         </div>
-
-                        <!-- Credits row -->
-                        <div class="glass fragment fade-up"
-                            style="padding:20px 32px;border-radius:var(--radius-lg);display:inline-flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center;">
-                            <div style="text-align:center;">
-                                <div style="font-size:1.4rem;margin-bottom:4px;">⬡</div>
-                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
-                                    PubChem</div>
-                            </div>
-                            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
-                            <div style="text-align:center;">
-                                <div style="font-size:1.4rem;margin-bottom:4px;">🧬</div>
-                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
-                                    RCSB PDB</div>
-                            </div>
-                            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
-                            <div style="text-align:center;">
-                                <div style="font-size:1.4rem;margin-bottom:4px;">🔬</div>
-                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
-                                    3Dmol.js</div>
-                            </div>
-                            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
-                            <div style="text-align:center;">
-                                <div style="font-size:1.4rem;margin-bottom:4px;">🌐</div>
-                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
-                                    Reveal.js</div>
-                            </div>
-                        </div>
-
-                        <p
-                            style="margin-top:28px;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
-                            ChemHub © 2026 &nbsp;·&nbsp; Built with ♥ for Chemistry Students
-                        </p>
                     </div>
                 </div>
             </section>
