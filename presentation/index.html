@@ -1,807 +1,978 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChemHub — Computational Chemistry Platform Presentation</title>
-  <meta name="description" content="ChemHub presentation — a cinematic showcase of the computational chemistry research platform.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemHub — Computational Chemistry Platform Presentation</title>
+    <meta name="description"
+        content="ChemHub presentation — a cinematic showcase of the computational chemistry research platform.">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
-  <!-- Reveal.js CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
 
-  <!-- ChemHub Presentation CSS -->
-  <link rel="stylesheet" href="presentation.css">
+    <!-- ChemHub Presentation CSS -->
+    <link rel="stylesheet" href="presentation.css">
 
-  <style>
-    /* Override Reveal black theme bg */
-    .reveal-viewport { background: #06060e !important; }
-    body { background: #06060e; }
-  </style>
+    <style>
+        /* Override Reveal black theme bg */
+        .reveal-viewport {
+            background: #06060e !important;
+        }
+
+        body {
+            background: #06060e;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="reveal">
-  <div class="slides">
+    <div class="reveal">
+        <div class="slides">
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 1 — HERO INTRO
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide hero-slide" style="text-align:center;align-items:center;">
-        <!-- Animated background -->
-        <canvas id="hero-canvas" class="slide-bg-canvas"></canvas>
+            <section>
+                <div class="slide hero-slide" style="text-align:center;align-items:center;">
+                    <!-- Animated background -->
+                    <canvas id="hero-canvas" class="slide-bg-canvas"></canvas>
 
-        <!-- Orbit rings -->
-        <div class="orbit-container">
-          <div class="orbit-ring"><div class="orbit-dot orbit-dot-accent"></div></div>
-          <div class="orbit-ring"><div class="orbit-dot orbit-dot-purple"></div></div>
-          <div class="orbit-ring"><div class="orbit-dot orbit-dot-cyan"></div></div>
-        </div>
+                    <!-- Orbit rings -->
+                    <div class="orbit-container">
+                        <div class="orbit-ring">
+                            <div class="orbit-dot orbit-dot-accent"></div>
+                        </div>
+                        <div class="orbit-ring">
+                            <div class="orbit-dot orbit-dot-purple"></div>
+                        </div>
+                        <div class="orbit-ring">
+                            <div class="orbit-dot orbit-dot-cyan"></div>
+                        </div>
+                    </div>
 
-        <!-- Ambient orbs -->
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
+                    <!-- Ambient orbs -->
+                    <div class="orb orb-1"></div>
+                    <div class="orb orb-2"></div>
 
-        <div class="slide-inner" style="text-align:center;">
-          <!-- Logo -->
-          <svg class="hero-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="20" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <circle cx="8"  cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <circle cx="32" cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <circle cx="20" cy="22" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <line x1="20" y1="14" x2="20" y2="18" stroke="currentColor" stroke-width="1.5"/>
-            <line x1="17" y1="25" x2="11" y2="28" stroke="currentColor" stroke-width="1.5"/>
-            <line x1="23" y1="25" x2="29" y2="28" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="20" cy="10" r="2" fill="currentColor" opacity="0.7"/>
-            <circle cx="20" cy="22" r="2" fill="currentColor" opacity="0.7"/>
-          </svg>
+                    <div class="slide-inner" style="text-align:center;">
+                        <!-- Logo -->
+                        <svg class="hero-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="20" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="8" cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="32" cy="30" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <circle cx="20" cy="22" r="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+                            <line x1="20" y1="14" x2="20" y2="18" stroke="currentColor" stroke-width="1.5" />
+                            <line x1="17" y1="25" x2="11" y2="28" stroke="currentColor" stroke-width="1.5" />
+                            <line x1="23" y1="25" x2="29" y2="28" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="20" cy="10" r="2" fill="currentColor" opacity="0.7" />
+                            <circle cx="20" cy="22" r="2" fill="currentColor" opacity="0.7" />
+                        </svg>
 
-          <div class="hero-tag-line">⚗️ &nbsp;Computational Chemistry Research Platform</div>
+                        <div class="hero-tag-line">⚗️ &nbsp;Computational Chemistry Research Platform</div>
 
-          <h1 class="hero-title">ChemHub</h1>
+                        <h1 class="hero-title">ChemHub</h1>
 
-          <p class="hero-subtitle">
-            An integrated browser-based toolkit for molecular visualization,<br>
-            ADME analysis, protein docking &amp; thermochemistry — built for students.
-          </p>
+                        <p class="hero-subtitle">
+                            An integrated browser-based toolkit for molecular visualization,<br>
+                            ADME analysis, protein docking &amp; thermochemistry — built for students.
+                        </p>
 
-          <div class="hero-stats-row fragment fade-up">
-            <div class="hero-stat glass">
-              <span class="hero-stat-icon">⚗</span>
-              <span class="hero-stat-val">6</span>
-              <span class="hero-stat-lbl">Research Tools</span>
-            </div>
-            <div class="hero-stat glass">
-              <span class="hero-stat-icon">⬡</span>
-              <span class="hero-stat-val">PubChem</span>
-              <span class="hero-stat-lbl">Molecule Database</span>
-            </div>
-            <div class="hero-stat glass">
-              <span class="hero-stat-icon">◌</span>
-              <span class="hero-stat-val">RCSB PDB</span>
-              <span class="hero-stat-lbl">Protein Data</span>
-            </div>
-            <div class="hero-stat glass">
-              <span class="hero-stat-icon">🌐</span>
-              <span class="hero-stat-val">100%</span>
-              <span class="hero-stat-lbl">Browser-Based</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                        <div class="hero-stats-row fragment fade-up">
+                            <div class="hero-stat glass">
+                                <span class="hero-stat-icon">⚗</span>
+                                <span class="hero-stat-val">6</span>
+                                <span class="hero-stat-lbl">Research Tools</span>
+                            </div>
+                            <div class="hero-stat glass">
+                                <span class="hero-stat-icon">⬡</span>
+                                <span class="hero-stat-val">PubChem</span>
+                                <span class="hero-stat-lbl">Molecule Database</span>
+                            </div>
+                            <div class="hero-stat glass">
+                                <span class="hero-stat-icon">◌</span>
+                                <span class="hero-stat-val">RCSB PDB</span>
+                                <span class="hero-stat-lbl">Protein Data</span>
+                            </div>
+                            <div class="hero-stat glass">
+                                <span class="hero-stat-icon">🌐</span>
+                                <span class="hero-stat-val">100%</span>
+                                <span class="hero-stat-lbl">Browser-Based</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 2 — THE PROBLEM
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-1" style="opacity:0.3;"></div>
-        <div class="slide-inner">
-          <div class="section-label">Challenge</div>
-          <h2 class="slide-h2">The Problem</h2>
-          <p style="color:var(--text-secondary);margin-bottom:8px;font-size:0.95rem;">
-            Chemistry students face a fragmented, inaccessible software landscape.
-          </p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-1" style="opacity:0.3;"></div>
+                    <div class="slide-inner">
+                        <div class="section-label">Challenge</div>
+                        <h2 class="slide-h2">The Problem</h2>
+                        <p style="color:var(--text-secondary);margin-bottom:8px;font-size:0.95rem;">
+                            Chemistry students face a fragmented, inaccessible software landscape.
+                        </p>
 
-          <div class="problem-grid" style="margin-top:36px;">
-            <div class="glass problem-card fragment fade-up" style="--c1:rgba(233,30,140,0.4);">
-              <span class="problem-icon" style="color:var(--accent);">🧩</span>
-              <h3>Fragmented Tooling</h3>
-              <p>Molecular viewers, ADME analyzers, and docking software each live on different platforms with no unified experience.</p>
-            </div>
-            <div class="glass problem-card fragment fade-up" style="--c1:rgba(168,85,247,0.4);">
-              <span class="problem-icon" style="color:var(--accent-purple);">🚧</span>
-              <h3>Steep Learning Curve</h3>
-              <p>Desktop molecular software like Gaussian, Avogadro, or AutoDock requires installation, compute resources, and expertise.</p>
-            </div>
-            <div class="glass problem-card fragment fade-up" style="--c1:rgba(0,229,255,0.35);">
-              <span class="problem-icon" style="color:var(--accent-cyan);">📚</span>
-              <h3>No Student Platform</h3>
-              <p>No lightweight, browser-based integrated platform exists for students to explore molecular properties in real time.</p>
-            </div>
-          </div>
+                        <div class="problem-grid" style="margin-top:36px;">
+                            <div class="glass problem-card fragment fade-up" style="--c1:rgba(233,30,140,0.4);">
+                                <span class="problem-icon" style="color:var(--accent);">🧩</span>
+                                <h3>Fragmented Tooling</h3>
+                                <p>Molecular viewers, ADME analyzers, and docking software each live on different
+                                    platforms with no unified experience.</p>
+                            </div>
+                            <div class="glass problem-card fragment fade-up" style="--c1:rgba(168,85,247,0.4);">
+                                <span class="problem-icon" style="color:var(--accent-purple);">🚧</span>
+                                <h3>Steep Learning Curve</h3>
+                                <p>Desktop molecular software like Gaussian, Avogadro, or AutoDock requires
+                                    installation, compute resources, and expertise.</p>
+                            </div>
+                            <div class="glass problem-card fragment fade-up" style="--c1:rgba(0,229,255,0.35);">
+                                <span class="problem-icon" style="color:var(--accent-cyan);">📚</span>
+                                <h3>No Student Platform</h3>
+                                <p>No lightweight, browser-based integrated platform exists for students to explore
+                                    molecular properties in real time.</p>
+                            </div>
+                        </div>
 
-          <div class="glass fragment fade-up" style="margin-top:24px;padding:20px 28px;border-radius:var(--radius-lg);border-color:rgba(233,30,140,0.2);display:flex;align-items:center;gap:16px;">
-            <span style="font-size:1.8rem;">💡</span>
-            <p style="margin:0;color:var(--text-secondary);font-style:italic;">
-              "Students need a <strong style="color:var(--accent);">unified, zero-setup</strong> platform that brings professional-grade chemistry tools directly into the browser."
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+                        <div class="glass fragment fade-up"
+                            style="margin-top:24px;padding:20px 28px;border-radius:var(--radius-lg);border-color:rgba(233,30,140,0.2);display:flex;align-items:center;gap:16px;">
+                            <span style="font-size:1.8rem;">💡</span>
+                            <p style="margin:0;color:var(--text-secondary);font-style:italic;">
+                                "Students need a <strong style="color:var(--accent);">unified, zero-setup</strong>
+                                platform that brings professional-grade chemistry tools directly into the browser."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 3 — THE SOLUTION
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-2" style="opacity:0.35;"></div>
-        <div class="slide-inner">
-          <div class="section-label">Solution</div>
-          <h2 class="slide-h2">The ChemHub Ecosystem</h2>
-          <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:4px;">Six integrated tools. One unified platform. Zero installation required.</p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-2" style="opacity:0.35;"></div>
+                    <div class="slide-inner">
+                        <div class="section-label">Solution</div>
+                        <h2 class="slide-h2">The ChemHub Ecosystem</h2>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:4px;">Six integrated
+                            tools. One unified platform. Zero installation required.</p>
 
-          <div class="tool-grid-pres" style="margin-top:32px;">
-            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(0,229,255,0.3);">
-              <div class="tool-card-pres-icon" style="background:rgba(0,229,255,0.1);--icon-glow:rgba(0,229,255,0.3);">🔬</div>
-              <h3>3D Molecular Visualizer</h3>
-              <p>PubChem-powered interactive 3D rendering via 3Dmol.js. SMILES & name input.</p>
-            </div>
-            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(233,30,140,0.3);">
-              <div class="tool-card-pres-icon" style="background:rgba(233,30,140,0.1);--icon-glow:rgba(233,30,140,0.3);">💊</div>
-              <h3>ADME Analyzer</h3>
-              <p>Lipinski Rule of Five, drug-likeness scoring and bioavailability prediction.</p>
-            </div>
-            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(168,85,247,0.3);">
-              <div class="tool-card-pres-icon" style="background:rgba(168,85,247,0.1);--icon-glow:rgba(168,85,247,0.3);">🧬</div>
-              <h3>Docking Explorer</h3>
-              <p>Protein-ligand 3D visualization using RCSB PDB structures.</p>
-            </div>
-            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(16,185,129,0.3);">
-              <div class="tool-card-pres-icon" style="background:rgba(16,185,129,0.1);--icon-glow:rgba(16,185,129,0.3);">🧮</div>
-              <h3>ChemCalc</h3>
-              <p>Moles, molarity, mass, temperature — comprehensive chemistry calculations.</p>
-            </div>
-            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(251,191,36,0.3);">
-              <div class="tool-card-pres-icon" style="background:rgba(251,191,36,0.1);--icon-glow:rgba(251,191,36,0.3);">⚛️</div>
-              <h3>Periodic Table Explorer</h3>
-              <p>Detailed element lookup by symbol or name with atomic data.</p>
-            </div>
-            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(251,146,60,0.3);">
-              <div class="tool-card-pres-icon" style="background:rgba(251,146,60,0.1);--icon-glow:rgba(251,146,60,0.3);">🔥</div>
-              <h3>Enthalpy Calculator</h3>
-              <p>ΔH°rxn via Hess's Law with NIST thermochemical data lookup.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                        <div class="tool-grid-pres" style="margin-top:32px;">
+                            <div class="glass tool-card-pres fragment fade-up" style="--card-glow:rgba(0,229,255,0.3);">
+                                <div class="tool-card-pres-icon"
+                                    style="background:rgba(0,229,255,0.1);--icon-glow:rgba(0,229,255,0.3);">🔬</div>
+                                <h3>3D Molecular Visualizer</h3>
+                                <p>PubChem-powered interactive 3D rendering via 3Dmol.js. SMILES & name input.</p>
+                            </div>
+                            <div class="glass tool-card-pres fragment fade-up"
+                                style="--card-glow:rgba(233,30,140,0.3);">
+                                <div class="tool-card-pres-icon"
+                                    style="background:rgba(233,30,140,0.1);--icon-glow:rgba(233,30,140,0.3);">💊</div>
+                                <h3>ADME Analyzer</h3>
+                                <p>Lipinski Rule of Five, drug-likeness scoring and bioavailability prediction.</p>
+                            </div>
+                            <div class="glass tool-card-pres fragment fade-up"
+                                style="--card-glow:rgba(168,85,247,0.3);">
+                                <div class="tool-card-pres-icon"
+                                    style="background:rgba(168,85,247,0.1);--icon-glow:rgba(168,85,247,0.3);">🧬</div>
+                                <h3>Docking Explorer</h3>
+                                <p>Protein-ligand 3D visualization using RCSB PDB structures.</p>
+                            </div>
+                            <div class="glass tool-card-pres fragment fade-up"
+                                style="--card-glow:rgba(16,185,129,0.3);">
+                                <div class="tool-card-pres-icon"
+                                    style="background:rgba(16,185,129,0.1);--icon-glow:rgba(16,185,129,0.3);">🧮</div>
+                                <h3>ChemCalc</h3>
+                                <p>Moles, molarity, mass, temperature — comprehensive chemistry calculations.</p>
+                            </div>
+                            <div class="glass tool-card-pres fragment fade-up"
+                                style="--card-glow:rgba(251,191,36,0.3);">
+                                <div class="tool-card-pres-icon"
+                                    style="background:rgba(251,191,36,0.1);--icon-glow:rgba(251,191,36,0.3);">⚛️</div>
+                                <h3>Periodic Table Explorer</h3>
+                                <p>Detailed element lookup by symbol or name with atomic data.</p>
+                            </div>
+                            <div class="glass tool-card-pres fragment fade-up"
+                                style="--card-glow:rgba(251,146,60,0.3);">
+                                <div class="tool-card-pres-icon"
+                                    style="background:rgba(251,146,60,0.1);--icon-glow:rgba(251,146,60,0.3);">🔥</div>
+                                <h3>Enthalpy Calculator</h3>
+                                <p>ΔH°rxn via Hess's Law with NIST thermochemical data lookup.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 4 — PLATFORM SHOWCASE
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-1" style="opacity:0.25;"></div>
-        <div class="orb orb-3"></div>
-        <div class="slide-inner">
-          <div class="section-label">Platform</div>
-          <h2 class="slide-h2">Platform Showcase</h2>
-          <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:36px;">Premium scientific UI — glassmorphism, glow accents, animated backgrounds.</p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-1" style="opacity:0.25;"></div>
+                    <div class="orb orb-3"></div>
+                    <div class="slide-inner">
+                        <div class="section-label">Platform</div>
+                        <h2 class="slide-h2">Platform Showcase</h2>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:36px;">Premium scientific
+                            UI — glassmorphism, glow accents, animated backgrounds.</p>
 
-          <div class="two-col">
-            <!-- Left: big stats -->
-            <div style="display:flex;flex-direction:column;gap:16px;">
-              <div class="glass-elevated" style="padding:28px 32px;border-radius:var(--radius-lg);text-align:center;">
-                <div style="font-size:3.5rem;margin-bottom:8px;filter:drop-shadow(0 0 20px rgba(233,30,140,0.5));">⚗️</div>
-                <div class="big-stat-num" style="font-size:2.4rem;">6</div>
-                <div class="big-stat-lbl">Integrated Research Tools</div>
-              </div>
-              <div class="glass" style="padding:20px 24px;border-radius:var(--radius-lg);">
-                <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                  <span class="pill pill-accent">Dark Scientific UI</span>
-                  <span class="pill pill-purple">Glassmorphism</span>
-                  <span class="pill pill-cyan">Glow Accents</span>
-                  <span class="pill pill-green">Responsive</span>
-                  <span class="pill pill-gold">Theme Aware</span>
-                </div>
-              </div>
-              <div class="glass fragment fade-up" style="padding:22px 24px;border-radius:var(--radius-lg);">
-                <div style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;">Key Metrics</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                  <div style="text-align:center;">
-                    <div style="font-size:1.8rem;font-family:var(--font-mono);font-weight:700;color:var(--accent);">~0ms</div>
-                    <div style="font-size:0.72rem;color:var(--text-muted);">Setup Time</div>
-                  </div>
-                  <div style="text-align:center;">
-                    <div style="font-size:1.8rem;font-family:var(--font-mono);font-weight:700;color:var(--accent-purple);">100%</div>
-                    <div style="font-size:0.72rem;color:var(--text-muted);">Browser Native</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                        <div class="two-col">
+                            <!-- Left: big stats -->
+                            <div style="display:flex;flex-direction:column;gap:16px;">
+                                <div class="glass-elevated"
+                                    style="padding:28px 32px;border-radius:var(--radius-lg);text-align:center;">
+                                    <div
+                                        style="font-size:3.5rem;margin-bottom:8px;filter:drop-shadow(0 0 20px rgba(233,30,140,0.5));">
+                                        ⚗️</div>
+                                    <div class="big-stat-num" style="font-size:2.4rem;">6</div>
+                                    <div class="big-stat-lbl">Integrated Research Tools</div>
+                                </div>
+                                <div class="glass" style="padding:20px 24px;border-radius:var(--radius-lg);">
+                                    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                                        <span class="pill pill-accent">Dark Scientific UI</span>
+                                        <span class="pill pill-purple">Glassmorphism</span>
+                                        <span class="pill pill-cyan">Glow Accents</span>
+                                        <span class="pill pill-green">Responsive</span>
+                                        <span class="pill pill-gold">Theme Aware</span>
+                                    </div>
+                                </div>
+                                <div class="glass fragment fade-up"
+                                    style="padding:22px 24px;border-radius:var(--radius-lg);">
+                                    <div
+                                        style="font-size:0.8rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;">
+                                        Key Metrics</div>
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                        <div style="text-align:center;">
+                                            <div
+                                                style="font-size:1.8rem;font-family:var(--font-mono);font-weight:700;color:var(--accent);">
+                                                ~0ms</div>
+                                            <div style="font-size:0.72rem;color:var(--text-muted);">Setup Time</div>
+                                        </div>
+                                        <div style="text-align:center;">
+                                            <div
+                                                style="font-size:1.8rem;font-family:var(--font-mono);font-weight:700;color:var(--accent-purple);">
+                                                100%</div>
+                                            <div style="font-size:0.72rem;color:var(--text-muted);">Browser Native</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Right: visual mockup of hub -->
-            <div class="glass-elevated feature-mock fragment fade-up" style="padding:28px;">
-              <div class="feature-mock-title">ChemHub Dashboard</div>
-              <!-- Mock card rows -->
-              <div style="display:flex;flex-direction:column;gap:10px;">
-                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(233,30,140,0.07);border:1px solid rgba(233,30,140,0.15);border-radius:12px;">
-                  <span style="font-size:1.3rem;">💊</span>
-                  <div>
-                    <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">ADME Analyzer</div>
-                    <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">PubChem API · Active</div>
-                  </div>
-                  <span class="pill pill-accent" style="margin-left:auto;font-size:0.68rem;">Launch →</span>
+                            <!-- Right: visual mockup of hub -->
+                            <div class="glass-elevated feature-mock fragment fade-up" style="padding:28px;">
+                                <div class="feature-mock-title">ChemHub Dashboard</div>
+                                <!-- Mock card rows -->
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <div
+                                        style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(233,30,140,0.07);border:1px solid rgba(233,30,140,0.15);border-radius:12px;">
+                                        <span style="font-size:1.3rem;">💊</span>
+                                        <div>
+                                            <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">
+                                                ADME Analyzer</div>
+                                            <div
+                                                style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                                PubChem API · Active</div>
+                                        </div>
+                                        <span class="pill pill-accent"
+                                            style="margin-left:auto;font-size:0.68rem;">Launch →</span>
+                                    </div>
+                                    <div
+                                        style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.15);border-radius:12px;">
+                                        <span style="font-size:1.3rem;">🧬</span>
+                                        <div>
+                                            <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">
+                                                Docking Explorer</div>
+                                            <div
+                                                style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                                RCSB PDB · Active</div>
+                                        </div>
+                                        <span class="pill pill-purple"
+                                            style="margin-left:auto;font-size:0.68rem;">Launch →</span>
+                                    </div>
+                                    <div
+                                        style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.12);border-radius:12px;">
+                                        <span style="font-size:1.3rem;">🔬</span>
+                                        <div>
+                                            <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">3D
+                                                Visualizer</div>
+                                            <div
+                                                style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                                3Dmol.js · Active</div>
+                                        </div>
+                                        <span class="pill pill-cyan" style="margin-left:auto;font-size:0.68rem;">Launch
+                                            →</span>
+                                    </div>
+                                    <div
+                                        style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:12px;">
+                                        <span style="font-size:1.3rem;">🧮</span>
+                                        <div>
+                                            <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">
+                                                ChemCalc</div>
+                                            <div
+                                                style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                                Local Utility · Active</div>
+                                        </div>
+                                        <span class="pill pill-green" style="margin-left:auto;font-size:0.68rem;">Launch
+                                            →</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.15);border-radius:12px;">
-                  <span style="font-size:1.3rem;">🧬</span>
-                  <div>
-                    <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">Docking Explorer</div>
-                    <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">RCSB PDB · Active</div>
-                  </div>
-                  <span class="pill pill-purple" style="margin-left:auto;font-size:0.68rem;">Launch →</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.12);border-radius:12px;">
-                  <span style="font-size:1.3rem;">🔬</span>
-                  <div>
-                    <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">3D Visualizer</div>
-                    <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">3Dmol.js · Active</div>
-                  </div>
-                  <span class="pill pill-cyan" style="margin-left:auto;font-size:0.68rem;">Launch →</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:12px;">
-                  <span style="font-size:1.3rem;">🧮</span>
-                  <div>
-                    <div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">ChemCalc</div>
-                    <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">Local Utility · Active</div>
-                  </div>
-                  <span class="pill pill-green" style="margin-left:auto;font-size:0.68rem;">Launch →</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 5 — 3D MOLECULAR VISUALIZER
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-1" style="background:radial-gradient(circle,rgba(0,229,255,0.3) 0%,transparent 70%);opacity:0.4;"></div>
-        <div class="slide-inner">
-          <div class="feature-layout">
-            <!-- Left -->
-            <div>
-              <div class="section-label" style="color:var(--accent-cyan);">Tool 01</div>
-              <h2 class="feature-title" style="background:linear-gradient(135deg,#fff,var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-                3D Molecular<br>Visualizer
-              </h2>
-              <p class="feature-desc">
-                Render any molecule interactively in 3D directly in your browser. Powered by PubChem and 3Dmol.js for real-time structural visualization.
-              </p>
-              <ul class="feature-list">
-                <li>Search by <strong style="color:var(--text-primary);">molecule name or SMILES string</strong></li>
-                <li><strong style="color:var(--text-primary);">PubChem API</strong> integration for live 3D coordinate data</li>
-                <li>Switch between <strong style="color:var(--text-primary);">stick, sphere, ball-and-stick</strong> representations</li>
-                <li>Real-time mouse-controlled rotation &amp; zoom</li>
-                <li>Atom hover tooltips and label overlays</li>
-                <li>Export as PNG snapshot</li>
-              </ul>
-              <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;">
-                <span class="pill pill-cyan">3Dmol.js</span>
-                <span class="pill pill-accent">PubChem</span>
-                <span class="pill pill-purple">SMILES</span>
-                <span class="pill pill-green">WebGL</span>
-              </div>
-            </div>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-1"
+                        style="background:radial-gradient(circle,rgba(0,229,255,0.3) 0%,transparent 70%);opacity:0.4;">
+                    </div>
+                    <div class="slide-inner">
+                        <div class="feature-layout">
+                            <!-- Left -->
+                            <div>
+                                <div class="section-label" style="color:var(--accent-cyan);">Tool 01</div>
+                                <h2 class="feature-title"
+                                    style="background:linear-gradient(135deg,#fff,var(--accent-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                                    3D Molecular<br>Visualizer
+                                </h2>
+                                <p class="feature-desc">
+                                    Render any molecule interactively in 3D directly in your browser. Powered by PubChem
+                                    and 3Dmol.js for real-time structural visualization.
+                                </p>
+                                <ul class="feature-list">
+                                    <li>Search by <strong style="color:var(--text-primary);">molecule name or SMILES
+                                            string</strong></li>
+                                    <li><strong style="color:var(--text-primary);">PubChem API</strong> integration for
+                                        live 3D coordinate data</li>
+                                    <li>Switch between <strong style="color:var(--text-primary);">stick, sphere,
+                                            ball-and-stick</strong> representations</li>
+                                    <li>Real-time mouse-controlled rotation &amp; zoom</li>
+                                    <li>Atom hover tooltips and label overlays</li>
+                                    <li>Export as PNG snapshot</li>
+                                </ul>
+                                <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;">
+                                    <span class="pill pill-cyan">3Dmol.js</span>
+                                    <span class="pill pill-accent">PubChem</span>
+                                    <span class="pill pill-purple">SMILES</span>
+                                    <span class="pill pill-green">WebGL</span>
+                                </div>
+                            </div>
 
-            <!-- Right: visual mock -->
-            <div class="feature-visual fragment fade-up">
-              <div class="glass-elevated feature-mock" style="text-align:center;">
-                <div class="feature-mock-title">3D Viewer · Caffeine (C₈H₁₀N₄O₂)</div>
-                <!-- Animated SVG molecule -->
-                <svg class="mock-molecule-svg" width="180" height="180" viewBox="0 0 180 180" fill="none">
-                  <circle cx="90" cy="90" r="70" stroke="rgba(0,229,255,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-                  <circle cx="90" cy="90" r="45" stroke="rgba(233,30,140,0.15)" stroke-width="1" stroke-dasharray="3 5"/>
-                  <!-- Bonds -->
-                  <line x1="90" y1="30" x2="130" y2="65" stroke="rgba(0,229,255,0.7)" stroke-width="2"/>
-                  <line x1="130" y1="65" x2="130" y2="115" stroke="rgba(168,85,247,0.7)" stroke-width="2"/>
-                  <line x1="130" y1="115" x2="90" y2="150" stroke="rgba(0,229,255,0.7)" stroke-width="2"/>
-                  <line x1="90" y1="150" x2="50" y2="115" stroke="rgba(233,30,140,0.7)" stroke-width="2"/>
-                  <line x1="50" y1="115" x2="50" y2="65" stroke="rgba(168,85,247,0.7)" stroke-width="2"/>
-                  <line x1="50" y1="65" x2="90" y2="30" stroke="rgba(0,229,255,0.7)" stroke-width="2"/>
-                  <line x1="90" y1="30" x2="90" y2="90" stroke="rgba(16,185,129,0.5)" stroke-width="1.5" stroke-dasharray="3 3"/>
-                  <line x1="130" y1="65" x2="90" y2="90" stroke="rgba(16,185,129,0.5)" stroke-width="1.5" stroke-dasharray="3 3"/>
-                  <line x1="50" y1="65" x2="90" y2="90" stroke="rgba(16,185,129,0.5)" stroke-width="1.5" stroke-dasharray="3 3"/>
-                  <!-- Atoms -->
-                  <circle cx="90" cy="30" r="9" fill="#00e5ff" opacity="0.9"/>
-                  <circle cx="130" cy="65" r="9" fill="#a855f7" opacity="0.9"/>
-                  <circle cx="130" cy="115" r="9" fill="#00e5ff" opacity="0.9"/>
-                  <circle cx="90" cy="150" r="9" fill="#e91e8c" opacity="0.9"/>
-                  <circle cx="50" cy="115" r="9" fill="#a855f7" opacity="0.9"/>
-                  <circle cx="50" cy="65" r="9" fill="#00e5ff" opacity="0.9"/>
-                  <circle cx="90" cy="90" r="12" fill="#10b981" opacity="0.8"/>
-                  <!-- Labels -->
-                  <text x="90" y="34" text-anchor="middle" fill="white" font-size="8" font-family="monospace" font-weight="bold">N</text>
-                  <text x="130" y="69" text-anchor="middle" fill="white" font-size="8" font-family="monospace" font-weight="bold">C</text>
-                  <text x="130" y="119" text-anchor="middle" fill="white" font-size="8" font-family="monospace" font-weight="bold">N</text>
-                  <text x="90" y="154" text-anchor="middle" fill="white" font-size="8" font-family="monospace" font-weight="bold">C</text>
-                  <text x="50" y="119" text-anchor="middle" fill="white" font-size="8" font-family="monospace" font-weight="bold">O</text>
-                  <text x="50" y="69" text-anchor="middle" fill="white" font-size="8" font-family="monospace" font-weight="bold">N</text>
-                  <text x="90" y="94" text-anchor="middle" fill="white" font-size="9" font-family="monospace" font-weight="bold">C</text>
-                </svg>
-                <div style="margin-top:16px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
-                  <span class="pill pill-cyan" style="font-size:0.7rem;">Stick</span>
-                  <span class="pill pill-purple" style="font-size:0.7rem;">Sphere</span>
-                  <span class="pill pill-green" style="font-size:0.7rem;">Ball &amp; Stick</span>
+                            <!-- Right: visual mock -->
+                            <div class="feature-visual fragment fade-up">
+                                <div class="glass-elevated feature-mock" style="text-align:center;">
+                                    <div class="feature-mock-title">3D Viewer · Caffeine (C₈H₁₀N₄O₂)</div>
+                                    <!-- Animated SVG molecule -->
+                                    <svg class="mock-molecule-svg" width="180" height="180" viewBox="0 0 180 180"
+                                        fill="none">
+                                        <circle cx="90" cy="90" r="70" stroke="rgba(0,229,255,0.15)" stroke-width="1"
+                                            stroke-dasharray="4 4" />
+                                        <circle cx="90" cy="90" r="45" stroke="rgba(233,30,140,0.15)" stroke-width="1"
+                                            stroke-dasharray="3 5" />
+                                        <!-- Bonds -->
+                                        <line x1="90" y1="30" x2="130" y2="65" stroke="rgba(0,229,255,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="130" y1="65" x2="130" y2="115" stroke="rgba(168,85,247,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="130" y1="115" x2="90" y2="150" stroke="rgba(0,229,255,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="90" y1="150" x2="50" y2="115" stroke="rgba(233,30,140,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="50" y1="115" x2="50" y2="65" stroke="rgba(168,85,247,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="50" y1="65" x2="90" y2="30" stroke="rgba(0,229,255,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="90" y1="30" x2="90" y2="90" stroke="rgba(16,185,129,0.5)"
+                                            stroke-width="1.5" stroke-dasharray="3 3" />
+                                        <line x1="130" y1="65" x2="90" y2="90" stroke="rgba(16,185,129,0.5)"
+                                            stroke-width="1.5" stroke-dasharray="3 3" />
+                                        <line x1="50" y1="65" x2="90" y2="90" stroke="rgba(16,185,129,0.5)"
+                                            stroke-width="1.5" stroke-dasharray="3 3" />
+                                        <!-- Atoms -->
+                                        <circle cx="90" cy="30" r="9" fill="#00e5ff" opacity="0.9" />
+                                        <circle cx="130" cy="65" r="9" fill="#a855f7" opacity="0.9" />
+                                        <circle cx="130" cy="115" r="9" fill="#00e5ff" opacity="0.9" />
+                                        <circle cx="90" cy="150" r="9" fill="#e91e8c" opacity="0.9" />
+                                        <circle cx="50" cy="115" r="9" fill="#a855f7" opacity="0.9" />
+                                        <circle cx="50" cy="65" r="9" fill="#00e5ff" opacity="0.9" />
+                                        <circle cx="90" cy="90" r="12" fill="#10b981" opacity="0.8" />
+                                        <!-- Labels -->
+                                        <text x="90" y="34" text-anchor="middle" fill="white" font-size="8"
+                                            font-family="monospace" font-weight="bold">N</text>
+                                        <text x="130" y="69" text-anchor="middle" fill="white" font-size="8"
+                                            font-family="monospace" font-weight="bold">C</text>
+                                        <text x="130" y="119" text-anchor="middle" fill="white" font-size="8"
+                                            font-family="monospace" font-weight="bold">N</text>
+                                        <text x="90" y="154" text-anchor="middle" fill="white" font-size="8"
+                                            font-family="monospace" font-weight="bold">C</text>
+                                        <text x="50" y="119" text-anchor="middle" fill="white" font-size="8"
+                                            font-family="monospace" font-weight="bold">O</text>
+                                        <text x="50" y="69" text-anchor="middle" fill="white" font-size="8"
+                                            font-family="monospace" font-weight="bold">N</text>
+                                        <text x="90" y="94" text-anchor="middle" fill="white" font-size="9"
+                                            font-family="monospace" font-weight="bold">C</text>
+                                    </svg>
+                                    <div
+                                        style="margin-top:16px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+                                        <span class="pill pill-cyan" style="font-size:0.7rem;">Stick</span>
+                                        <span class="pill pill-purple" style="font-size:0.7rem;">Sphere</span>
+                                        <span class="pill pill-green" style="font-size:0.7rem;">Ball &amp; Stick</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 6 — ADME ANALYZER
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-2" style="background:radial-gradient(circle,rgba(233,30,140,0.35) 0%,transparent 70%);opacity:0.45;"></div>
-        <div class="slide-inner">
-          <div class="feature-layout">
-            <div>
-              <div class="section-label">Tool 02</div>
-              <h2 class="feature-title">ADME<br>Analyzer</h2>
-              <p class="feature-desc">
-                Predict drug absorption, distribution, metabolism, and excretion using Lipinski's Rule of Five — a SwissADME-inspired workflow running entirely in the browser.
-              </p>
-              <ul class="feature-list">
-                <li>Lipinski Rule of Five compliance check</li>
-                <li>Molecular weight, LogP, H-bond donors/acceptors</li>
-                <li>Bioavailability radar visualization</li>
-                <li>Real-time pass/fail scoring dashboard</li>
-                <li>PubChem data pipeline for live property fetch</li>
-              </ul>
-              <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;">
-                <span class="pill pill-accent">Lipinski RO5</span>
-                <span class="pill pill-cyan">PubChem API</span>
-                <span class="pill pill-purple">Drug-likeness</span>
-              </div>
-            </div>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-2"
+                        style="background:radial-gradient(circle,rgba(233,30,140,0.35) 0%,transparent 70%);opacity:0.45;">
+                    </div>
+                    <div class="slide-inner">
+                        <div class="feature-layout">
+                            <div>
+                                <div class="section-label">Tool 02</div>
+                                <h2 class="feature-title">ADME<br>Analyzer</h2>
+                                <p class="feature-desc">
+                                    Predict drug absorption, distribution, metabolism, and excretion using Lipinski's
+                                    Rule of Five — a SwissADME-inspired workflow running entirely in the browser.
+                                </p>
+                                <ul class="feature-list">
+                                    <li>Lipinski Rule of Five compliance check</li>
+                                    <li>Molecular weight, LogP, H-bond donors/acceptors</li>
+                                    <li>Bioavailability radar visualization</li>
+                                    <li>Real-time pass/fail scoring dashboard</li>
+                                    <li>PubChem data pipeline for live property fetch</li>
+                                </ul>
+                                <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;">
+                                    <span class="pill pill-accent">Lipinski RO5</span>
+                                    <span class="pill pill-cyan">PubChem API</span>
+                                    <span class="pill pill-purple">Drug-likeness</span>
+                                </div>
+                            </div>
 
-            <!-- Right: ADME mock results -->
-            <div class="feature-visual fragment fade-up">
-              <div class="glass-elevated feature-mock">
-                <div class="feature-mock-title">ADME Result · Aspirin</div>
-                <div class="mock-row">
-                  <span class="mock-label">Molecular Weight</span>
-                  <span class="mock-val pass">180.16 g/mol ✓</span>
+                            <!-- Right: ADME mock results -->
+                            <div class="feature-visual fragment fade-up">
+                                <div class="glass-elevated feature-mock">
+                                    <div class="feature-mock-title">ADME Result · Aspirin</div>
+                                    <div class="mock-row">
+                                        <span class="mock-label">Molecular Weight</span>
+                                        <span class="mock-val pass">180.16 g/mol ✓</span>
+                                    </div>
+                                    <div class="mock-row">
+                                        <span class="mock-label">LogP (lipophilicity)</span>
+                                        <span class="mock-val pass">1.19 ✓</span>
+                                    </div>
+                                    <div class="mock-row">
+                                        <span class="mock-label">H-Bond Donors</span>
+                                        <span class="mock-val pass">1 ✓</span>
+                                    </div>
+                                    <div class="mock-row">
+                                        <span class="mock-label">H-Bond Acceptors</span>
+                                        <span class="mock-val pass">4 ✓</span>
+                                    </div>
+                                    <div class="mock-row">
+                                        <span class="mock-label">TPSA</span>
+                                        <span class="mock-val cyan">63.6 Å²</span>
+                                    </div>
+                                    <div style="margin-top:16px;">
+                                        <div
+                                            style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">
+                                            BIOAVAILABILITY SCORE</div>
+                                        <div class="mock-progress-bar-bg">
+                                            <div class="mock-progress-bar-fill" style="width:88%;"></div>
+                                        </div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:4px;">
+                                            <span>0%</span><span style="color:var(--accent-green);font-weight:600;">88%
+                                                — PASS</span><span>100%</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        style="margin-top:16px;padding:10px 14px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:10px;font-size:0.82rem;color:var(--accent-green);font-weight:600;">
+                                        ✅ &nbsp;Lipinski Rule of Five — ALL PASSED
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mock-row">
-                  <span class="mock-label">LogP (lipophilicity)</span>
-                  <span class="mock-val pass">1.19 ✓</span>
-                </div>
-                <div class="mock-row">
-                  <span class="mock-label">H-Bond Donors</span>
-                  <span class="mock-val pass">1 ✓</span>
-                </div>
-                <div class="mock-row">
-                  <span class="mock-label">H-Bond Acceptors</span>
-                  <span class="mock-val pass">4 ✓</span>
-                </div>
-                <div class="mock-row">
-                  <span class="mock-label">TPSA</span>
-                  <span class="mock-val cyan">63.6 Å²</span>
-                </div>
-                <div style="margin-top:16px;">
-                  <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px;">BIOAVAILABILITY SCORE</div>
-                  <div class="mock-progress-bar-bg">
-                    <div class="mock-progress-bar-fill" style="width:88%;"></div>
-                  </div>
-                  <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-top:4px;">
-                    <span>0%</span><span style="color:var(--accent-green);font-weight:600;">88% — PASS</span><span>100%</span>
-                  </div>
-                </div>
-                <div style="margin-top:16px;padding:10px 14px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:10px;font-size:0.82rem;color:var(--accent-green);font-weight:600;">
-                  ✅ &nbsp;Lipinski Rule of Five — ALL PASSED
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 7 — CHEMCALC + ENTHALPY
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-1" style="background:radial-gradient(circle,rgba(16,185,129,0.35) 0%,transparent 70%);opacity:0.4;top:auto;bottom:-100px;right:-100px;"></div>
-        <div class="slide-inner">
-          <div class="section-label" style="color:var(--accent-green);">Tools 04 &amp; 06</div>
-          <h2 class="slide-h2" style="background:linear-gradient(135deg,#fff,var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-            ChemCalc &amp; Enthalpy Calculator
-          </h2>
-          <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:32px;">Precision chemistry calculations with step-by-step breakdowns.</p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-1"
+                        style="background:radial-gradient(circle,rgba(16,185,129,0.35) 0%,transparent 70%);opacity:0.4;top:auto;bottom:-100px;right:-100px;">
+                    </div>
+                    <div class="slide-inner">
+                        <div class="section-label" style="color:var(--accent-green);">Tools 04 &amp; 06</div>
+                        <h2 class="slide-h2"
+                            style="background:linear-gradient(135deg,#fff,var(--accent-green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                            ChemCalc &amp; Enthalpy Calculator
+                        </h2>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:32px;">Precision chemistry
+                            calculations with step-by-step breakdowns.</p>
 
-          <div class="two-col">
-            <!-- ChemCalc -->
-            <div class="glass fragment fade-up" style="padding:28px;border-radius:var(--radius-lg);">
-              <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-                <span style="font-size:1.8rem;">🧮</span>
-                <div>
-                  <div style="font-weight:700;font-size:1rem;color:var(--text-primary);">ChemCalc</div>
-                  <div style="font-size:0.75rem;color:var(--accent-green);font-family:var(--font-mono);">Local Utility</div>
+                        <div class="two-col">
+                            <!-- ChemCalc -->
+                            <div class="glass fragment fade-up" style="padding:28px;border-radius:var(--radius-lg);">
+                                <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                                    <span style="font-size:1.8rem;">🧮</span>
+                                    <div>
+                                        <div style="font-weight:700;font-size:1rem;color:var(--text-primary);">ChemCalc
+                                        </div>
+                                        <div
+                                            style="font-size:0.75rem;color:var(--accent-green);font-family:var(--font-mono);">
+                                            Local Utility</div>
+                                    </div>
+                                </div>
+                                <ul class="feature-list" style="gap:10px;">
+                                    <li>Mole ↔ mass ↔ formula weight conversions</li>
+                                    <li>Molarity calculator (c = n/V)</li>
+                                    <li>Temperature: °C ↔ °F ↔ K</li>
+                                    <li>Volume &amp; pressure unit converters</li>
+                                    <li>Integrated with 3D Viewer (MW auto-fill)</li>
+                                </ul>
+                                <div
+                                    style="margin-top:18px;padding:14px 16px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-green);">
+                                    n = m / M &nbsp;·&nbsp; c = n / V &nbsp;·&nbsp; K = °C + 273.15
+                                </div>
+                            </div>
+
+                            <!-- Enthalpy -->
+                            <div class="glass fragment fade-up" style="padding:28px;border-radius:var(--radius-lg);">
+                                <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+                                    <span style="font-size:1.8rem;">🔥</span>
+                                    <div>
+                                        <div style="font-weight:700;font-size:1rem;color:var(--text-primary);">Enthalpy
+                                            Calculator</div>
+                                        <div
+                                            style="font-size:0.75rem;color:var(--accent-orange);font-family:var(--font-mono);">
+                                            NIST + PubChem</div>
+                                    </div>
+                                </div>
+                                <ul class="feature-list" style="gap:10px;">
+                                    <li>ΔH°rxn via Hess's Law</li>
+                                    <li>Parse any balanced chemical equation</li>
+                                    <li>Live ΔHf° lookup per molecule</li>
+                                    <li>Full step-by-step thermochemical breakdown</li>
+                                    <li>Endothermic / exothermic classification</li>
+                                </ul>
+                                <div
+                                    style="margin-top:18px;padding:14px 16px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:10px;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-orange);">
+                                    ΔH°rxn = Σ ΔHf°(products) − Σ ΔHf°(reactants)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <ul class="feature-list" style="gap:10px;">
-                <li>Mole ↔ mass ↔ formula weight conversions</li>
-                <li>Molarity calculator (c = n/V)</li>
-                <li>Temperature: °C ↔ °F ↔ K</li>
-                <li>Volume &amp; pressure unit converters</li>
-                <li>Integrated with 3D Viewer (MW auto-fill)</li>
-              </ul>
-              <div style="margin-top:18px;padding:14px 16px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-green);">
-                n = m / M &nbsp;·&nbsp; c = n / V &nbsp;·&nbsp; K = °C + 273.15
-              </div>
-            </div>
+            </section>
 
-            <!-- Enthalpy -->
-            <div class="glass fragment fade-up" style="padding:28px;border-radius:var(--radius-lg);">
-              <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-                <span style="font-size:1.8rem;">🔥</span>
-                <div>
-                  <div style="font-weight:700;font-size:1rem;color:var(--text-primary);">Enthalpy Calculator</div>
-                  <div style="font-size:0.75rem;color:var(--accent-orange);font-family:var(--font-mono);">NIST + PubChem</div>
-                </div>
-              </div>
-              <ul class="feature-list" style="gap:10px;">
-                <li>ΔH°rxn via Hess's Law</li>
-                <li>Parse any balanced chemical equation</li>
-                <li>Live ΔHf° lookup per molecule</li>
-                <li>Full step-by-step thermochemical breakdown</li>
-                <li>Endothermic / exothermic classification</li>
-              </ul>
-              <div style="margin-top:18px;padding:14px 16px;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:10px;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-orange);">
-                ΔH°rxn = Σ ΔHf°(products) − Σ ΔHf°(reactants)
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 8 — DOCKING EXPLORER
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-2" style="background:radial-gradient(circle,rgba(168,85,247,0.4) 0%,transparent 70%);opacity:0.4;"></div>
-        <div class="slide-inner">
-          <div class="feature-layout">
-            <div>
-              <div class="section-label" style="color:var(--accent-purple);">Tool 03</div>
-              <h2 class="feature-title" style="background:linear-gradient(135deg,#fff,var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-                Docking<br>Explorer
-              </h2>
-              <p class="feature-desc">
-                Visualize how small molecules interact with protein binding pockets in full 3D. Load any PDB protein structure and observe ligand positioning.
-              </p>
-              <ul class="feature-list">
-                <li>RCSB PDB integration — load by PDB ID</li>
-                <li>3Dmol.js powered protein visualization</li>
-                <li>Binding pocket surface rendering</li>
-                <li>Ligand overlay &amp; interaction heatmap</li>
-                <li>Cartoon, surface &amp; stick display modes</li>
-                <li>Foundation for future WASM docking engine</li>
-              </ul>
-              <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;">
-                <span class="pill pill-purple">RCSB PDB</span>
-                <span class="pill pill-cyan">3Dmol.js</span>
-                <span class="pill pill-accent">Protein-Ligand</span>
-              </div>
-            </div>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-2"
+                        style="background:radial-gradient(circle,rgba(168,85,247,0.4) 0%,transparent 70%);opacity:0.4;">
+                    </div>
+                    <div class="slide-inner">
+                        <div class="feature-layout">
+                            <div>
+                                <div class="section-label" style="color:var(--accent-purple);">Tool 03</div>
+                                <h2 class="feature-title"
+                                    style="background:linear-gradient(135deg,#fff,var(--accent-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                                    Docking<br>Explorer
+                                </h2>
+                                <p class="feature-desc">
+                                    Visualize how small molecules interact with protein binding pockets in full 3D. Load
+                                    any PDB protein structure and observe ligand positioning.
+                                </p>
+                                <ul class="feature-list">
+                                    <li>RCSB PDB integration — load by PDB ID</li>
+                                    <li>3Dmol.js powered protein visualization</li>
+                                    <li>Binding pocket surface rendering</li>
+                                    <li>Ligand overlay &amp; interaction heatmap</li>
+                                    <li>Cartoon, surface &amp; stick display modes</li>
+                                    <li>Foundation for future WASM docking engine</li>
+                                </ul>
+                                <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px;">
+                                    <span class="pill pill-purple">RCSB PDB</span>
+                                    <span class="pill pill-cyan">3Dmol.js</span>
+                                    <span class="pill pill-accent">Protein-Ligand</span>
+                                </div>
+                            </div>
 
-            <!-- Right: docking mock -->
-            <div class="feature-visual fragment fade-up">
-              <div class="glass-elevated feature-mock" style="text-align:center;">
-                <div class="feature-mock-title">Docking · 6LU7 (COVID-19 Mpro)</div>
-                <!-- Protein visual -->
-                <svg width="200" height="180" viewBox="0 0 200 180" fill="none" style="display:block;margin:0 auto;filter:drop-shadow(0 0 16px rgba(168,85,247,0.5));">
-                  <!-- Protein backbone (cartoon ribbon approximation) -->
-                  <path d="M30 90 Q50 40 80 70 Q110 100 140 60 Q160 40 170 90 Q160 140 130 120 Q100 100 70 130 Q50 150 30 90Z"
-                    stroke="rgba(168,85,247,0.7)" stroke-width="2.5" fill="rgba(168,85,247,0.05)"/>
-                  <path d="M60 90 Q80 60 100 80 Q120 100 140 80"
-                    stroke="rgba(0,229,255,0.6)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                  <!-- Helices -->
-                  <ellipse cx="70" cy="70" rx="18" ry="8" stroke="rgba(233,30,140,0.6)" stroke-width="1.5" fill="rgba(233,30,140,0.06)" transform="rotate(-20,70,70)"/>
-                  <ellipse cx="130" cy="110" rx="18" ry="8" stroke="rgba(233,30,140,0.6)" stroke-width="1.5" fill="rgba(233,30,140,0.06)" transform="rotate(20,130,110)"/>
-                  <!-- Binding pocket -->
-                  <circle cx="100" cy="90" r="22" stroke="rgba(251,191,36,0.7)" stroke-width="1.5" stroke-dasharray="4 3" fill="rgba(251,191,36,0.06)"/>
-                  <!-- Ligand -->
-                  <circle cx="100" cy="90" r="8" fill="rgba(16,185,129,0.8)" filter="url(#glow-filter)"/>
-                  <circle cx="114" cy="82" r="5" fill="rgba(0,229,255,0.8)"/>
-                  <circle cx="86" cy="82" r="5" fill="rgba(0,229,255,0.8)"/>
-                  <line x1="100" y1="90" x2="114" y2="82" stroke="rgba(16,185,129,0.7)" stroke-width="2"/>
-                  <line x1="100" y1="90" x2="86" y2="82" stroke="rgba(16,185,129,0.7)" stroke-width="2"/>
-                  <defs>
-                    <filter id="glow-filter"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                  </defs>
-                </svg>
-                <div style="margin-top:14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
-                  <span class="pill pill-gold" style="font-size:0.68rem;">Binding Pocket</span>
-                  <span class="pill pill-green" style="font-size:0.68rem;">Ligand</span>
-                  <span class="pill pill-purple" style="font-size:0.68rem;">Protein</span>
+                            <!-- Right: docking mock -->
+                            <div class="feature-visual fragment fade-up">
+                                <div class="glass-elevated feature-mock" style="text-align:center;">
+                                    <div class="feature-mock-title">Docking · 6LU7 (COVID-19 Mpro)</div>
+                                    <!-- Protein visual -->
+                                    <svg width="200" height="180" viewBox="0 0 200 180" fill="none"
+                                        style="display:block;margin:0 auto;filter:drop-shadow(0 0 16px rgba(168,85,247,0.5));">
+                                        <!-- Protein backbone (cartoon ribbon approximation) -->
+                                        <path
+                                            d="M30 90 Q50 40 80 70 Q110 100 140 60 Q160 40 170 90 Q160 140 130 120 Q100 100 70 130 Q50 150 30 90Z"
+                                            stroke="rgba(168,85,247,0.7)" stroke-width="2.5"
+                                            fill="rgba(168,85,247,0.05)" />
+                                        <path d="M60 90 Q80 60 100 80 Q120 100 140 80" stroke="rgba(0,229,255,0.6)"
+                                            stroke-width="2.5" fill="none" stroke-linecap="round" />
+                                        <!-- Helices -->
+                                        <ellipse cx="70" cy="70" rx="18" ry="8" stroke="rgba(233,30,140,0.6)"
+                                            stroke-width="1.5" fill="rgba(233,30,140,0.06)"
+                                            transform="rotate(-20,70,70)" />
+                                        <ellipse cx="130" cy="110" rx="18" ry="8" stroke="rgba(233,30,140,0.6)"
+                                            stroke-width="1.5" fill="rgba(233,30,140,0.06)"
+                                            transform="rotate(20,130,110)" />
+                                        <!-- Binding pocket -->
+                                        <circle cx="100" cy="90" r="22" stroke="rgba(251,191,36,0.7)" stroke-width="1.5"
+                                            stroke-dasharray="4 3" fill="rgba(251,191,36,0.06)" />
+                                        <!-- Ligand -->
+                                        <circle cx="100" cy="90" r="8" fill="rgba(16,185,129,0.8)"
+                                            filter="url(#glow-filter)" />
+                                        <circle cx="114" cy="82" r="5" fill="rgba(0,229,255,0.8)" />
+                                        <circle cx="86" cy="82" r="5" fill="rgba(0,229,255,0.8)" />
+                                        <line x1="100" y1="90" x2="114" y2="82" stroke="rgba(16,185,129,0.7)"
+                                            stroke-width="2" />
+                                        <line x1="100" y1="90" x2="86" y2="82" stroke="rgba(16,185,129,0.7)"
+                                            stroke-width="2" />
+                                        <defs>
+                                            <filter id="glow-filter">
+                                                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                                <feMerge>
+                                                    <feMergeNode in="coloredBlur" />
+                                                    <feMergeNode in="SourceGraphic" />
+                                                </feMerge>
+                                            </filter>
+                                        </defs>
+                                    </svg>
+                                    <div
+                                        style="margin-top:14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+                                        <span class="pill pill-gold" style="font-size:0.68rem;">Binding Pocket</span>
+                                        <span class="pill pill-green" style="font-size:0.68rem;">Ligand</span>
+                                        <span class="pill pill-purple" style="font-size:0.68rem;">Protein</span>
+                                    </div>
+                                    <div class="mock-row" style="margin-top:14px;">
+                                        <span class="mock-label">PDB ID</span>
+                                        <span class="mock-val cyan">6LU7</span>
+                                    </div>
+                                    <div class="mock-row">
+                                        <span class="mock-label">Resolution</span>
+                                        <span class="mock-val">2.16 Å</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mock-row" style="margin-top:14px;">
-                  <span class="mock-label">PDB ID</span>
-                  <span class="mock-val cyan">6LU7</span>
-                </div>
-                <div class="mock-row">
-                  <span class="mock-label">Resolution</span>
-                  <span class="mock-val">2.16 Å</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 9 — UI/UX ENGINEERING
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-3" style="opacity:0.3;width:400px;height:400px;top:20%;left:30%;"></div>
-        <div class="slide-inner">
-          <div class="section-label">Design</div>
-          <h2 class="slide-h2">UI / UX Engineering</h2>
-          <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:32px;">Premium scientific aesthetics, modular architecture, and performance-first design.</p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-3" style="opacity:0.3;width:400px;height:400px;top:20%;left:30%;"></div>
+                    <div class="slide-inner">
+                        <div class="section-label">Design</div>
+                        <h2 class="slide-h2">UI / UX Engineering</h2>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:32px;">Premium scientific
+                            aesthetics, modular architecture, and performance-first design.</p>
 
-          <div class="ux-grid">
-            <div class="glass ux-card fragment fade-up">
-              <span class="ux-icon">🌗</span>
-              <div>
-                <h3>Theme Persistence</h3>
-                <p>Dark / light mode with localStorage persistence, smooth 1.8s crossfade transitions across all tools.</p>
-              </div>
-            </div>
-            <div class="glass ux-card fragment fade-up">
-              <span class="ux-icon">✨</span>
-              <div>
-                <h3>Glassmorphism System</h3>
-                <p>Unified glass card system with backdrop blur, border gradients, and layered ambient glow effects.</p>
-              </div>
-            </div>
-            <div class="glass ux-card fragment fade-up">
-              <span class="ux-icon">🎞</span>
-              <div>
-                <h3>Animated Backgrounds</h3>
-                <p>Canvas-based particle network with molecular graph simulation running at 60fps on every page.</p>
-              </div>
-            </div>
-            <div class="glass ux-card fragment fade-up">
-              <span class="ux-icon">📱</span>
-              <div>
-                <h3>Responsive Design</h3>
-                <p>Fluid layouts with CSS Grid and clamp() typography scaling from 320px to 4K displays.</p>
-              </div>
-            </div>
-            <div class="glass ux-card fragment fade-up">
-              <span class="ux-icon">🧱</span>
-              <div>
-                <h3>Modular Architecture</h3>
-                <p>Shared design system (shared.css) with CSS custom properties. Each tool is self-contained.</p>
-              </div>
-            </div>
-            <div class="glass ux-card fragment fade-up">
-              <span class="ux-icon">⚡</span>
-              <div>
-                <h3>Zero Build Step</h3>
-                <p>No bundlers, no Node.js, no installation. Pure HTML + CSS + Vanilla JS with CDN dependencies.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                        <div class="ux-grid">
+                            <div class="glass ux-card fragment fade-up">
+                                <span class="ux-icon">🌗</span>
+                                <div>
+                                    <h3>Theme Persistence</h3>
+                                    <p>Dark / light mode with localStorage persistence, smooth 1.8s crossfade
+                                        transitions across all tools.</p>
+                                </div>
+                            </div>
+                            <div class="glass ux-card fragment fade-up">
+                                <span class="ux-icon">✨</span>
+                                <div>
+                                    <h3>Glassmorphism System</h3>
+                                    <p>Unified glass card system with backdrop blur, border gradients, and layered
+                                        ambient glow effects.</p>
+                                </div>
+                            </div>
+                            <div class="glass ux-card fragment fade-up">
+                                <span class="ux-icon">🎞</span>
+                                <div>
+                                    <h3>Animated Backgrounds</h3>
+                                    <p>Canvas-based particle network with molecular graph simulation running at 60fps on
+                                        every page.</p>
+                                </div>
+                            </div>
+                            <div class="glass ux-card fragment fade-up">
+                                <span class="ux-icon">📱</span>
+                                <div>
+                                    <h3>Responsive Design</h3>
+                                    <p>Fluid layouts with CSS Grid and clamp() typography scaling from 320px to 4K
+                                        displays.</p>
+                                </div>
+                            </div>
+                            <div class="glass ux-card fragment fade-up">
+                                <span class="ux-icon">🧱</span>
+                                <div>
+                                    <h3>Modular Architecture</h3>
+                                    <p>Shared design system (shared.css) with CSS custom properties. Each tool is
+                                        self-contained.</p>
+                                </div>
+                            </div>
+                            <div class="glass ux-card fragment fade-up">
+                                <span class="ux-icon">⚡</span>
+                                <div>
+                                    <h3>Zero Build Step</h3>
+                                    <p>No bundlers, no Node.js, no installation. Pure HTML + CSS + Vanilla JS with CDN
+                                        dependencies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 10 — TECH STACK
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-1" style="opacity:0.3;"></div>
-        <div class="orb orb-2" style="opacity:0.25;"></div>
-        <div class="slide-inner">
-          <div class="section-label">Stack</div>
-          <h2 class="slide-h2">Technology Stack</h2>
-          <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:36px;">Modern web technologies — no frameworks, no overhead.</p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-1" style="opacity:0.3;"></div>
+                    <div class="orb orb-2" style="opacity:0.25;"></div>
+                    <div class="slide-inner">
+                        <div class="section-label">Stack</div>
+                        <h2 class="slide-h2">Technology Stack</h2>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:36px;">Modern web
+                            technologies — no frameworks, no overhead.</p>
 
-          <div class="tech-grid">
-            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(233,70,27,0.4);">
-              <span class="tech-card-icon" style="--t-glow:rgba(233,70,27,0.4);">🌐</span>
-              <h3>HTML5</h3>
-              <p>Semantic structure, Canvas API, SVG animations</p>
-            </div>
-            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(33,150,243,0.4);">
-              <span class="tech-card-icon">🎨</span>
-              <h3>CSS3</h3>
-              <p>Custom properties, Grid, clamp(), backdrop-filter</p>
-            </div>
-            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(247,208,0,0.4);">
-              <span class="tech-card-icon">⚡</span>
-              <h3>JavaScript</h3>
-              <p>Vanilla ES6+, Canvas2D, async/await, fetch API</p>
-            </div>
-            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(0,229,255,0.4);">
-              <span class="tech-card-icon" style="filter:drop-shadow(0 0 12px rgba(0,229,255,0.5));">🔬</span>
-              <h3>3Dmol.js</h3>
-              <p>WebGL molecular rendering &amp; protein visualization</p>
-            </div>
-            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(233,30,140,0.4);">
-              <span class="tech-card-icon">⬡</span>
-              <h3>PubChem API</h3>
-              <p>Molecular structure, properties &amp; SMILES data</p>
-            </div>
-            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(168,85,247,0.4);">
-              <span class="tech-card-icon">🧬</span>
-              <h3>RCSB PDB</h3>
-              <p>Protein structure coordinates &amp; metadata</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                        <div class="tech-grid">
+                            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(233,70,27,0.4);">
+                                <span class="tech-card-icon" style="--t-glow:rgba(233,70,27,0.4);">🌐</span>
+                                <h3>HTML5</h3>
+                                <p>Semantic structure, Canvas API, SVG animations</p>
+                            </div>
+                            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(33,150,243,0.4);">
+                                <span class="tech-card-icon">🎨</span>
+                                <h3>CSS3</h3>
+                                <p>Custom properties, Grid, clamp(), backdrop-filter</p>
+                            </div>
+                            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(247,208,0,0.4);">
+                                <span class="tech-card-icon">⚡</span>
+                                <h3>JavaScript</h3>
+                                <p>Vanilla ES6+, Canvas2D, async/await, fetch API</p>
+                            </div>
+                            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(0,229,255,0.4);">
+                                <span class="tech-card-icon"
+                                    style="filter:drop-shadow(0 0 12px rgba(0,229,255,0.5));">🔬</span>
+                                <h3>3Dmol.js</h3>
+                                <p>WebGL molecular rendering &amp; protein visualization</p>
+                            </div>
+                            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(233,30,140,0.4);">
+                                <span class="tech-card-icon">⬡</span>
+                                <h3>PubChem API</h3>
+                                <p>Molecular structure, properties &amp; SMILES data</p>
+                            </div>
+                            <div class="glass tech-card fragment fade-up" style="--t-glow:rgba(168,85,247,0.4);">
+                                <span class="tech-card-icon">🧬</span>
+                                <h3>RCSB PDB</h3>
+                                <p>Protein structure coordinates &amp; metadata</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 11 — FUTURE IMPROVEMENTS
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
-        <div class="orb orb-1" style="opacity:0.3;"></div>
-        <div class="slide-inner">
-          <div class="section-label">Roadmap</div>
-          <h2 class="slide-h2">Future Improvements</h2>
-          <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:32px;">ChemHub is designed to evolve — here's what's next on the roadmap.</p>
+            <section>
+                <div class="slide">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+                    <div class="orb orb-1" style="opacity:0.3;"></div>
+                    <div class="slide-inner">
+                        <div class="section-label">Roadmap</div>
+                        <h2 class="slide-h2">Future Improvements</h2>
+                        <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:32px;">ChemHub is designed
+                            to evolve — here's what's next on the roadmap.</p>
 
-          <div class="future-grid">
-            <div class="glass future-card fragment fade-up" style="--f-glow:rgba(233,30,140,0.4);--f-color:var(--accent);">
-              <div class="future-num">01</div>
-              <h3>🤖 AI-Assisted Chemistry</h3>
-              <p>Natural language interface to query molecular properties, suggest related drugs, and explain results in plain English using LLM integration.</p>
-            </div>
-            <div class="glass future-card fragment fade-up" style="--f-glow:rgba(168,85,247,0.4);--f-color:var(--accent-purple);">
-              <div class="future-num">02</div>
-              <h3>⚙️ WASM Docking Engine</h3>
-              <p>Real in-browser AutoDock-style docking simulation using WebAssembly, giving true binding affinity scores without a server.</p>
-            </div>
-            <div class="glass future-card fragment fade-up" style="--f-glow:rgba(0,229,255,0.35);--f-color:var(--accent-cyan);">
-              <div class="future-num">03</div>
-              <h3>📤 Exportable Reports</h3>
-              <p>Generate PDF / JSON reports of ADME results, docking scores, and molecular data for research notes and assignments.</p>
-            </div>
-            <div class="glass future-card fragment fade-up" style="--f-glow:rgba(16,185,129,0.35);--f-color:var(--accent-green);">
-              <div class="future-num">04</div>
-              <h3>🔮 Molecular Predictions</h3>
-              <p>Advanced ML-based toxicity prediction, solubility modeling, and synthetic accessibility scoring powered by open-source cheminformatics.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+                        <div class="future-grid">
+                            <div class="glass future-card fragment fade-up"
+                                style="--f-glow:rgba(233,30,140,0.4);--f-color:var(--accent);">
+                                <div class="future-num">01</div>
+                                <h3>🤖 AI-Assisted Chemistry</h3>
+                                <p>Natural language interface to query molecular properties, suggest related drugs, and
+                                    explain results in plain English using LLM integration.</p>
+                            </div>
+                            <div class="glass future-card fragment fade-up"
+                                style="--f-glow:rgba(168,85,247,0.4);--f-color:var(--accent-purple);">
+                                <div class="future-num">02</div>
+                                <h3>⚙️ WASM Docking Engine</h3>
+                                <p>Real in-browser AutoDock-style docking simulation using WebAssembly, giving true
+                                    binding affinity scores without a server.</p>
+                            </div>
+                            <div class="glass future-card fragment fade-up"
+                                style="--f-glow:rgba(0,229,255,0.35);--f-color:var(--accent-cyan);">
+                                <div class="future-num">03</div>
+                                <h3>📤 Exportable Reports</h3>
+                                <p>Generate PDF / JSON reports of ADME results, docking scores, and molecular data for
+                                    research notes and assignments.</p>
+                            </div>
+                            <div class="glass future-card fragment fade-up"
+                                style="--f-glow:rgba(16,185,129,0.35);--f-color:var(--accent-green);">
+                                <div class="future-num">04</div>
+                                <h3>🔮 Molecular Predictions</h3>
+                                <p>Advanced ML-based toxicity prediction, solubility modeling, and synthetic
+                                    accessibility scoring powered by open-source cheminformatics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ═══════════════════════════════════════
+            <!-- ═══════════════════════════════════════
          SLIDE 12 — THANK YOU
          ═══════════════════════════════════════ -->
-    <section>
-      <div class="slide outro-slide" style="justify-content:center;align-items:center;">
-        <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
+            <section>
+                <div class="slide outro-slide" style="justify-content:center;align-items:center;">
+                    <canvas class="slide-bg-canvas slide-particle-canvas"></canvas>
 
-        <!-- Full ambient orbs -->
-        <div class="orb orb-1" style="opacity:0.6;"></div>
-        <div class="orb orb-2" style="opacity:0.5;"></div>
-        <div class="orb orb-3" style="opacity:0.35;width:500px;height:500px;top:20%;left:25%;"></div>
+                    <!-- Full ambient orbs -->
+                    <div class="orb orb-1" style="opacity:0.6;"></div>
+                    <div class="orb orb-2" style="opacity:0.5;"></div>
+                    <div class="orb orb-3" style="opacity:0.35;width:500px;height:500px;top:20%;left:25%;"></div>
 
-        <!-- Orbit rings -->
-        <div class="orbit-container">
-          <div class="orbit-ring"><div class="orbit-dot orbit-dot-accent"></div></div>
-          <div class="orbit-ring"><div class="orbit-dot orbit-dot-purple"></div></div>
-          <div class="orbit-ring"><div class="orbit-dot orbit-dot-cyan"></div></div>
-        </div>
+                    <!-- Orbit rings -->
+                    <div class="orbit-container">
+                        <div class="orbit-ring">
+                            <div class="orbit-dot orbit-dot-accent"></div>
+                        </div>
+                        <div class="orbit-ring">
+                            <div class="orbit-dot orbit-dot-purple"></div>
+                        </div>
+                        <div class="orbit-ring">
+                            <div class="orbit-dot orbit-dot-cyan"></div>
+                        </div>
+                    </div>
 
-        <div class="slide-inner" style="text-align:center;">
-          <!-- Outro molecule -->
-          <svg class="outro-mol" width="120" height="120" viewBox="0 0 120 120" fill="none">
-            <circle cx="60" cy="60" r="55" stroke="rgba(233,30,140,0.15)" stroke-width="1" stroke-dasharray="4 4"/>
-            <circle cx="60" cy="60" r="38" stroke="rgba(168,85,247,0.15)" stroke-width="1" stroke-dasharray="3 5"/>
-            <line x1="60" y1="10" x2="60" y2="60" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
-            <line x1="60" y1="60" x2="103" y2="85" stroke="rgba(233,30,140,0.5)" stroke-width="1.5"/>
-            <line x1="60" y1="60" x2="17" y2="85" stroke="rgba(168,85,247,0.5)" stroke-width="1.5"/>
-            <circle cx="60" cy="10" r="7" fill="var(--accent)" opacity="0.9"/>
-            <circle cx="103" cy="85" r="7" fill="var(--accent-purple)" opacity="0.9"/>
-            <circle cx="17" cy="85" r="7" fill="var(--accent-cyan)" opacity="0.9"/>
-            <circle cx="60" cy="60" r="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-            <text x="60" y="63" text-anchor="middle" fill="white" font-size="9" font-family="monospace" font-weight="bold" opacity="0.8">CH</text>
-          </svg>
+                    <div class="slide-inner" style="text-align:center;">
+                        <!-- Outro molecule -->
+                        <svg class="outro-mol" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                            <circle cx="60" cy="60" r="55" stroke="rgba(233,30,140,0.15)" stroke-width="1"
+                                stroke-dasharray="4 4" />
+                            <circle cx="60" cy="60" r="38" stroke="rgba(168,85,247,0.15)" stroke-width="1"
+                                stroke-dasharray="3 5" />
+                            <line x1="60" y1="10" x2="60" y2="60" stroke="rgba(0,229,255,0.5)" stroke-width="1.5" />
+                            <line x1="60" y1="60" x2="103" y2="85" stroke="rgba(233,30,140,0.5)" stroke-width="1.5" />
+                            <line x1="60" y1="60" x2="17" y2="85" stroke="rgba(168,85,247,0.5)" stroke-width="1.5" />
+                            <circle cx="60" cy="10" r="7" fill="var(--accent)" opacity="0.9" />
+                            <circle cx="103" cy="85" r="7" fill="var(--accent-purple)" opacity="0.9" />
+                            <circle cx="17" cy="85" r="7" fill="var(--accent-cyan)" opacity="0.9" />
+                            <circle cx="60" cy="60" r="10" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)"
+                                stroke-width="1" />
+                            <text x="60" y="63" text-anchor="middle" fill="white" font-size="9" font-family="monospace"
+                                font-weight="bold" opacity="0.8">CH</text>
+                        </svg>
 
-          <h2 class="outro-title">Thank You</h2>
+                        <h2 class="outro-title">Thank You</h2>
 
-          <p class="outro-sub">
-            ChemHub — making computational chemistry<br>
-            <strong style="color:var(--accent);">accessible, beautiful, and browser-native</strong><br>
-            for every student.
-          </p>
+                        <p class="outro-sub">
+                            ChemHub — making computational chemistry<br>
+                            <strong style="color:var(--accent);">accessible, beautiful, and browser-native</strong><br>
+                            for every student.
+                        </p>
 
-          <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:40px;">
-            <a class="outro-link" href="http://localhost:8080" target="_blank">
-              🚀 Open ChemHub
-            </a>
-            <div class="glass" style="padding:12px 24px;border-radius:999px;font-size:0.88rem;color:var(--text-secondary);">
-              <span style="font-family:var(--font-mono);color:var(--accent);">localhost:8080</span>
-            </div>
-          </div>
+                        <div
+                            style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:40px;">
+                            <a class="outro-link" href="https://adithya07-ops.github.io/ChemHUB/" target="_blank">
+                                🚀 Open ChemHub
+                            </a>
+                            <div class="glass"
+                                style="padding:12px 24px;border-radius:999px;font-size:0.88rem;color:var(--text-secondary);">
+                                <span
+                                    style="font-family:var(--font-mono);color:var(--accent);">https://adithya07-ops.github.io/ChemHUB/</span>
+                            </div>
+                        </div>
 
-          <!-- Credits row -->
-          <div class="glass fragment fade-up" style="padding:20px 32px;border-radius:var(--radius-lg);display:inline-flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center;">
-            <div style="text-align:center;">
-              <div style="font-size:1.4rem;margin-bottom:4px;">⬡</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">PubChem</div>
-            </div>
-            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
-            <div style="text-align:center;">
-              <div style="font-size:1.4rem;margin-bottom:4px;">🧬</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">RCSB PDB</div>
-            </div>
-            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
-            <div style="text-align:center;">
-              <div style="font-size:1.4rem;margin-bottom:4px;">🔬</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">3Dmol.js</div>
-            </div>
-            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
-            <div style="text-align:center;">
-              <div style="font-size:1.4rem;margin-bottom:4px;">🌐</div>
-              <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">Reveal.js</div>
-            </div>
-          </div>
+                        <!-- Credits row -->
+                        <div class="glass fragment fade-up"
+                            style="padding:20px 32px;border-radius:var(--radius-lg);display:inline-flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:center;">
+                            <div style="text-align:center;">
+                                <div style="font-size:1.4rem;margin-bottom:4px;">⬡</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                    PubChem</div>
+                            </div>
+                            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                            <div style="text-align:center;">
+                                <div style="font-size:1.4rem;margin-bottom:4px;">🧬</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                    RCSB PDB</div>
+                            </div>
+                            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                            <div style="text-align:center;">
+                                <div style="font-size:1.4rem;margin-bottom:4px;">🔬</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                    3Dmol.js</div>
+                            </div>
+                            <div style="width:1px;height:32px;background:rgba(255,255,255,0.08);"></div>
+                            <div style="text-align:center;">
+                                <div style="font-size:1.4rem;margin-bottom:4px;">🌐</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                                    Reveal.js</div>
+                            </div>
+                        </div>
 
-          <p style="margin-top:28px;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
-            ChemHub © 2026 &nbsp;·&nbsp; Built with ♥ for Chemistry Students
-          </p>
-        </div>
-      </div>
-    </section>
+                        <p
+                            style="margin-top:28px;font-size:0.72rem;color:var(--text-muted);font-family:var(--font-mono);">
+                            ChemHub © 2026 &nbsp;·&nbsp; Built with ♥ for Chemistry Students
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-  </div><!-- /.slides -->
-</div><!-- /.reveal -->
+        </div><!-- /.slides -->
+    </div><!-- /.reveal -->
 
-<!-- Reveal.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<script src="presentation.js"></script>
+    <!-- Reveal.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script src="presentation.js"></script>
 
 </body>
+
 </html>
